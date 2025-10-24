@@ -1,12 +1,13 @@
 import Navbar from "./Navbar"; // Removed unused import
 import Button from "./Button";
 import Image from "./Image"; // Removed unused import
+import logo from "../assets/icons/logo.svg";
 
 const Header = () => {
   return (
     <header className="flex items-center justify-between px-20 bg-white h-[93px] shadow-lg">
       <Image
-        SrcImage="../public/Images/Logo.png"
+        SrcImage={logo}
         AltImage="Logo"
         classNameImage="w-[102.47px] h-[52.87px]"
       ></Image>

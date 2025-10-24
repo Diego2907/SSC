@@ -2,6 +2,7 @@ import React from "react";
 import Image from "./Image";
 import Brands from "./Brands";
 import Contact from "./Contact";
+import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 
 const Body: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const Body: React.FC = () => {
 
       <Image
         classNameImage="inset-0 w-full"
-        SrcImage="../public/Images/vista-lateral-hombre-trabajando-como-fontanero.png"
+        SrcImage={persona}
         AltImage="vista-lateral-hombre-trabajando-como-fontanero"
       />
 

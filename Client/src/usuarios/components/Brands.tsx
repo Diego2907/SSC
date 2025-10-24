@@ -1,5 +1,5 @@
 import React from "react";
-
+import esqueleto from "../assets/img/background_logo_example.webp";
 
 interface Brand {
   id: number;
@@ -10,9 +10,9 @@ interface Brand {
 const Brands: React.FC = () => {
   // Centraliza las marcas en un array para fácil mantenimiento
   const brands: Brand[] = [
-    { id: 1, name: "LG", imagePath: "/Images/background_logo_example.png" },
-    { id: 2, name: "Panasonic", imagePath: "/Images/background_logo_example.png" },
-    { id: 3, name: "Midea", imagePath: "/Images/background_logo_example.png" },
+    { id: 1, name: "LG", imagePath: esqueleto },
+    { id: 2, name: "Panasonic", imagePath: esqueleto },
+    { id: 3, name: "Midea", imagePath: esqueleto },
   ];
 
   return (

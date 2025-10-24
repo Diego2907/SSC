@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "../src/usuarios/components/Header.tsx";
-import Body from "../src/usuarios/components/Body.tsx";
+import Header from "../usuarios/components/Header";
+import Body from "../usuarios/components/Body";
 
 const App = () => {
   return (
