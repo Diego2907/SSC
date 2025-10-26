@@ -1,7 +1,7 @@
 import Navbar from "./Navbar"; // Removed unused import
 import Button from "./Button";
 import Image from "./Image"; // Removed unused import
-import logo from "../assets/icons/logo.svg";
+import logo from "../../../public/assets/icons/logo.svg";
 
 const Header = () => {
   return (
