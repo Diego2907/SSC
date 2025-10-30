@@ -84,10 +84,6 @@ const Contact: React.FC = () => {
             </div>
           </div>
         </div>
-
-        <div className="mt-8 text-xs text-gray-500">
-          Copyright © 2025-2029 ServiHogar de Colima. Todos los derechos reservados.
-        </div>
       </div>
     </section>
   );
