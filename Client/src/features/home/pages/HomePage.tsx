@@ -1,10 +1,9 @@
-import React from "react";
-import Image from "./Image";
-import Brands from "./Brands";
-import Contact from "./Contact";
+import Image from "../../../shared/components/Image";
+import Brands from "../components/Brands";
+import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 
-const Body: React.FC = () => {
+const HomePage = () => {
   return (
     <main className="main-content">
       <div className="container mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-0">
@@ -123,14 +122,14 @@ const Body: React.FC = () => {
         </section>
       </div>
 
-  {/* Sección de marcas */}
-  <Brands />
+      {/* Sección de marcas */}
+      <Brands />
 
-  {/* Sección de contacto */}
-  <Contact />
-  {/* Espaciado opcional antes del footer removed to avoid gray band */}
+      {/* Sección de contacto */}
+      <Contact />
+      {/* Espaciado opcional antes del footer removed to avoid gray band */}
     </main>
   );
 };
 
-export default Body;
+export default HomePage;

@@ -3,7 +3,7 @@
 /* ==================== BASE STYLES ==================== */
 body {
   font-family: "Sora", sans-serif;
-  background-color: #e9e9e9;
+  background-color: #cbcbcb;
   margin: 0;
   padding: 0;
 }
@@ -28,7 +28,11 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(11, 18, 32, 0.02) 0%, transparent 70%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(11, 18, 32, 0.02) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
@@ -88,7 +92,7 @@ body {
   .brands-title {
     font-size: 2rem;
   }
-  
+
   .brands-grid {
     gap: 2rem;
   }
@@ -99,12 +103,12 @@ body {
     width: 80px !important;
     height: 80px !important;
   }
-  
+
   .brands-title {
     font-size: 1.75rem;
     letter-spacing: -0.01em;
   }
-  
+
   .brands-section {
     padding-top: 3rem;
     padding-bottom: 3rem;
@@ -116,7 +120,7 @@ body {
   .brands-grid {
     gap: 1.5rem;
   }
-  
+
   .brand-logo {
     width: 64px !important;
     height: 64px !important;
@@ -129,7 +133,7 @@ body {
     background: white;
     page-break-inside: avoid;
   }
-  
+
   .brand-logo {
     filter: none;
   }
@@ -149,11 +153,11 @@ body {
   .brands-section {
     background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
   }
-  
+
   .brands-title {
     color: #ffffff;
   }
-  
+
   .brands-title::after {
     background: linear-gradient(90deg, #ffffff 0%, transparent 100%);
   }
@@ -501,7 +505,7 @@ body {
   display: inline-block;
   background: white;
   padding: 6px; /* white padding to mimic circular badge */
-  box-shadow: 0 4px 10px rgba(2,6,23,0.12);
+  box-shadow: 0 4px 10px rgba(2, 6, 23, 0.12);
 }
 
 /* Slightly larger badges on bigger screens */
