@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
               <a className="social-link" href="#" aria-label="Facebook">
                 <div className="social-icon" style={{ background: '#1877F2' }}>
                   {/* Facebook SVG */}
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="facebook.svg">
                     <path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 4.84 3.44 8.85 7.94 9.8v-6.93H7.1v-2.87h2.84V9.41c0-2.81 1.67-4.36 4.22-4.36 1.22 0 2.5.22 2.5.22v2.75h-1.41c-1.39 0-1.82.86-1.82 1.74v2.09h3.1l-.5 2.87h-2.6V21.8C18.56 20.85 22 16.84 22 12z" fill="white" />
                   </svg>
                 </div>
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
               <a className="social-link" href="#" aria-label="Instagram">
                 <div className="social-icon" style={{ background: '#E4405F' }}>
                   {/* Instagram SVG */}
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="instagram.svg">
                     <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6a5 5 0 100 10 5 5 0 000-10zm6.5-.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" fill="white" />
                   </svg>
                 </div>
