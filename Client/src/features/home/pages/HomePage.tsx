@@ -1,8 +1,7 @@
-import Image from "../../../shared/components/Image";
+import Image from "../../shared/components/Image";
 import Brands from "../components/Brands";
 import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
-
 const HomePage = () => {
   return (
     <main className="main-content">

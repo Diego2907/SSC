@@ -1,6 +1,6 @@
-import Navbar from "../../../shared/components/Navbar"; // Removed unused import
-import Button from "../../../shared/components/Button";
-import Image from "../../../shared/components/Image"; // Removed unused import
+import Navbar from "../../shared/components/Navbar"; // Removed unused import
+import Button from "../../shared/components/Button";
+import Image from "../../shared/components/Image"; // Removed unused import
 import logo from "../assets/img/Logo.webp";
 
 const Header = () => {
