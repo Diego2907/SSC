@@ -2,7 +2,6 @@ import Image from "../../../shared/components/Image";
 import Brands from "../components/Brands";
 import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
-import ubicacionImg from "../assets/img/Ubicacion.webp";
 
 const HomePage = () => {
   return (
@@ -122,41 +121,6 @@ const HomePage = () => {
           </div>
         </section>
       </div>
-
-      {/* === 3. SECCIÓN UBICACIÓN === */}
-      <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
-        <div className="flexcontainer mx-auto px-4 md:px-8 lg:px-16">
-          {/* === Encabezado === */}
-          <div className="mb-8 text-center">
-            <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-4">
-              ¿Dónde nos encontramos?
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-              Ubicación
-            </h2>
-            <div className="flex justify-center items-center space-x-2 text-gray-700 text-lg">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-red-600"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM12 11.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" />
-              </svg>
-              <p>Mariano Arista #126, Centro, Colima, CP 28000</p>
-            </div>
-          </div>
-
-          {/* === Imagen del mapa === */}
-          <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-md">
-            <img
-              src={ubicacionImg}
-              alt="Mapa de ubicación SHC Colima"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Sección de marcas */}
       <Brands />
