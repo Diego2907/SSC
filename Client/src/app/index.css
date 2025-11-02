@@ -230,8 +230,7 @@
   }
 
   .payment-img {
-    max-width: 220px;
-    width: auto;
+    width: 220px;
     height: 36px;
     object-fit: contain;
     display: block;
