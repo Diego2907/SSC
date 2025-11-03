@@ -2,6 +2,9 @@ import Image from "../../shared/components/Image";
 import Brands from "../components/Brands";
 import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
+import UbicacionImg from "../assets/img/Ubicacion.webp";
+import UbicationIcon from "../assets/icons/ubicationIcon.svg";
+
 const HomePage = () => {
   return (
     <main className="main-content">
@@ -120,6 +123,42 @@ const HomePage = () => {
           </div>
         </section>
       </div>
+
+      {/*Aqui va la resccion de Ubicacion*/}
+
+      <section className="w-full ">
+        <div className="flex-col">
+          <div className="flex items-center justify-between gap-6 px-32">
+            <div>
+              <p className="bg-red-600 text-white px-4 py-4 font-semibold text-sm inline-block mb-8">
+                ¿Dónde nos encontramos?
+              </p>
+              <h2 className="font-[Sora] text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-8">
+                Ubicacion
+              </h2>
+            </div>
+
+            <div className="flex justify-between gap-6">
+              <Image
+                classNameImage="w-12 h-12 mb-4"
+                SrcImage={UbicationIcon}
+                AltImage="Icono de ubicacion"
+              />
+
+              <p className="font-semibold font-[20px]">
+                Mariano Arista #125Centro, Colima CP. 28000
+              </p>
+            </div>
+          </div>
+          <div className="relative w-full">
+            <Image
+              classNameImage="inset-0 w-full py-10"
+              SrcImage={UbicacionImg}
+              AltImage="Ubiacion de la empresa"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Sección de marcas */}
       <Brands />
