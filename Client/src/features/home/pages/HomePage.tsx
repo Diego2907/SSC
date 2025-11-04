@@ -5,9 +5,6 @@ import Achievements from "../components/Achievements.tsx";
 import Testimonials from "../components/Testimonials.tsx";
 import ContactSchedule from "../components/ContactSchedule";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
-import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
-import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
-import radiador from "../assets/img/radiador.webp";
 const HomePage = () => {
   return (
     <main className="main-content">
@@ -46,7 +43,7 @@ const HomePage = () => {
       />
 
       <div>
-        <section className="pb-0 pt-16 md:pt-24">
+        <section className="py-16 md:py-20 lg:py-24">
           <div className="container mx-auto px-4 md:px-8 lg:px-16">
             {/* === 1. SECCIÓN SUPERIOR: ENCABEZADO Y DESCRIPCIÓN === */}
             <div className="flex flex-col lg:flex-row lg:space-x-12 mb-16 lg:mb-24">
@@ -143,6 +140,42 @@ const HomePage = () => {
         {/* Sección de horarios y contacto - PEGADA DIRECTAMENTE */}
         <ContactSchedule />
       </div>
+
+      {/*Aqui va la resccion de Ubicacion*/}
+
+      <section className="w-full ">
+        <div className="flex-col">
+          <div className="flex items-center justify-between gap-6 px-32">
+            <div>
+              <p className="bg-red-600 text-white px-4 py-4 font-semibold text-sm inline-block mb-8">
+                ¿Dónde nos encontramos?
+              </p>
+              <h2 className="font-[Sora] text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-8">
+                Ubicacion
+              </h2>
+            </div>
+
+            <div className="flex justify-between gap-6">
+              <Image
+                classNameImage="w-12 h-12 mb-4"
+                SrcImage={UbicationIcon}
+                AltImage="Icono de ubicacion"
+              />
+
+              <p className="font-semibold font-[20px]">
+                Mariano Arista #125Centro, Colima CP. 28000
+              </p>
+            </div>
+          </div>
+          <div className="relative w-full">
+            <Image
+              classNameImage="inset-0 w-full py-10"
+              SrcImage={UbicacionImg}
+              AltImage="Ubiacion de la empresa"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Sección de marcas */}
       <Brands />
