@@ -1,7 +1,13 @@
-import Image from "../../shared/components/Image";
+import Carousel from "../../shared/components/Carousel.tsx";
 import Brands from "../components/Brands";
 import Contact from "../components/Contact";
+import Achievements from "../components/Achievements.tsx";
+import Testimonials from "../components/Testimonials.tsx";
+import ContactSchedule from "../components/ContactSchedule";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
+import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
+import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
+import radiador from "../assets/img/radiador.webp";
 const HomePage = () => {
   return (
     <main className="main-content">
@@ -17,22 +23,38 @@ const HomePage = () => {
         </h2>
       </div>
 
-      <Image
-        classNameImage="inset-0 w-full"
-        SrcImage={persona}
-        AltImage="vista-lateral-hombre-trabajando-como-fontanero"
+      <Carousel
+        images={[
+          {
+            src: persona,
+            alt: "Vista lateral hombre trabajando como fontanero"
+          },
+          {
+            src: altoAngulo,
+            alt: "Hombre de alto ángulo trabajando como fontanero"
+          },
+          {
+            src: lavadora,
+            alt: "Hombre reparando lavadora"
+          },
+          {
+            src: radiador,
+            alt: "Radiador"
+          }
+        ]}
+        className="inset-0 w-full"
       />
 
       <div>
-        <section className="py-16 md:py-20 lg:py-24">
+        <section className="pb-0 pt-16 md:pt-24">
           <div className="container mx-auto px-4 md:px-8 lg:px-16">
             {/* === 1. SECCIÓN SUPERIOR: ENCABEZADO Y DESCRIPCIÓN === */}
-            <div className="flex flex-col lg:flex-row lg:space-x-12 mb-12 lg:mb-20">
+            <div className="flex flex-col lg:flex-row lg:space-x-12 mb-16 lg:mb-24">
               {/* Bloque del Título (izquierda) */}
               <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
                 {/* Etiqueta */}
                 <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
-                  ¡Preparados para ganar!
+                  ¿Quienes somos?
                 </p>
                 {/* Título principal */}
                 <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
@@ -41,24 +63,22 @@ const HomePage = () => {
               </div>
 
               {/* Bloque de Texto Descriptivo (derecha) */}
-              <div className="w-full lg:w-2/3 space-y-4 text-gray-600 text-lg leading-relaxed">
-                <p className="font-semibold font-[20px]">
+              <div className="w-full lg:w-2/3 space-y-4 text-gray-700 text-lg leading-relaxed">
+                <p>
                   Somos una empresa especializada en{" "}
-                  <span className="text-green-700 font-semibold">
+                  <span className="text-blue-700">
                     mantenimiento de línea blanca
                   </span>{" "}
-                  con más de{" "}
-                  <span className="font-semibold">10 años de experiencia</span>{" "}
-                  en el mercado.
+                  con más de 10 años de experiencia en el mercado.
                 </p>
                 <p>
                   Nuestro equipo está formado por{" "}
-                  <span className="text-blue-700 font-semibold">
+                  <span className="text-blue-700">
                     técnicos certificados y apasionados
                   </span>{" "}
                   por ofrecer el mejor servicio. Nos distinguimos por nuestra
                   puntualidad, honestidad y compromiso con la{" "}
-                  <span className="text-blue-700 font-semibold">
+                  <span className="text-blue-700">
                     satisfacción total de nuestros clientes
                   </span>
                   .
@@ -119,14 +139,22 @@ const HomePage = () => {
             </div>
           </div>
         </section>
+
+        {/* Sección de horarios y contacto - PEGADA DIRECTAMENTE */}
+        <ContactSchedule />
       </div>
 
       {/* Sección de marcas */}
       <Brands />
 
+      {/* Sección de logros */}
+      <Achievements />
+
+      {/* Sección de testimonios */}
+      <Testimonials />
+
       {/* Sección de contacto */}
       <Contact />
-      {/* Espaciado opcional antes del footer removed to avoid gray band */}
     </main>
   );
 };
