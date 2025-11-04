@@ -146,6 +146,7 @@ const HomePage = () => {
 
         {/* Sección de horarios y contacto - PEGADA DIRECTAMENTE */}
         <ContactSchedule />
+        </section>
       </div>
 
       {/*Aqui va la resccion de Ubicacion*/}
