@@ -5,6 +5,12 @@ import Achievements from "../components/Achievements.tsx";
 import Testimonials from "../components/Testimonials.tsx";
 import ContactSchedule from "../components/ContactSchedule";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
+import UbicacionImg from "../assets/img/Ubicacion.webp";
+import UbicationIcon from "../assets/icons/ubicationIcon.svg";
+
+import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
+import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
+import radiador from "../assets/img/radiador.webp";
 const HomePage = () => {
   return (
     <main className="main-content">
@@ -43,7 +49,8 @@ const HomePage = () => {
       />
 
       <div>
-        <section className="py-16 md:py-20 lg:py-24">
+        <section className=" py-16 md:py-20 lg:py-24">
+        <section className="pb-0 pt-16 md:pt-24">
           <div className="container mx-auto px-4 md:px-8 lg:px-16">
             {/* === 1. SECCIÓN SUPERIOR: ENCABEZADO Y DESCRIPCIÓN === */}
             <div className="flex flex-col lg:flex-row lg:space-x-12 mb-16 lg:mb-24">
