@@ -7,7 +7,7 @@ import ContactSchedule from "../components/ContactSchedule";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 import UbicacionImg from "../assets/img/Ubicacion.webp";
 import UbicationIcon from "../assets/icons/ubicationIcon.svg";
-
+import Image from "../../shared/components/Image.tsx";
 import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
 import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
 import radiador from "../assets/img/radiador.webp";
