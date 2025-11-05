@@ -1,9 +1,13 @@
+import Carousel from "../../shared/components/Carousel.tsx";
 import Image from "../../shared/components/Image";
 import Brands from "../components/Brands";
 import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 import UbicacionImg from "../assets/img/Ubicacion.webp";
 import UbicationIcon from "../assets/icons/ubicationIcon.svg";
+
+{
+  /*
 import technicalTeam from "../components/technicalTeam";
 import img1TechTeam from "../assets/img/Technical-Theme/Technical-theme-1.webp";
 import img2TechTeam from "../assets/img/Technical-Theme/Technical-theme-2.webp";
@@ -11,13 +15,17 @@ import img3TechTeam from "../assets/img/Technical-Theme/Technical-theme-3.webp";
 import img4TechTeam from "../assets/img/Technical-Theme/Technical-theme-4.webp";
 import img5TechTeam from "../assets/img/Technical-Theme/Technical-theme-5.webp";
 import img6TechTeam from "../assets/img/Technical-Theme/Technical-theme-6.webp";
+*/
+}
 
-=======
-import Image from "../../shared/components/Image.tsx";
 import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
 import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
 import radiador from "../assets/img/radiador.webp";
->>>>>>> 492f0525dd89b36134c88906fcd5358bf27ddc48
+
+import Achievements from "../components/Achievements.tsx";
+import Testimonials from "../components/Testimonials.tsx";
+import ContactSchedule from "../components/ContactSchedule";
+
 const HomePage = () => {
   return (
     <main className="main-content">
@@ -33,10 +41,26 @@ const HomePage = () => {
         </h2>
       </div>
 
-      <Image
-        classNameImage="inset-0 w-full"
-        SrcImage={persona}
-        AltImage="vista-lateral-hombre-trabajando-como-fontanero"
+      <Carousel
+        images={[
+          {
+            src: persona,
+            alt: "Vista lateral hombre trabajando como fontanero",
+          },
+          {
+            src: altoAngulo,
+            alt: "Hombre de alto ángulo trabajando como fontanero",
+          },
+          {
+            src: lavadora,
+            alt: "Hombre reparando lavadora",
+          },
+          {
+            src: radiador,
+            alt: "Radiador",
+          },
+        ]}
+        className="inset-0 w-full"
       />
 
       <div>
@@ -137,6 +161,8 @@ const HomePage = () => {
         </section>
       </div>
 
+      <ContactSchedule />
+
       {/*Aqui va la seccion de Ubicacion*/}
 
       <section className="w-full ">
@@ -201,6 +227,10 @@ const HomePage = () => {
       {/* Sección de marcas */}
       <Brands />
 
+      <Achievements />
+
+      {/* Sección de testimonios */}
+      <Testimonials />
       {/* Sección de contacto */}
       <Contact />
       {/* Espaciado opcional antes del footer removed to avoid gray band */}
