@@ -4,6 +4,13 @@ import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 import UbicacionImg from "../assets/img/Ubicacion.webp";
 import UbicationIcon from "../assets/icons/ubicationIcon.svg";
+import technicalTeam from "../components/technicalTeam";
+import img1TechTeam from "../assets/img/Technical-Theme/Technical-theme-1.webp";
+import img2TechTeam from "../assets/img/Technical-Theme/Technical-theme-2.webp";
+import img3TechTeam from "../assets/img/Technical-Theme/Technical-theme-3.webp";
+import img4TechTeam from "../assets/img/Technical-Theme/Technical-theme-4.webp";
+import img5TechTeam from "../assets/img/Technical-Theme/Technical-theme-5.webp";
+import img6TechTeam from "../assets/img/Technical-Theme/Technical-theme-6.webp";
 
 const HomePage = () => {
   return (
@@ -124,7 +131,7 @@ const HomePage = () => {
         </section>
       </div>
 
-      {/*Aqui va la resccion de Ubicacion*/}
+      {/*Aqui va la seccion de Ubicacion*/}
 
       <section className="w-full ">
         <div className="flex-col">
@@ -157,6 +164,31 @@ const HomePage = () => {
               AltImage="Ubiacion de la empresa"
             />
           </div>
+        </div>
+      </section>
+
+      {/*Aqui va la seccion de equipo*/}
+      <section>
+        <div className="flex items-center justify-between gap-10 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32">
+          <div>
+            <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
+              Nuestros expertos
+            </p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+              Equipo técnico
+            </h2>
+          </div>
+          <p>
+            Nuestro equipo de{" "}
+            <span className="text-blue-700 font-semibold">
+              técnicos certificados y apasionados{" "}
+            </span>
+            por ofrecer el mejor servicio. Se distinguen por su puntualidad,
+            honestidad y compromiso con la{" "}
+            <span className="text-blue-700 font-semibold">
+              satisfacción total de nuestros clientes.
+            </span>
+          </p>
         </div>
       </section>
 
