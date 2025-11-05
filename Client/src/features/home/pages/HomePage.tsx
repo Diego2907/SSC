@@ -12,6 +12,12 @@ import img4TechTeam from "../assets/img/Technical-Theme/Technical-theme-4.webp";
 import img5TechTeam from "../assets/img/Technical-Theme/Technical-theme-5.webp";
 import img6TechTeam from "../assets/img/Technical-Theme/Technical-theme-6.webp";
 
+=======
+import Image from "../../shared/components/Image.tsx";
+import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
+import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
+import radiador from "../assets/img/radiador.webp";
+>>>>>>> 492f0525dd89b36134c88906fcd5358bf27ddc48
 const HomePage = () => {
   return (
     <main className="main-content">
