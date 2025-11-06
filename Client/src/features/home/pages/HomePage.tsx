@@ -1,7 +1,26 @@
+import Carousel from "../../shared/components/Carousel.tsx";
 import Image from "../../shared/components/Image";
 import Brands from "../components/Brands";
 import Contact from "../components/Contact";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
+import UbicacionImg from "../assets/img/Ubicacion.webp";
+import UbicationIcon from "../assets/icons/ubicationIcon.svg";
+
+import img1TechTeam from "../assets/img/Technical-Theme/Technical-theme-1.webp";
+import img2TechTeam from "../assets/img/Technical-Theme/Technical-theme-2.webp";
+import img3TechTeam from "../assets/img/Technical-Theme/Technical-theme-3.webp";
+import img4TechTeam from "../assets/img/Technical-Theme/Technical-theme-4.webp";
+import img5TechTeam from "../assets/img/Technical-Theme/Technical-theme-5.webp";
+import img6TechTeam from "../assets/img/Technical-Theme/Technical-theme-6.webp";
+
+import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-fontanero.webp";
+import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
+import radiador from "../assets/img/radiador.webp";
+
+import Achievements from "../components/Achievements.tsx";
+import Testimonials from "../components/Testimonials.tsx";
+import ContactSchedule from "../components/ContactSchedule";
+
 const HomePage = () => {
   return (
     <main className="main-content">
@@ -17,25 +36,45 @@ const HomePage = () => {
         </h2>
       </div>
 
-      <Image
-        classNameImage="inset-0 w-full"
-        SrcImage={persona}
-        AltImage="vista-lateral-hombre-trabajando-como-fontanero"
+      <Carousel
+        images={[
+          {
+            src: persona,
+            alt: "Vista lateral hombre trabajando como fontanero",
+            classNameImage: "w-full h-full object-cover",
+          },
+          {
+            src: altoAngulo,
+            alt: "Hombre de alto ángulo trabajando como fontanero",
+            classNameImage: "w-full h-full object-cover",
+          },
+          {
+            src: lavadora,
+            alt: "Hombre reparando lavadora",
+            classNameImage: "w-full h-full object-cover",
+          },
+          {
+            src: radiador,
+            alt: "Radiador",
+            classNameImage: "w-full h-full object-cover",
+          },
+        ]}
+        className="inset-0 w-full"
       />
 
       <div>
-        <section className="py-16 md:py-20 lg:py-24">
+        <section className=" py-16 md:py-20 lg:py-24">
           <div className="container mx-auto px-4 md:px-8 lg:px-16">
             {/* === 1. SECCIÓN SUPERIOR: ENCABEZADO Y DESCRIPCIÓN === */}
-            <div className="flex flex-col lg:flex-row lg:space-x-12 mb-12 lg:mb-20">
+            <div className="flex flex-col justify-between gap-6 lg:flex-row lg:space-x-20 mb-12 lg:mb-20">
               {/* Bloque del Título (izquierda) */}
               <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
                 {/* Etiqueta */}
                 <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
-                  ¡Preparados para ganar!
+                  ¿Quienes somos?
                 </p>
                 {/* Título principal */}
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900">
                   Conócenos
                 </h2>
               </div>
@@ -121,9 +160,125 @@ const HomePage = () => {
         </section>
       </div>
 
+      <ContactSchedule />
+
+      {/*Aqui va la seccion de Ubicacion*/}
+
+      <section className="w-full pt-10">
+        <div className="flex-col">
+          <div className="flex items-center justify-between gap-6 px-32">
+            <div>
+              <p className="bg-red-600 text-white px-4 py-4 font-semibold text-sm inline-block mb-8">
+                ¿Dónde nos encontramos?
+              </p>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-8">
+                Ubicacion
+              </h2>
+            </div>
+
+            <div className="flex justify-between gap-6">
+              <Image
+                classNameImage="w-12 h-12 mb-4"
+                SrcImage={UbicationIcon}
+                AltImage="Icono de ubicacion"
+              />
+
+              <p className="font-semibold font-[20px]">
+                Mariano Arista #125Centro, Colima CP. 28000
+              </p>
+            </div>
+          </div>
+          <div className="relative w-full">
+            <Image
+              classNameImage="inset-0 w-full py-10"
+              SrcImage={UbicacionImg}
+              AltImage="Ubiacion de la empresa"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/*Aqui va la seccion de equipo*/}
+      <section>
+        <div className="flex-col px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32">
+          <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
+            Nuestros expertos
+          </p>
+          <div className="flex items-center justify-between gap-10">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900">
+              Equipo técnico
+            </h2>
+            <p>
+              Nuestro equipo de{" "}
+              <span className="text-blue-700 font-semibold">
+                técnicos certificados y apasionados{" "}
+              </span>
+              por ofrecer el mejor servicio. Se distinguen por su puntualidad,
+              honestidad y compromiso con la{" "}
+              <span className="text-blue-700 font-semibold">
+                satisfacción total de nuestros clientes.
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="relative mt-10">
+          <Carousel
+            images={[
+              {
+                src: img1TechTeam,
+                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                alt: "erika-de-la-cruz",
+                title: "Erika de la Cruz",
+                description: "Refrigeración",
+              },
+              {
+                src: img2TechTeam,
+                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                alt: "valentina-gonzalez",
+                title: "Valentina González",
+                description: "Lavadoras",
+              },
+              {
+                src: img3TechTeam,
+                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                alt: "angel-santos",
+                title: "Ángel Santos",
+                description: "Instalación",
+              },
+              {
+                src: img4TechTeam,
+                classNameImage: "rounded-full w-96 h-96 object-center",
+                alt: "daniela-ramos",
+                title: "Daniela Ramos",
+                description: "Televisores",
+              },
+              {
+                src: img5TechTeam,
+                classNameImage: "rounded-full w-96 h-96 object-center",
+                alt: "hector-vargas",
+                title: "Héctor Vargas",
+                description: "Hornos",
+              },
+              {
+                src: img6TechTeam,
+                classNameImage: "rounded-full w-96 h-96 object-center",
+                alt: "edwin-magana",
+                title: "Edwin Magaña",
+                description: "Mantenimiento",
+              },
+            ]}
+          />
+        </div>
+      </section>
+
       {/* Sección de marcas */}
       <Brands />
 
+      <Achievements />
+
+      {/* Sección de testimonios */}
+      <Testimonials />
       {/* Sección de contacto */}
       <Contact />
       {/* Espaciado opcional antes del footer removed to avoid gray band */}

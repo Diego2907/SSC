@@ -1,5 +1,8 @@
+
 import React from "react";
-import esqueleto from "../assets/img/background_logo_example.webp";
+import lgLogo from "../assets/img/LG_logo.webp";
+import panasonicLogo from "../assets/img/panosonic_logo.webp";
+import mideaLogo from "../assets/img/midea_logo.webp";
 
 interface Brand {
   id: number;
@@ -10,9 +13,9 @@ interface Brand {
 const Brands: React.FC = () => {
   // Centraliza las marcas en un array para fácil mantenimiento
   const brands: Brand[] = [
-    { id: 1, name: "LG", imagePath: esqueleto },
-    { id: 2, name: "Panasonic", imagePath: esqueleto },
-    { id: 3, name: "Midea", imagePath: esqueleto },
+    { id: 1, name: "LG", imagePath: lgLogo },
+    { id: 2, name: "Panasonic", imagePath: panasonicLogo },
+    { id: 3, name: "Midea", imagePath: mideaLogo },
   ];
 
   return (
@@ -28,19 +31,16 @@ const Brands: React.FC = () => {
           Nuestras marcas
         </h2>
 
-        <div className="brands-grid flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-20">
+        <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 lg:gap-24">
           {brands.map((brand) => (
             <div 
               key={brand.id} 
-              className="brand-item transition-transform duration-300 hover:scale-110"
+              className="brand-item"
             >
-
-
-
               <img
                 src={brand.imagePath}
                 alt={`Logo de ${brand.name}`}
-                className="brand-logo w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 mx-auto object-contain"
+                className="h-12 md:h-16 lg:h-20 w-auto object-contain"
                 loading="lazy"
               />
             </div>
