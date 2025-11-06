@@ -71,7 +71,7 @@ const HomePage = () => {
               <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
                 {/* Etiqueta */}
                 <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
-                  ¡Preparados para ganar!
+                  ¿Quienes somos?
                 </p>
                 {/* Título principal */}
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900">
