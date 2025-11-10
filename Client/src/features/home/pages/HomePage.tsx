@@ -1,7 +1,7 @@
 import Carousel from "../../shared/components/Carousel.tsx";
 import Image from "../../shared/components/Image";
-import Brands from "../components/Brands";
-import Contact from "../components/Contact";
+import Brands from "../components/sectionComponents/brands-Section.tsx";
+import Contact from "../components/sectionComponents/contact-Section.tsx";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 import UbicacionImg from "../assets/img/Ubicacion.webp";
 import UbicationIcon from "../assets/icons/ubicationIcon.svg";
@@ -17,9 +17,9 @@ import altoAngulo from "../assets/img/hombre-de-alto-angulo-trabajando-como-font
 import lavadora from "../assets/img/hombre_reparando_lavadora.webp";
 import radiador from "../assets/img/radiador.webp";
 
-import Achievements from "../components/Achievements.tsx";
-import Testimonials from "../components/Testimonials.tsx";
-import ContactSchedule from "../components/ContactSchedule";
+import Achievements from "../components/sectionComponents/achievements-Section.tsx";
+import Testimonials from "../components/sectionComponents/testimonials-Section.tsx";
+import ContactSchedule from "../components/sectionComponents/contactSchedule-Section.tsx";
 
 const HomePage = () => {
   return (
