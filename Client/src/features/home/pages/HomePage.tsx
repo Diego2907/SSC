@@ -172,7 +172,7 @@ const HomePage = () => {
                 ¿Dónde nos encontramos?
               </p>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-8">
-                Ubicacion
+                Ubicación
               </h2>
             </div>
 
