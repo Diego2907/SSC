@@ -1,7 +1,7 @@
 import Carousel from "../../shared/components/Carousel.tsx";
 import Image from "../../shared/components/Image";
-import Brands from "../components/Brands";
-import Contact from "../components/Contact";
+import Brands from "../components/sectionComponents/brands-Section.tsx";
+import Contact from "../components/sectionComponents/contact-Section.tsx";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 import UbicacionImg from "../assets/img/Ubicacion.webp";
 import UbicationIcon from "../assets/icons/ubicationIcon.svg";
@@ -19,9 +19,9 @@ import radiador from "../assets/img/radiador.webp";
 import misionImg from "../assets/img/mision.webp";
 import visionImg from "../assets/img/vision.webp";
 
-import Achievements from "../components/Achievements.tsx";
-import Testimonials from "../components/Testimonials.tsx";
-import ContactSchedule from "../components/ContactSchedule";
+import Achievements from "../components/sectionComponents/achievements-Section.tsx";
+import Testimonials from "../components/sectionComponents/testimonials-Section.tsx";
+import ContactSchedule from "../components/sectionComponents/contactSchedule-Section.tsx";
 import Services from "../components/Services";
 
 const HomePage = () => {
@@ -182,7 +182,7 @@ const HomePage = () => {
                 ¿Dónde nos encontramos?
               </p>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-8">
-                Ubicacion
+                Ubicación
               </h2>
             </div>
 

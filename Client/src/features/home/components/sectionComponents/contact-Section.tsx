@@ -1,13 +1,13 @@
 import React from "react";
-import Logo from "../assets/img/Logo.webp";
-import visa from "../assets/icons/visa.svg";
-import paypal from "../assets/icons/paypal.svg";
-import oxxo from "../assets/icons/oxxo.svg";
-import mastercard from "../assets/icons/mastercard.svg";
-import facebook from "../assets/icons/facebook.svg";
-import instagram from "../assets/icons/instagram.svg";
-import linkeding from "../assets/icons/linkeding.svg";
-import xIcon from "../assets/icons/x.svg";
+import Logo from "../../assets/img/Logo.webp";
+import visa from "../../assets/icons/visa.svg";
+import paypal from "../../assets/icons/paypal.svg";
+import oxxo from "../../assets/icons/oxxo.svg";
+import mastercard from "../../assets/icons/mastercard.svg";
+import facebook from "../../assets/icons/facebook.svg";
+import instagram from "../../assets/icons/instagram.svg";
+import linkeding from "../../assets/icons/linkeding.svg";
+import xIcon from "../../assets/icons/x.svg";
 
 const Contact: React.FC = () => {
   return (
@@ -29,7 +29,9 @@ const Contact: React.FC = () => {
           </div>
 
           <div>
-            <div className="contact-heading text-sm font-semibold mb-3">Formas de pago</div>
+            <div className="contact-heading text-sm font-semibold mb-3">
+              Formas de pago
+            </div>
             <div className="payment-methods flex flex-col gap-3">
               <div className="payment-item">
                 <div className="payment-logo">
@@ -48,14 +50,20 @@ const Contact: React.FC = () => {
               </div>
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src={mastercard} alt="Mastercard" className="payment-img" />
+                  <img
+                    src={mastercard}
+                    alt="Mastercard"
+                    className="payment-img"
+                  />
                 </div>
               </div>
             </div>
           </div>
 
           <div>
-            <div className="contact-heading text-sm font-semibold mb-3">Compañía</div>
+            <div className="contact-heading text-sm font-semibold mb-3">
+              Compañía
+            </div>
             <ul className="company-links space-y-2 text-sm text-gray-600">
               <li>Términos y condiciones generales del servicio</li>
               <li>Políticas de garantía</li>
@@ -67,7 +75,9 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="social-column">
-            <div className="contact-heading text-sm font-semibold mb-3">síguenos en nuestras redes sociales</div>
+            <div className="contact-heading text-sm font-semibold mb-3">
+              síguenos en nuestras redes sociales
+            </div>
             <div className="social-links flex flex-col gap-3">
               <a href="#" className="social-link" aria-label="Facebook">
                 <img src={facebook} alt="Facebook" className="social-img" />

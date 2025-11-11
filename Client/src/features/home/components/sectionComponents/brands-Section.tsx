@@ -1,8 +1,7 @@
-
 import React from "react";
-import lgLogo from "../assets/img/LG_logo.webp";
-import panasonicLogo from "../assets/img/panosonic_logo.webp";
-import mideaLogo from "../assets/img/midea_logo.webp";
+import lgLogo from "../../assets/img/LG_logo.webp";
+import panasonicLogo from "../../assets/img/panosonic_logo.webp";
+import mideaLogo from "../../assets/img/midea_logo.webp";
 
 interface Brand {
   id: number;
@@ -19,8 +18,8 @@ const Brands: React.FC = () => {
   ];
 
   return (
-    <section 
-      className="brands-section py-16 md:py-20 lg:py-24" 
+    <section
+      className="brands-section py-16 md:py-20 lg:py-24"
       aria-labelledby="brands-title"
     >
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
@@ -33,10 +32,7 @@ const Brands: React.FC = () => {
 
         <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 lg:gap-24">
           {brands.map((brand) => (
-            <div 
-              key={brand.id} 
-              className="brand-item"
-            >
+            <div key={brand.id} className="brand-item">
               <img
                 src={brand.imagePath}
                 alt={`Logo de ${brand.name}`}

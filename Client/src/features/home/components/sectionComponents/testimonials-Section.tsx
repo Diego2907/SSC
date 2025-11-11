@@ -1,5 +1,5 @@
-import React from 'react';
-import testimonialsBg from '../assets/img/lo_que_dicen_nuestros_clientes.webp';
+import React from "react";
+import testimonialsBg from "../../assets/img/lo_que_dicen_nuestros_clientes.webp";
 
 const Testimonials: React.FC = () => {
   return (

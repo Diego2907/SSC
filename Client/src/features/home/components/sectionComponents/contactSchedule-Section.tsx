@@ -1,10 +1,10 @@
-import React from 'react';
-import mujerImage from '../assets/img/mujer.webp';
-import operadoraImage from '../assets/img/agente-de-call-center-femenino.webp';
-import phoneIcon from '../assets/icons/phone.svg';
-import whatsappIcon from '../assets/icons/whatsapp_icon.svg';
-import mailIcon from '../assets/icons/mail_icon.svg';
-import locationIcon from '../assets/icons/location_icon.svg';
+import React from "react";
+import mujerImage from "../../assets/img/mujer.webp";
+import operadoraImage from "../../assets/img/agente-de-call-center-femenino.webp";
+import phoneIcon from "../../assets/icons/phone.svg";
+import whatsappIcon from "../../assets/icons/whatsapp_icon.svg";
+import mailIcon from "../../assets/icons/mail_icon.svg";
+import locationIcon from "../../assets/icons/location_icon.svg";
 
 const ContactSchedule: React.FC = () => {
   return (
@@ -24,22 +24,28 @@ const ContactSchedule: React.FC = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-gray-900">
             Horario de atención
           </h2>
-          
+
           {/* Horarios */}
           <div className="flex flex-wrap gap-4 mb-12">
             <div className="bg-blue-200 px-6 py-4 rounded-lg flex-1 min-w-[200px]">
               <h3 className="text-base md:text-lg font-semibold mb-2 text-gray-800">
                 Lunes a Viernes
               </h3>
-              <p className="text-sm md:text-base text-gray-700">De 9:00 am a 02:00 pm</p>
-              <p className="text-sm md:text-base text-gray-700">De 04:00 pm a 06:00 pm</p>
+              <p className="text-sm md:text-base text-gray-700">
+                De 9:00 am a 02:00 pm
+              </p>
+              <p className="text-sm md:text-base text-gray-700">
+                De 04:00 pm a 06:00 pm
+              </p>
             </div>
 
             <div className="bg-blue-200 px-6 py-4 rounded-lg flex-1 min-w-[200px]">
               <h3 className="text-base md:text-lg font-semibold mb-2 text-gray-800">
                 Sábado
               </h3>
-              <p className="text-sm md:text-base text-gray-700">De 09:00 am a 03:00 pm</p>
+              <p className="text-sm md:text-base text-gray-700">
+                De 09:00 am a 03:00 pm
+              </p>
             </div>
           </div>
 
@@ -50,7 +56,11 @@ const ContactSchedule: React.FC = () => {
           <div className="space-y-6">
             {/* Teléfonos */}
             <div className="flex items-start gap-4">
-              <img src={phoneIcon} alt="Teléfono" className="w-8 h-8 flex-shrink-0" />
+              <img
+                src={phoneIcon}
+                alt="Teléfono"
+                className="w-8 h-8 flex-shrink-0"
+              />
               <div className="text-base md:text-lg text-gray-800">
                 <p className="font-medium">(312) 314 5444</p>
                 <p className="font-medium">(312) 313 4249</p>
@@ -59,13 +69,23 @@ const ContactSchedule: React.FC = () => {
 
             {/* WhatsApp */}
             <div className="flex items-center gap-4">
-              <img src={whatsappIcon} alt="WhatsApp" className="w-8 h-8 flex-shrink-0" />
-              <p className="text-base md:text-lg font-medium text-gray-800">(312) 132 4977</p>
+              <img
+                src={whatsappIcon}
+                alt="WhatsApp"
+                className="w-8 h-8 flex-shrink-0"
+              />
+              <p className="text-base md:text-lg font-medium text-gray-800">
+                (312) 132 4977
+              </p>
             </div>
 
             {/* Email */}
             <div className="flex items-center gap-4">
-              <img src={mailIcon} alt="Email" className="w-8 h-8 flex-shrink-0" />
+              <img
+                src={mailIcon}
+                alt="Email"
+                className="w-8 h-8 flex-shrink-0"
+              />
               <p className="text-base md:text-lg font-medium text-gray-800 break-all">
                 servihogardecolima@gmail.com
               </p>
@@ -73,7 +93,11 @@ const ContactSchedule: React.FC = () => {
 
             {/* Ubicación */}
             <div className="flex items-center gap-4">
-              <img src={locationIcon} alt="Ubicación" className="w-8 h-8 flex-shrink-0" />
+              <img
+                src={locationIcon}
+                alt="Ubicación"
+                className="w-8 h-8 flex-shrink-0"
+              />
               <p className="text-base md:text-lg font-medium text-gray-800">
                 Colima, México
               </p>
