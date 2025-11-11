@@ -8,7 +8,7 @@ import locationIcon from '../assets/icons/location_icon.svg';
 
 const ContactSchedule: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 -mt-px">
+    <div className="grid grid-cols-1 md:grid-cols-2">
       {/* Columna izquierda con imagen */}
       <div className="relative h-full min-h-[600px] md:min-h-[700px]">
         <img
