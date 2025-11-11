@@ -1,5 +1,5 @@
-import React from 'react';
-import achievementImage from '../assets/img/Group-1000005811.webp';
+import React from "react";
+import achievementImage from "../../assets/img/Group-1000005811.webp";
 
 const Achievements: React.FC = () => {
   return (
