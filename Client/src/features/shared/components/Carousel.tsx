@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 interface CarouselImage {
   src: string;
@@ -11,14 +11,22 @@ interface CarouselImage {
 interface CarouselProps {
   images: CarouselImage[];
   className?: string;
+  autoplayInterval?: number;
+  pauseOnHover?: boolean;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images, className = "" }) => {
+const Carousel: React.FC<CarouselProps> = ({ 
+  images, 
+  className = "", 
+  autoplayInterval = 4000, 
+  pauseOnHover = true 
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  }, [images.length]);
 
   const prevSlide = () => {
     setCurrentIndex(
@@ -26,8 +34,19 @@ const Carousel: React.FC<CarouselProps> = ({ images, className = "" }) => {
     );
   };
 
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(nextSlide, autoplayInterval);
+      return () => clearInterval(interval);
+    }
+  }, [nextSlide, autoplayInterval, isPaused]);
+
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div 
+      className={`relative overflow-hidden ${className}`}
+      onMouseEnter={() => pauseOnHover && setIsPaused(true)}
+      onMouseLeave={() => pauseOnHover && setIsPaused(false)}
+    >
       {/* Contenedor principal del slide */}
       <div className="relative h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
         {images.map((image, index) => (
