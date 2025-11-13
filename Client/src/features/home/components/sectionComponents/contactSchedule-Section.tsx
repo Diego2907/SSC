@@ -106,7 +106,7 @@ const ContactSchedule: React.FC = () => {
         </div>
 
         {/* Imagen de la operadora */}
-        <div className="hidden md:block absolute bottom-4 right-4 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 pointer-events-none opacity-80">
+        <div className="hidden md:block absolute bottom-1 -right-4 md:w-40 md:h-60 lg:w-80 lg:h-96  opacity-80">
           <img
             src={operadoraImage}
             alt="Agente de servicio al cliente"
