@@ -3,6 +3,7 @@ import Carousel from "../../../shared/components/Carousel.tsx";
 import lgLogo from "../../assets/img/LG_logo.webp";
 import panasonicLogo from "../../assets/img/panosonic_logo.webp";
 import mideaLogo from "../../assets/img/midea_logo.webp";
+import Carousel from "../../../shared/components/Carousel"; // 🔹 Ajusta la ruta
 import samsungLogo from "../../assets/img/Samsung_logo.webp";
 import whirlpoolLogo from "../../assets/img/Whirlpool_Corporation_Logo.webp";
 import sonyLogo from "../../assets/img/Sony_logo.webp";
@@ -13,6 +14,19 @@ interface Brand {
 }
 
 const Brands: React.FC = () => {
+  const images = [
+    { src: lgLogo, alt: "Logo de LG", classNameImage: "h-48 object-contain" },
+    {
+      src: panasonicLogo,
+      alt: "Logo de Panasonic",
+      classNameImage: "h-48 object-contain",
+    },
+    {
+      src: mideaLogo,
+      alt: "Logo de Midea",
+      classNameImage: "h-48 object-contain",
+    },
+  ];
   const brands: Brand[] = [
     { id: 1, imagePath: lgLogo },
     { id: 2, imagePath: panasonicLogo },
@@ -30,16 +44,26 @@ const Brands: React.FC = () => {
 
   return (
     <section
+      className="brands-section py-8 md:py-10 lg:py-12 "
       className="brands-section py-6 md:py-8"
       aria-labelledby="brands-title"
     >
+      <div className="container mx-auto px-10 md:px-2 lg:px-2 relative mt-10">
       <header className="container mx-auto px-4 md:px-8 lg:px-16 mb-6 md:mb-8">
         <h2
           id="brands-title"
+          className="brands-title text-3xl md:text-4xl lg:text-5xl font-extrabold mb-16 md:mb-12 lg:mb-16 text-center"
           className="brands-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-center"
         >
           Nuestras marcas
         </h2>
+
+        {/* 🔹 Aquí se muestra el carrusel */}
+        <Carousel
+          images={images}
+          className="max-w-20xl mx-auto"
+          autoplayInterval={3000}
+        />
       </header>
 
       <div className="h-64 md:h-72 lg:h-80 overflow-hidden flex items-center">

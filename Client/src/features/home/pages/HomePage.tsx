@@ -118,7 +118,8 @@ const HomePage = () => {
             <p className="text-base md:text-lg leading-relaxed">
               Nuestra misión es{" "}
               <span className="text-yellow-300 font-semibold">
-                proporcionar servicios técnicos de calidad excepcional para electrodomésticos
+                proporcionar servicios técnicos de calidad excepcional para
+                electrodomésticos
               </span>
               , garantizando soluciones rápidas y efectivas que superen las
               expectativas de nuestros clientes. Nos comprometemos con la{" "}
@@ -150,7 +151,7 @@ const HomePage = () => {
                 excelencia, innovación y compromiso
               </span>{" "}
               con la satisfacción del cliente. Buscamos{" "}
-              <span className="font-semibold">
+              <span className="font-semibold text-[#1D4488]">
                 expandir nuestra presencia a nivel nacional
               </span>
               , manteniendo siempre los más altos estándares de calidad y
@@ -224,42 +225,42 @@ const HomePage = () => {
             images={[
               {
                 src: img1TechTeam,
-                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                classNameImage: "h-486 rounded-full object-cover mx-auto",
                 alt: "erika-de-la-cruz",
                 title: "Erika de la Cruz",
                 description: "Refrigeración",
               },
               {
                 src: img2TechTeam,
-                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                classNameImage: "h-486 rounded-full object-cover mx-auto",
                 alt: "valentina-gonzalez",
                 title: "Valentina González",
                 description: "Lavadoras",
               },
               {
                 src: img3TechTeam,
-                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                classNameImage: "h-486 rounded-full object-cover mx-auto",
                 alt: "angel-santos",
                 title: "Ángel Santos",
                 description: "Instalación",
               },
               {
                 src: img4TechTeam,
-                classNameImage: "rounded-full w-96 h-96 object-center",
+                classNameImage: "rounded-full h-486 object-center",
                 alt: "daniela-ramos",
                 title: "Daniela Ramos",
                 description: "Televisores",
               },
               {
                 src: img5TechTeam,
-                classNameImage: "rounded-full w-96 h-96 object-center",
+                classNameImage: "rounded-full h-486 object-center",
                 alt: "hector-vargas",
                 title: "Héctor Vargas",
                 description: "Hornos",
               },
               {
                 src: img6TechTeam,
-                classNameImage: "rounded-full w-96 h-96 object-center",
+                classNameImage: "rounded-full h-486 object-center",
                 alt: "edwin-magana",
                 title: "Edwin Magaña",
                 description: "Mantenimiento",
