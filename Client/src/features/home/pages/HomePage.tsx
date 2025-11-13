@@ -214,7 +214,7 @@ const HomePage = () => {
 
       {/*Aqui va la seccion de equipo*/}
       <section>
-        <div className="flex-col px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32">
+        <div className="flex-col px-4 sm:px-6 md:px-1 lg:px-20 xl:px-32">
           <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
             Nuestros expertos
           </p>
@@ -241,42 +241,42 @@ const HomePage = () => {
             images={[
               {
                 src: img1TechTeam,
-                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                classNameImage: "h-486 rounded-full object-cover mx-auto",
                 alt: "erika-de-la-cruz",
                 title: "Erika de la Cruz",
                 description: "Refrigeración",
               },
               {
                 src: img2TechTeam,
-                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                classNameImage: "h-486 rounded-full object-cover mx-auto",
                 alt: "valentina-gonzalez",
                 title: "Valentina González",
                 description: "Lavadoras",
               },
               {
                 src: img3TechTeam,
-                classNameImage: "w-72 h-72 rounded-full object-cover mx-auto",
+                classNameImage: "h-486 rounded-full object-cover mx-auto",
                 alt: "angel-santos",
                 title: "Ángel Santos",
                 description: "Instalación",
               },
               {
                 src: img4TechTeam,
-                classNameImage: "rounded-full w-96 h-96 object-center",
+                classNameImage: "rounded-full h-486 object-center",
                 alt: "daniela-ramos",
                 title: "Daniela Ramos",
                 description: "Televisores",
               },
               {
                 src: img5TechTeam,
-                classNameImage: "rounded-full w-96 h-96 object-center",
+                classNameImage: "rounded-full h-486 object-center",
                 alt: "hector-vargas",
                 title: "Héctor Vargas",
                 description: "Hornos",
               },
               {
                 src: img6TechTeam,
-                classNameImage: "rounded-full w-96 h-96 object-center",
+                classNameImage: "rounded-full h-486 object-center",
                 alt: "edwin-magana",
                 title: "Edwin Magaña",
                 description: "Mantenimiento",
