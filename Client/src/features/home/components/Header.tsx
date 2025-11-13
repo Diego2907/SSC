@@ -5,7 +5,7 @@ import logo from "../assets/img/Logo.webp";
 
 const Header = () => {
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full px-6 sm:px-10 lg:px-20 bg-white h-20 sm:h-24 shadow-lg relative">
+    <header className="sticky top-0 z-50 flex items-center justify-between w-full px-6 sm:px-10 lg:px-20 bg-white h-20 sm:h-24 shadow-lg">
       <Image
         SrcImage={logo}
         AltImage="Logo"
