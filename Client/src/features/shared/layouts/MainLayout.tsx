@@ -26,10 +26,10 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       <Header />
       <Outlet />
-      
+
       {/* Botón flotante para volver arriba */}
       {showButton && (
         <button
@@ -39,11 +39,11 @@ const MainLayout = () => {
                      focus:outline-none"
           aria-label="Volver arriba"
           style={{
-            background: 'none',
-            border: 'none',
+            background: "none",
+            border: "none",
             padding: 0,
-            cursor: 'pointer',
-            outline: 'none'
+            cursor: "pointer",
+            outline: "none",
           }}
         >
           {/* Imagen de fondo del botón (círculo amarillo) */}
@@ -53,7 +53,7 @@ const MainLayout = () => {
               alt=""
               className="w-full h-full object-contain drop-shadow-lg"
             />
-            
+
             {/* Flecha encima del botón - tamaño reducido */}
             <img
               src={flechaBotonImg}
