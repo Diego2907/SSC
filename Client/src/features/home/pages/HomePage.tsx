@@ -88,8 +88,8 @@ const HomePage = () => {
                   mantenimiento de línea blanca
                 </span>{" "}
                 con más de{" "}
-                <span className="font-semibold">10 años de experiencia</span>{" "}
-                en el mercado.
+                <span className="font-semibold">10 años de experiencia</span> en
+                el mercado.
               </p>
               <p>
                 Nuestro equipo está formado por{" "}
@@ -113,9 +113,9 @@ const HomePage = () => {
           {/* BLOQUE MISIÓN (Azul oscuro) */}
           <div className="w-full md:w-1/2 bg-blue-900 text-white p-12 md:p-16 lg:p-20 relative overflow-hidden">
             {/* Imagen de fondo Misión */}
-            <img 
-              src={misionImg} 
-              alt="" 
+            <img
+              src={misionImg}
+              alt=""
               className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-20"
             />
             {/* Título Misión */}
@@ -126,7 +126,8 @@ const HomePage = () => {
             <p className="text-lg leading-relaxed relative max-w-2xl">
               Nuestra misión es{" "}
               <span className="text-yellow-300 font-semibold">
-                proporcionar servicios técnicos de calidad excepcional para electrodomésticos
+                proporcionar servicios técnicos de calidad excepcional para
+                electrodomésticos
               </span>
               , garantizando soluciones rápidas y efectivas que superen las
               expectativas de nuestros clientes. Nos comprometemos con la{" "}
@@ -144,9 +145,9 @@ const HomePage = () => {
           {/* BLOQUE VISIÓN (Verde) */}
           <div className="w-full md:w-1/2 bg-green-600 text-white p-12 md:p-16 lg:p-20 relative overflow-hidden">
             {/* Imagen de fondo Visión */}
-            <img 
-              src={visionImg} 
-              alt="" 
+            <img
+              src={visionImg}
+              alt=""
               className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-20"
             />
             {/* Título Visión */}
@@ -155,13 +156,16 @@ const HomePage = () => {
             </h3>
             {/* Texto Visión */}
             <p className="text-lg leading-relaxed relative max-w-2xl">
-              Ser la <span className="font-semibold">empresa líder</span> en
-              servicios técnicos de línea blanca, reconocida por nuestra{" "}
-              <span className="font-semibold">
+              Ser la{" "}
+              <span className="font-semibold text-[#1D4488]">
+                empresa líder
+              </span>{" "}
+              en servicios técnicos de línea blanca, reconocida por nuestra{" "}
+              <span className="font-semibold text-[#1D4488]">
                 excelencia, innovación y compromiso
               </span>{" "}
               con la satisfacción del cliente. Buscamos{" "}
-              <span className="font-semibold">
+              <span className="font-semibold text-[#1D4488]">
                 expandir nuestra presencia a nivel nacional
               </span>
               , manteniendo siempre los más altos estándares de calidad y
@@ -292,7 +296,7 @@ const HomePage = () => {
 
       {/* Sección de testimonios */}
       <Testimonials />
-      
+
       {/* Sección de contacto */}
       <Contact />
     </main>
