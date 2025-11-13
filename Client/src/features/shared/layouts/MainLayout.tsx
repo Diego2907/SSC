@@ -26,7 +26,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
       <Header />
       <Outlet />
 
