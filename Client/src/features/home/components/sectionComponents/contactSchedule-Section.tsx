@@ -27,8 +27,8 @@ const ContactSchedule: React.FC = () => {
 
           {/* Horarios */}
           <div className="flex flex-wrap gap-4 mb-12">
-            <div className="bg-blue-200 px-6 py-4 rounded-lg flex-1 min-w-[200px]">
-              <h3 className="text-base md:text-lg font-semibold mb-2 text-gray-800">
+            <div className=" px-6 py-4 rounded-lg flex-1 min-w-[200px]">
+              <h3 className="inline-block bg-[#7A869A] text-base md:text-lg mb-2 px-6 text-white">
                 Lunes a Viernes
               </h3>
               <p className="text-sm md:text-base text-gray-700">
@@ -39,8 +39,8 @@ const ContactSchedule: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-blue-200 px-6 py-4 rounded-lg flex-1 min-w-[200px]">
-              <h3 className="text-base md:text-lg font-semibold mb-2 text-gray-800">
+            <div className=" px-6 py-4 rounded-lg flex-1 min-w-[200px]">
+              <h3 className="inline-block bg-[#7A869A] text-base md:text-lg mb-2 px-16 text-white">
                 Sábado
               </h3>
               <p className="text-sm md:text-base text-gray-700">
@@ -50,12 +50,12 @@ const ContactSchedule: React.FC = () => {
           </div>
 
           {/* Contacto */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-gray-900">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-14 mt-16 text-gray-900">
             Contacto
           </h2>
-          <div className="space-y-6">
+          <div className="flex-col">
             {/* Teléfonos */}
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 mb-12">
               <img
                 src={phoneIcon}
                 alt="Teléfono"
@@ -68,7 +68,7 @@ const ContactSchedule: React.FC = () => {
             </div>
 
             {/* WhatsApp */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mb-12">
               <img
                 src={whatsappIcon}
                 alt="WhatsApp"
@@ -80,7 +80,7 @@ const ContactSchedule: React.FC = () => {
             </div>
 
             {/* Email */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mb-12">
               <img
                 src={mailIcon}
                 alt="Email"
@@ -91,7 +91,7 @@ const ContactSchedule: React.FC = () => {
               </p>
             </div>
 
-            {/* Ubicación */}
+            {/* Ubicación 
             <div className="flex items-center gap-4">
               <img
                 src={locationIcon}
@@ -101,7 +101,7 @@ const ContactSchedule: React.FC = () => {
               <p className="text-base md:text-lg font-medium text-gray-800">
                 Colima, México
               </p>
-            </div>
+            </div>*/}
           </div>
         </div>
 
