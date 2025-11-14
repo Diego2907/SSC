@@ -13,6 +13,8 @@
     background-color: #e9e9e9;
     margin: 0;
     padding: 0;
+    /* Prevent horizontal page scroll caused by elements wider than the viewport */
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -35,7 +37,11 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 50% 50%, rgba(11, 18, 32, 0.02) 0%, transparent 70%);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(11, 18, 32, 0.02) 0%,
+      transparent 70%
+    );
   }
 
   .brands-title {
@@ -141,12 +147,13 @@
     background: white;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: none; /* Animations removed for payment logos */
   }
 
+  /* Remove hover animation for payment logos to match request */
   .payment-logo:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .social-links {
@@ -300,7 +307,8 @@
 
 /* ==================== ANIMATIONS ==================== */
 @keyframes pulse-whatsapp {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 4px 12px rgba(255, 214, 0, 0.4);
   }
   50% {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 interface CarouselImage {
   src: string;
@@ -11,14 +11,22 @@ interface CarouselImage {
 interface CarouselProps {
   images: CarouselImage[];
   className?: string;
+  autoplayInterval?: number;
+  pauseOnHover?: boolean;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images, className = "" }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  images,
+  className = "",
+  autoplayInterval = 4000,
+  pauseOnHover = true,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  }, [images.length]);
 
   const prevSlide = () => {
     setCurrentIndex(
@@ -26,10 +34,21 @@ const Carousel: React.FC<CarouselProps> = ({ images, className = "" }) => {
     );
   };
 
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(nextSlide, autoplayInterval);
+      return () => clearInterval(interval);
+    }
+  }, [nextSlide, autoplayInterval, isPaused]);
+
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div
+      className={`relative overflow-hidden ${className}`}
+      onMouseEnter={() => pauseOnHover && setIsPaused(true)}
+      onMouseLeave={() => pauseOnHover && setIsPaused(false)}
+    >
       {/* Contenedor principal del slide */}
-      <div className="relative h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
+      <div className="relative h-[100px] md:h-[300px] lg:h-[450px] flex items-center justify-center ">
         {images.map((image, index) => (
           <div
             key={index}
@@ -62,7 +81,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, className = "" }) => {
       {/* Botones de navegación */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full hover:bg-white shadow"
+        className="absolute left-10 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full hover:bg-white shadow"
         aria-label="Anterior"
       >
         <svg
@@ -83,7 +102,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, className = "" }) => {
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full hover:bg-white shadow"
+        className="absolute right-10 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full hover:bg-white shadow"
         aria-label="Siguiente"
       >
         <svg

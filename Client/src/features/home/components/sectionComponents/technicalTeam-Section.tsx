@@ -1,3 +1,7 @@
+{
+  /*Este quedo como prueba, no lo usamos en el codigo   *NO ELIMINAR* */
+}
+
 type technicalTeamProps = {
   imgSrc: string;
   altImage: string;
