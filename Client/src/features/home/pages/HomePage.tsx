@@ -30,7 +30,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <header className="container mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-0">
         <p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
-          ¡Preparados para ganar!
+          ¡Preparados para grandes retos!
         </p>
         <h1 className="font-[Sora] text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-8">
           SHC es una empresa con más de
