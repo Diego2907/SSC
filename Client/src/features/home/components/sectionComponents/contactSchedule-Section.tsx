@@ -4,7 +4,6 @@ import operadoraImage from "../../assets/img/agente-de-call-center-femenino.webp
 import phoneIcon from "../../assets/icons/phone.svg";
 import whatsappIcon from "../../assets/icons/whatsapp_icon.svg";
 import mailIcon from "../../assets/icons/mail_icon.svg";
-import locationIcon from "../../assets/icons/location_icon.svg";
 
 const ContactSchedule: React.FC = () => {
   return (
@@ -90,18 +89,6 @@ const ContactSchedule: React.FC = () => {
                 servihogardecolima@gmail.com
               </p>
             </div>
-
-            {/* Ubicación 
-            <div className="flex items-center gap-4">
-              <img
-                src={locationIcon}
-                alt="Ubicación"
-                className="w-8 h-8 flex-shrink-0"
-              />
-              <p className="text-base md:text-lg font-medium text-gray-800">
-                Colima, México
-              </p>
-            </div>*/}
           </div>
         </div>
 
