@@ -13,19 +13,7 @@ interface Brand {
 }
 
 const Brands: React.FC = () => {
-  // const images = [
-  //   { src: lgLogo, alt: "Logo de LG", classNameImage: "h-48 object-contain" },
-  //   {
-  //     src: panasonicLogo,
-  //     alt: "Logo de Panasonic",
-  //     classNameImage: "h-48 object-contain",
-  //   },
-  //   {
-  //     src: mideaLogo,
-  //     alt: "Logo de Midea",
-  //     classNameImage: "h-48 object-contain",
-  //   },
-  // ];
+
   const brands: Brand[] = [
     { id: 1, imagePath: lgLogo },
     { id: 2, imagePath: panasonicLogo },
@@ -57,19 +45,13 @@ const Brands: React.FC = () => {
             Marcas que trabajamos   
           </h2>
 
-          {/* 🔹 Aquí se muestra el carrusel
-          <Carousel
-            images={images}
-            className="max-w-20xl mx-auto"
-            autoplayInterval={3000}
-          /> */}
         </header>
 
         <div className="h-64 md:h-72 lg:h-80 overflow-hidden flex items-center">
           <Carousel
             images={carouselImages}
             className="w-full"
-            autoplayInterval={1000}
+            autoplayInterval={2000}
           />
         </div>
 
