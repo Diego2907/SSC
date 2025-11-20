@@ -233,7 +233,7 @@ const HomePage = () => {
 			</section>
 
 			{/* Technical Team Section */}
-			<section>
+			{/* <section>
 				<header className="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32">
 					<p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
 						Nuestros expertos
@@ -306,7 +306,7 @@ const HomePage = () => {
 				</figure>
 			</section>
 
-			<Services />
+			<Services /> */}
 
 			{/* Brands Section - Sin padding extra */}
 			<Brands />
