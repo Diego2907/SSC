@@ -211,13 +211,13 @@ const HomePage = () => {
 						</h2>
 					</article>
 
-					<address className="flex justify-between gap-6 not-italic">
+					<address className="flex items-center  not-italic">
 						<Image
 							classNameImage="w-12 h-12 mb-4"
 							SrcImage={UbicationIcon}
 							AltImage="Icono de ubicacion"
 						/>
-						<p className="font-semibold font-[20px]">
+						<p className="font-semibold text-lg">
 							Mariano Arista #125Centro, Colima CP. 28000
 						</p>
 					</address>
