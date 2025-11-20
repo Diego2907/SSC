@@ -54,7 +54,7 @@ const Brands: React.FC = () => {
             className="brands-title text-3xl md:text-4xl lg:text-5xl font-extrabold mb-16 md:mb-12 lg:mb-16 text-center"
             // className="brands-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-center"
           >
-            Nuestras marcas
+            Marcas que trabajamos   
           </h2>
 
           {/* 🔹 Aquí se muestra el carrusel

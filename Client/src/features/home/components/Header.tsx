@@ -15,7 +15,7 @@ const Header = () => {
         Links={[
           "Conócenos",
           "Servicios",
-          "Nuestras marcas",
+          "Marcas que trabajamos",
           "Preguntas frecuentes",
         ]}
         NavClassName="flex gap-6"
