@@ -4,7 +4,7 @@ import obrero from '../assets/img/obrero.webp';
 
 const Services: React.FC = () => {
   return (
-    <section className="relative bg-[#183a7a] text-white overflow-hidden">
+    <section id="servicios" className="relative bg-[#183a7a] text-white overflow-hidden">
       {/* Background banner image - subtle */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-15"

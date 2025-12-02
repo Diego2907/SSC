@@ -128,7 +128,9 @@ const Carousel: React.FC<CarouselProps> = ({
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? "bg-gray-800" : "bg-gray-400"
+              index === currentIndex
+                ? "bg-yellow-400/80 shadow-[0_0_10px_rgba(250,204,21,0.5)]"
+                : "bg-gray-400"
             }`}
             aria-label={`Ir a imagen ${index + 1}`}
           />

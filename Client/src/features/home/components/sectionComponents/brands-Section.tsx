@@ -31,6 +31,7 @@ const Brands: React.FC = () => {
 
   return (
     <section
+      id="marcas"
       className="brands-section py-8 md:py-10 lg:py-12 "
       // className="brands-section py-6 md:py-8"
       aria-labelledby="brands-title"

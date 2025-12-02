@@ -28,7 +28,7 @@ const HomePage = () => {
 	return (
 		<main className="main-content">
 			{/* Hero Section */}
-			<header className="container mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-0">
+			<header id="inicio" className="container mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-0">
 				<p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
 					¡Preparados para grandes retos!
 				</p>
@@ -105,17 +105,17 @@ const HomePage = () => {
 			</section>
 
 			{/* Mission & Vision - Con imágenes de fondo */}
-			<section className="flex flex-col md:flex-row w-full">
-				<article className="w-full md:w-1/2 bg-[#2B4C9F] text-white px-8 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20 xl:px-24 xl:py-24 relative overflow-hidden flex flex-col justify-center min-h-[350px] md:min-h-[400px]">
+			<section id="conocenos" className="grid grid-cols-1 md:grid-cols-2 w-full">
+				<article className="w-full bg-[#2B4C9F] text-white px-8 py-[2.85rem] md:px-12 md:py-[3.8rem] lg:px-16 lg:py-[4.75rem] xl:px-24 xl:py-[5.7rem] relative overflow-hidden flex min-h-[330px] md:min-h-[380px]">
 					<div
 						className="absolute left-0 top-0 bottom-0 w-2/3 md:w-1/2 bg-no-repeat bg-left bg-contain opacity-30"
 						style={{ backgroundImage: `url(${misionImg})` }}
 					/>
-					<div className="relative z-10 max-w-xl">
-						<h3 className="text-5xl md:text-6xl xl:text-7xl font-extrabold mb-6 md:mb-8 leading-tight">
+					<div className="relative z-10 w-full max-w-[520px] mx-auto text-center flex flex-col gap-4">
+						<h3 className="text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight">
 							Misión
 						</h3>
-						<p className="text-base md:text-lg leading-relaxed">
+						<p className="text-base md:text-lg leading-relaxed text-white/95">
 							Somos una empresa especializada en{" "}
 							<span className="text-yellow-300 font-semibold">
 								<strong>
@@ -151,16 +151,16 @@ const HomePage = () => {
 					</div>
 				</article>
 
-				<article className="w-full md:w-1/2 bg-[#40BA5E] text-white px-8 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20 xl:px-24 xl:py-24 relative overflow-hidden flex flex-col justify-center min-h-[350px] md:min-h-[400px]">
+				<article className="w-full bg-[#40BA5E] text-white px-8 py-[2.85rem] md:px-12 md:py-[3.8rem] lg:px-16 lg:py-[4.75rem] xl:px-24 xl:py-[5.7rem] relative overflow-hidden flex min-h-[330px] md:min-h-[380px]">
 					<div
 						className="absolute right-0 top-0 bottom-0 w-2/3 md:w-1/2 bg-no-repeat bg-right bg-contain opacity-30"
 						style={{ backgroundImage: `url(${visionImg})` }}
 					/>
-					<div className="relative z-10 max-w-xl">
-						<h3 className="text-5xl md:text-6xl xl:text-7xl font-extrabold mb-6 md:mb-8 leading-tight">
+					<div className="relative z-10 w-full max-w-[520px] mx-auto text-center flex flex-col gap-4">
+						<h3 className="text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight">
 							Visión
 						</h3>
-						<p className="text-base md:text-lg leading-relaxed">
+						<p className="text-base md:text-lg leading-relaxed text-white/95">
 							Ser reconocidos para el 2030 como la{" "}
 							<span className="text-[#1d4488]">
 								<strong>empresa líder </strong>
@@ -306,8 +306,7 @@ const HomePage = () => {
 				</figure>
 			</section>
 
-			<Services /> */}
-
+			<Services />
 			{/* Brands Section - Sin padding extra */}
 			<Brands />
 
