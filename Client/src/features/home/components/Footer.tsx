@@ -1,16 +1,25 @@
 import React from "react";
 
+// Colores Pantone oficiales
+const COLORS = {
+  blue: "#1D4289",     // Pantone 7687 C
+  red: "#DA291C",      // Pantone 485 C
+  yellow: "#FFE900",   // Pantone 803 C
+  gray: "#838383",     // Pantone Cool Gray 10 U
+  green: "#44D62C",    // Pantone 802 C
+} as const;
+
 const Footer: React.FC = () => {
   return (
     <footer className="footer-section">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12">
-        <div className="footer-grid grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-          <div className="footer-column footer-logo">
-            <img src="/Images/Logo.png" alt="SHC Logo" className="w-32" />
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-10 md:py-12">
+        <div className="footer-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 items-start">
+          <div className="footer-column footer-logo flex justify-center sm:justify-start">
+            <img src="/Images/Logo.png" alt="SHC Logo" className="w-28 md:w-32" loading="lazy" />
           </div>
 
-          <div className="footer-column">
-            <nav aria-label="Secciones" className="footer-links">
+          <div className="footer-column text-center sm:text-left">
+            <nav aria-label="Secciones" className="footer-links font-poppins">
               <a className="footer-link" href="#">
                 Inicio
               </a>
@@ -29,22 +38,22 @@ const Footer: React.FC = () => {
             </nav>
           </div>
 
-          <div className="footer-column">
-            <div className="footer-heading">Formas de pago</div>
-            <div className="payment-methods">
+          <div className="footer-column text-center sm:text-left">
+            <div className="footer-heading font-poppins">Formas de pago</div>
+            <div className="payment-methods items-center sm:items-start">
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src="/Images/visa.png" alt="VISA" className="h-6" />
+                  <img src="/Images/visa.png" alt="VISA" className="h-6" loading="lazy" />
                 </div>
               </div>
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src="/Images/paypal.png" alt="PayPal" className="h-6" />
+                  <img src="/Images/paypal.png" alt="PayPal" className="h-6" loading="lazy" />
                 </div>
               </div>
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src="/Images/oxxo.png" alt="OXXO PAY" className="h-6" />
+                  <img src="/Images/oxxo.png" alt="OXXO PAY" className="h-6" loading="lazy" />
                 </div>
               </div>
               <div className="payment-item">
@@ -53,15 +62,16 @@ const Footer: React.FC = () => {
                     src="/Images/mastercard.png"
                     alt="Mastercard"
                     className="h-6"
+                    loading="lazy"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="footer-column">
-            <div className="footer-heading">Compañía</div>
-            <div className="footer-links">
+          <div className="footer-column text-center sm:text-left">
+            <div className="footer-heading font-poppins">Compañía</div>
+            <div className="footer-links font-poppins">
               <a className="footer-link" href="#">
                 Términos y condiciones generales del servicio
               </a>
@@ -84,13 +94,19 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-column social-column">
-            <div className="footer-heading">
-              síguenos en nuestras redes sociales
+            <div className="footer-heading font-poppins text-center">
+              Síguenos en nuestras redes sociales
             </div>
-            <div className="social-links">
-              <a className="social-link" href="#" aria-label="Facebook">
-                <div className="social-icon" style={{ background: "#1877F2" }}>
-                  {/* Facebook SVG */}
+            <div className="social-links flex-row lg:flex-col justify-center">
+              <a 
+                className="social-link group" 
+                href="#" 
+                aria-label="Facebook"
+              >
+                <div 
+                  className="social-icon transition-all duration-300"
+                  style={{ background: "#1877F2" }}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -106,9 +122,15 @@ const Footer: React.FC = () => {
                 </div>
               </a>
 
-              <a className="social-link" href="#" aria-label="Instagram">
-                <div className="social-icon" style={{ background: "#E4405F" }}>
-                  {/* Instagram SVG */}
+              <a 
+                className="social-link group" 
+                href="#" 
+                aria-label="Instagram"
+              >
+                <div 
+                  className="social-icon transition-all duration-300"
+                  style={{ background: "#E4405F" }}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -124,9 +146,15 @@ const Footer: React.FC = () => {
                 </div>
               </a>
 
-              <a className="social-link" href="#" aria-label="LinkedIn">
-                <div className="social-icon" style={{ background: "#0A66C2" }}>
-                  {/* LinkedIn SVG */}
+              <a 
+                className="social-link group" 
+                href="#" 
+                aria-label="LinkedIn"
+              >
+                <div 
+                  className="social-icon transition-all duration-300"
+                  style={{ background: "#0A66C2" }}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -142,9 +170,15 @@ const Footer: React.FC = () => {
                 </div>
               </a>
 
-              <a className="social-link" href="#" aria-label="X/Twitter">
-                <div className="social-icon" style={{ background: "#1DA1F2" }}>
-                  {/* X/Twitter SVG */}
+              <a 
+                className="social-link group" 
+                href="#" 
+                aria-label="X/Twitter"
+              >
+                <div 
+                  className="social-icon transition-all duration-300"
+                  style={{ background: "#1DA1F2" }}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -163,19 +197,20 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="footer-bottom mt-8 pt-6 text-sm text-gray-300">
+        <div className="footer-bottom mt-8 pt-6 text-xs md:text-sm text-gray-300 text-center font-poppins">
           Copyright © 2025-2029 ServiHogar de Colima. Todos los derechos
           reservados.
         </div>
       </div>
 
-      {/* WhatsApp floating button (update the number) */}
+      {/* WhatsApp floating button */}
       <a
         className="whatsapp-float"
         href="https://wa.me/523121234567"
         target="_blank"
         rel="noreferrer"
         aria-label="Enviar mensaje por WhatsApp"
+        style={{ background: `linear-gradient(135deg, ${COLORS.yellow} 0%, #FFD600 100%)` }}
       >
         <svg
           width="24"

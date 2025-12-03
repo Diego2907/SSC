@@ -26,17 +26,17 @@ import Services from "../components/Services";
 
 const HomePage = () => {
 	return (
-		<main className="main-content">
+		<main className="main-content bg-white dark:bg-gray-900 transition-colors duration-300">
 			{/* Hero Section */}
-			<header id="inicio" className="container mx-auto px-4 md:px-8 lg:px-16 pt-10 pb-0">
-				<p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
+			<header id="inicio" className="container mx-auto px-4 md:px-8 lg:px-16 pt-8 md:pt-10 pb-0">
+				<p className="bg-[#DA291C] text-white px-3 py-1 text-sm font-semibold inline-block mb-6 md:mb-8 font-poppins">
 					¡Preparados para grandes retos!
 				</p>
-				<h1 className="font-[Sora] text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-8">
+				<h1 className="font-poppins text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6 md:mb-8 text-gray-900 dark:text-white">
 					SHC es una empresa con más de
-					<span className="text-green-600"> 30 años en el mercado </span> con
+					<span className="text-[#44D62C]"> 30 años en el mercado </span> con
 					técnicos
-					<span className="text-[#1D4488]"> altamente capacitados</span>.
+					<span className="text-[#1D4289]"> altamente capacitados</span>.
 				</h1>
 			</header>
 
@@ -67,21 +67,21 @@ const HomePage = () => {
 			/>
 
 			{/* About Section */}
-			<section className="pt-16 md:pt-20 lg:pt-24 container mx-auto px-4 md:px-8 lg:px-16">
+			<section className="pt-12 md:pt-16 lg:pt-24 container mx-auto px-4 md:px-8 lg:px-16">
 				<article className="flex flex-col justify-between gap-6 lg:flex-row lg:space-x-20 mb-12 lg:mb-20">
-					<header className="w-full lg:w-1/3 mb-8 lg:mb-0">
-						<p className="bg-red-600 text-white px-3 py-1 text-sm font-semibold inline-block mb-8">
+					<header className="w-full lg:w-1/3 mb-6 lg:mb-0">
+						<p className="bg-[#DA291C] text-white px-3 py-1 text-sm font-semibold inline-block mb-6 md:mb-8 font-poppins">
 							¿Quienes somos?
 						</p>
-						<h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white font-poppins">
 							Conócenos
 						</h2>
 					</header>
 
-					<section className="w-full lg:w-2/3 space-y-4 text-gray-600 text-lg leading-relaxed">
-						<p className="font-semibold font-[20px]">
+					<section className="w-full lg:w-2/3 space-y-4 text-gray-600 dark:text-gray-300 text-base md:text-lg leading-relaxed font-poppins">
+						<p className="font-semibold">
 							Somos una empresa especializada en{" "}
-							<span className="text-green-700 font-semibold">
+							<span className="text-[#44D62C] font-semibold">
 								mantenimiento de línea blanca
 							</span>{" "}
 							con más de{" "}
@@ -90,12 +90,12 @@ const HomePage = () => {
 						</p>
 						<p>
 							Nuestro equipo está formado por{" "}
-							<span className="text-blue-700 font-semibold">
+							<span className="text-[#1D4289] dark:text-blue-400 font-semibold">
 								técnicos certificados y apasionados
 							</span>{" "}
 							por ofrecer el mejor servicio. Nos distinguimos por nuestra
 							puntualidad, honestidad y compromiso con la{" "}
-							<span className="text-blue-700 font-semibold">
+							<span className="text-[#1D4289] dark:text-blue-400 font-semibold">
 								satisfacción total de nuestros clientes
 							</span>
 							.
@@ -106,42 +106,42 @@ const HomePage = () => {
 
 			{/* Mission & Vision - Con imágenes de fondo */}
 			<section id="conocenos" className="grid grid-cols-1 md:grid-cols-2 w-full">
-				<article className="w-full bg-[#2B4C9F] text-white px-8 py-[2.85rem] md:px-12 md:py-[3.8rem] lg:px-16 lg:py-[4.75rem] xl:px-24 xl:py-[5.7rem] relative overflow-hidden flex min-h-[330px] md:min-h-[380px]">
+				<article className="w-full bg-[#1D4289] text-white px-6 py-8 sm:px-8 sm:py-10 md:px-12 md:py-[3.8rem] lg:px-16 lg:py-[4.75rem] xl:px-24 xl:py-[5.7rem] relative overflow-hidden flex min-h-[300px] sm:min-h-[330px] md:min-h-[380px]">
 					<div
 						className="absolute left-0 top-0 bottom-0 w-2/3 md:w-1/2 bg-no-repeat bg-left bg-contain opacity-30"
 						style={{ backgroundImage: `url(${misionImg})` }}
 					/>
 					<div className="relative z-10 w-full max-w-[520px] mx-auto text-center flex flex-col gap-4">
-						<h3 className="text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight">
+						<h3 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight font-poppins">
 							Misión
 						</h3>
-						<p className="text-base md:text-lg leading-relaxed text-white/95">
+						<p className="text-sm sm:text-base md:text-lg leading-relaxed text-white/95 font-poppins">
 							Somos una empresa especializada en{" "}
-							<span className="text-yellow-300 font-semibold">
+							<span className="text-[#FFE900] font-semibold">
 								<strong>
 									soluciones integrales para la instalación, mantenimiento y
 									reparación{" "}
 								</strong>
 							</span>
 							de{" "}
-							<span className="text-yellow-300 font-semibold">
+							<span className="text-[#FFE900] font-semibold">
 								<strong>equipos de línea blanca</strong>
 							</span>
 							,{" "}
-							<span className="text-yellow-300 font-semibold">
+							<span className="text-[#FFE900] font-semibold">
 								<strong>aire acondicionado</strong>
 							</span>{" "}
 							y{" "}
-							<span className="text-yellow-300 font-semibold">
+							<span className="text-[#FFE900] font-semibold">
 								<strong>electrónica</strong>
 							</span>
 							, comprometidos con brindar un servicio oportuno, eficiente y
 							confiable mediante{" "}
-							<span className="text-yellow-300 font-semibold">
+							<span className="text-[#FFE900] font-semibold">
 								<strong>personal altamente capacitado</strong>
 							</span>
 							, la implementación de{" "}
-							<span className="text-yellow-300 font-semibold">
+							<span className="text-[#FFE900] font-semibold">
 								<strong>tecnologías innovadoras</strong>{" "}
 							</span>
 							y una comunicación efectiva con nuestros clientes, colaboradores y
@@ -151,43 +151,43 @@ const HomePage = () => {
 					</div>
 				</article>
 
-				<article className="w-full bg-[#40BA5E] text-white px-8 py-[2.85rem] md:px-12 md:py-[3.8rem] lg:px-16 lg:py-[4.75rem] xl:px-24 xl:py-[5.7rem] relative overflow-hidden flex min-h-[330px] md:min-h-[380px]">
+				<article className="w-full bg-[#44D62C] text-white px-6 py-8 sm:px-8 sm:py-10 md:px-12 md:py-[3.8rem] lg:px-16 lg:py-[4.75rem] xl:px-24 xl:py-[5.7rem] relative overflow-hidden flex min-h-[300px] sm:min-h-[330px] md:min-h-[380px]">
 					<div
 						className="absolute right-0 top-0 bottom-0 w-2/3 md:w-1/2 bg-no-repeat bg-right bg-contain opacity-30"
 						style={{ backgroundImage: `url(${visionImg})` }}
 					/>
 					<div className="relative z-10 w-full max-w-[520px] mx-auto text-center flex flex-col gap-4">
-						<h3 className="text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight">
+						<h3 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight font-poppins">
 							Visión
 						</h3>
-						<p className="text-base md:text-lg leading-relaxed text-white/95">
+						<p className="text-sm sm:text-base md:text-lg leading-relaxed text-white/95 font-poppins">
 							Ser reconocidos para el 2030 como la{" "}
-							<span className="text-[#1d4488]">
+							<span className="text-[#1D4289]">
 								<strong>empresa líder </strong>
 							</span>
 							en el occidente del país en
-							<span className="text-[#1d4488]">
+							<span className="text-[#1D4289]">
 								<strong> servicios técnicos especializados </strong>
 							</span>
 							para
-							<span className="text-[#1d4488]">
+							<span className="text-[#1D4289]">
 								<strong> línea blanca</strong>
 							</span>
 							,
-							<span className="text-[#1d4488]">
+							<span className="text-[#1D4289]">
 								<strong> aire acondicionado </strong>
 							</span>
 							y{" "}
-							<span className="text-[#1d4488]">
+							<span className="text-[#1D4289]">
 								<strong>electrónica</strong>
 							</span>
 							, destacando por nuestra{" "}
-							<span className="text-[#1d4488] ">
+							<span className="text-[#1D4289]">
 								<strong>capacidad tecnológica</strong>,{" "}
 								<strong>innovación constante</strong>{" "}
 							</span>
 							y la{" "}
-							<span className="text-[#1d4488] font-semibold">
+							<span className="text-[#1D4289] font-semibold">
 								<strong>excelencia operativa</strong>,
 							</span>
 							ofreciendo a nuestros clientes soluciones ágiles, personalizadas y
@@ -200,34 +200,34 @@ const HomePage = () => {
 			<ContactSchedule />
 
 			{/* Location Section */}
-			<section className="w-full pt-10">
-				<header className="flex items-center justify-between gap-6 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32">
+			<section className="w-full pt-8 md:pt-10">
+				<header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32">
 					<article>
-						<p className="bg-red-600 text-white px-4 py-4 font-semibold text-sm inline-block mb-8">
+						<p className="bg-[#DA291C] text-white px-3 sm:px-4 py-2 sm:py-4 font-semibold text-sm inline-block mb-6 md:mb-8 font-poppins">
 							¿Dónde nos encontramos?
 						</p>
-						<h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-8">
+						<h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 md:mb-8 text-gray-900 dark:text-white font-poppins">
 							Ubicación
 						</h2>
 					</article>
 
-					<address className="flex items-center  not-italic">
+					<address className="flex items-center gap-2 not-italic">
 						<Image
-							classNameImage="w-12 h-12 mb-4"
+							classNameImage="w-10 h-10 md:w-12 md:h-12 mb-0 sm:mb-4 dark:invert"
 							SrcImage={UbicationIcon}
 							AltImage="Icono de ubicacion"
 						/>
-						<p className="font-semibold text-lg">
-							Mariano Arista #125Centro, Colima CP. 28000
+						<p className="font-semibold text-sm sm:text-base md:text-lg text-gray-900 dark:text-white font-poppins">
+							Mariano Arista #125 Centro, Colima CP. 28000
 						</p>
 					</address>
 				</header>
 
 				<figure className="relative w-full">
 					<Image
-						classNameImage="inset-0 w-full py-10"
+						classNameImage="inset-0 w-full py-6 md:py-10"
 						SrcImage={UbicacionImg}
-						AltImage="Ubiacion de la empresa"
+						AltImage="Ubicación de la empresa"
 					/>
 				</figure>
 			</section>
