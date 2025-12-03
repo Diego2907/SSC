@@ -100,7 +100,9 @@ const Footer: React.FC = () => {
             <div className="social-links flex-row lg:flex-col justify-center">
               <a 
                 className="social-link group" 
-                href="#" 
+                href="https://facebook.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
               >
                 <div 
@@ -124,7 +126,9 @@ const Footer: React.FC = () => {
 
               <a 
                 className="social-link group" 
-                href="#" 
+                href="https://instagram.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
               >
                 <div 
@@ -148,7 +152,9 @@ const Footer: React.FC = () => {
 
               <a 
                 className="social-link group" 
-                href="#" 
+                href="https://linkedin.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
                 <div 
@@ -164,30 +170,6 @@ const Footer: React.FC = () => {
                   >
                     <path
                       d="M6.94 6.94a2.28 2.28 0 11.001-4.561 2.28 2.28 0 01-.001 4.561zM4.5 8.25h4V20h-4v-11.75zM14.25 8.25h3.75v1.5h.05c.52-.99 1.8-2.04 3.7-2.04 3.95 0 4.7 2.6 4.7 5.98V20h-4v-5.88c0-1.4 0-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.08V20h-4V8.25z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-
-              <a 
-                className="social-link group" 
-                href="#" 
-                aria-label="X/Twitter"
-              >
-                <div 
-                  className="social-icon transition-all duration-300"
-                  style={{ background: "#1DA1F2" }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M22 5.92c-.6.26-1.25.44-1.93.52.7-.42 1.24-1.08 1.5-1.87-.66.39-1.39.67-2.17.82A3.44 3.44 0 0015.5 4c-1.9 0-3.44 1.55-3.44 3.46 0 .27.03.53.09.78C8.2 8.05 5.2 6.13 3.2 3.45c-.3.53-.47 1.14-.47 1.8 0 1.24.63 2.33 1.6 2.97-.58-.02-1.12-.18-1.6-.44v.04c0 1.72 1.2 3.15 2.8 3.48-.3.08-.62.12-.96.12-.24 0-.48-.02-.71-.06.48 1.5 1.86 2.6 3.5 2.63A6.9 6.9 0 012 19.54a9.7 9.7 0 005.26 1.54c6.31 0 9.76-5.24 9.76-9.78v-.45c.68-.48 1.27-1.08 1.74-1.77-.62.27-1.28.46-1.96.54z"
                       fill="white"
                     />
                   </svg>

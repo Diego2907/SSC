@@ -11,10 +11,11 @@ const COLORS = {
   gray: "#838383",     // Pantone Cool Gray 10 U
 } as const;
 
+// Redes sociales sin X/Twitter - Solo Facebook, Instagram y LinkedIn
 const socialNetworks = [
   {
     label: "Facebook",
-    href: "#",
+    href: "https://facebook.com",
     icon: (
       <svg
         width="44"
@@ -33,7 +34,7 @@ const socialNetworks = [
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://instagram.com",
     icon: (
       <svg
         width="44"
@@ -51,7 +52,7 @@ const socialNetworks = [
   },
   {
     label: "LinkedIn",
-    href: "#",
+    href: "https://linkedin.com",
     icon: (
       <svg
         width="44"
@@ -63,25 +64,6 @@ const socialNetworks = [
         <rect width="44" height="44" rx="12" fill="currentColor" />
         <path
           d="M14.5 18.5h3.5v12h-3.5v-12zm1.75-5.5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4.75 5.5h3.35v1.64h.05c.47-.89 1.61-1.82 3.32-1.82 3.55 0 4.21 2.34 4.21 5.38v6.2h-3.5v-5.5c0-1.31-.02-3-1.83-3s-2.11 1.43-2.11 2.9v5.6H21v-11.4z"
-          fill="white"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "X",
-    href: "#",
-    icon: (
-      <svg
-        width="44"
-        height="44"
-        viewBox="0 0 44 44"
-        className="social-icon-svg transition-all duration-300"
-        aria-hidden="true"
-      >
-        <rect width="44" height="44" rx="12" fill="currentColor" />
-        <path
-          d="M25.5 13h3.2l-7 8.2 8.2 10.8h-6.4l-5-6.6-5.7 6.6H9.6l7.5-8.7L9 13h6.6l4.5 6 5.4-6zm-1.1 17.1h1.8L16.8 14.9h-1.9l9.5 15.2z"
           fill="white"
         />
       </svg>

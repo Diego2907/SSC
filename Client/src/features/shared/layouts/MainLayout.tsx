@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../../home/components/Header";
+import Chatbot from "../components/Chatbot";
 import { useState, useEffect } from "react";
 import botonImg from "../../home/assets/img/boton.webp";
 import flechaBotonImg from "../../home/assets/img/flecha_boton.webp";
@@ -29,6 +30,9 @@ const MainLayout = () => {
     <div className="relative">
       <Header />
       <Outlet />
+
+      {/* Chatbot - Asistente Virtual Fixo */}
+      <Chatbot />
 
       {/* Botón flotante para volver arriba */}
       {showButton && (
