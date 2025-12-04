@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Logo from "../assets/img/Logo.webp"; // ⬅️ Ajusta la ruta si es necesario
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -78,9 +79,9 @@ const LoginPage = () => {
         {/* Footer */}
         <p className="text-center mt-5 text-sm text-gray-600">
           ¿No tienes una cuenta?{" "}
-          <a href="/register" className="text-[#1D4289] font-semibold">
+          <Link to="/register" className="text-[#1D4289] font-semibold">
             Regístrate
-          </a>
+          </Link>
         </p>
       </section>
     </main>
