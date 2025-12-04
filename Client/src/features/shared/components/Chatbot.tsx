@@ -8,14 +8,18 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="fixed bottom-[100px] md:bottom-[120px] right-[16px] md:right-[6px] z-[60] flex flex-col items-end gap-3">
+    <div className="fixed bottom-[100px] md:bottom-[120px] z-[30] right-[16px] md:right-[6px] flex flex-col items-end gap-3">
       {/* Burbuja de mensaje */}
       <div
         className={`
           bg-[#44D62C] text-white px-4 py-3 rounded-2xl rounded-br-sm
           shadow-lg max-w-[280px] md:max-w-[320px]
           transform transition-all duration-300 ease-out
-          ${isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-2 scale-95 pointer-events-none'}
+          ${
+            isOpen
+              ? "opacity-100 translate-y-0 scale-100"
+              : "opacity-0 translate-y-2 scale-95 pointer-events-none"
+          }
         `}
       >
         <p className="font-poppins text-sm md:text-base leading-relaxed">
