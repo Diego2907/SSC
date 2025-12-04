@@ -9,27 +9,27 @@
 /* ==================== CSS CUSTOM PROPERTIES (Pantone Official Colors) ==================== */
 :root {
   /* Pantone Official Palette */
-  --pantone-blue: #1D4289;
-  --pantone-red: #DA291C;
-  --pantone-yellow: #FFE900;
+  --pantone-blue: #1d4289;
+  --pantone-red: #da291c;
+  --pantone-yellow: #ffe900;
   --pantone-gray: #838383;
-  --pantone-green: #44D62C;
-  --pantone-white: #FFFFFF;
-  
+  --pantone-green: #44d62c;
+  --pantone-white: #ffffff;
+
   /* Light Mode Specific */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8F9FA;
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --border-color: #E5E7EB;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
 }
 
 /* Dark Mode Variables */
 .dark {
   --bg-primary: #0b1220;
   --bg-secondary: #1a2332;
-  --text-primary: #F9FAFB;
-  --text-secondary: #D1D5DB;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
   --border-color: #374151;
 }
 
@@ -53,12 +53,20 @@
   }
 
   /* Typography Hierarchy */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
   }
 
-  p, span, a, li {
+  p,
+  span,
+  a,
+  li {
     font-family: "Poppins", sans-serif;
   }
 
@@ -233,7 +241,7 @@
     align-items: center;
     justify-content: center;
     color: var(--pantone-gray);
-    background: #F3F4F6;
+    background: #f3f4f6;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
@@ -261,7 +269,7 @@
   /* Dark mode social icons */
   .dark .social-icon {
     background: #374151;
-    color: #D1D5DB;
+    color: #d1d5db;
   }
 
   .dark .social-icon:hover {
@@ -270,7 +278,7 @@
   }
 
   .dark .social-icon-svg {
-    color: #D1D5DB;
+    color: #d1d5db;
   }
 
   .dark .social-link:hover .social-icon-svg {
@@ -334,7 +342,7 @@
 
   .dark .contact-links li,
   .dark .company-links li {
-    color: #93C5FD;
+    color: #93c5fd;
   }
 
   .payment-img {
