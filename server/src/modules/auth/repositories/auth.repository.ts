@@ -30,15 +30,15 @@ Usuario.init(
 			unique: true,
 		},
 		Nombre: {
-			type: DataTypes.STRING(100),
+			type: DataTypes.STRING(50),
 			allowNull: false,
 		},
 		Apellido_Paterno: {
-			type: DataTypes.STRING(100),
+			type: DataTypes.STRING(30),
 			allowNull: false,
 		},
 		Apellido_Materno: {
-			type: DataTypes.STRING(100),
+			type: DataTypes.STRING(30),
 			allowNull: false,
 		},
 		Correo: {
