@@ -80,18 +80,20 @@ const RegisterPage = () => {
         </button>
 
         {/* Footer */}
-        <input type="checkbox" />
-        <p className="text-[11px] mt-4 text-center text-gray-500">
-          He aceptado las{" "}
-          <a href="#" className="text-[#1D4289] underline">
-            Condiciones de uso
-          </a>{" "}
-          y el{" "}
-          <a href="#" className="text-[#1D4289] underline">
-            Aviso de Privacidad
-          </a>{" "}
-          de SHC
-        </p>
+        <div className="flex pt-4">
+          <input className="w-5 accent-[#1D4289]" type="checkbox" />
+          <p className="text-[11px] mt-4 text-center text-gray-500">
+            He aceptado las{" "}
+            <a href="#" className="text-[#1D4289] underline">
+              Condiciones de uso
+            </a>{" "}
+            y el{" "}
+            <a href="#" className="text-[#1D4289] underline">
+              Aviso de Privacidad
+            </a>{" "}
+            de SHC
+          </p>
+        </div>
 
         <p className="text-sm text-center mt-4">
           ¿Ya tienes una cuenta?{" "}

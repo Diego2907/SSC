@@ -1,4 +1,5 @@
 import React from "react";
+import SocialLinks from "./SocialLinks";
 
 // Colores Pantone oficiales
 const COLORS = {
@@ -95,87 +96,9 @@ const Footer: React.FC = () => {
 
           <div className="footer-column social-column">
             <div className="footer-heading font-poppins text-center">
-              Síguenos en nuestras redes sociales
+              Redes
             </div>
-            <div className="social-links flex-row lg:flex-col justify-center">
-              <a 
-                className="social-link group" 
-                href="https://facebook.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-              >
-                <div 
-                  className="social-icon transition-all duration-300"
-                  style={{ background: "#1877F2" }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 4.84 3.44 8.85 7.94 9.8v-6.93H7.1v-2.87h2.84V9.41c0-2.81 1.67-4.36 4.22-4.36 1.22 0 2.5.22 2.5.22v2.75h-1.41c-1.39 0-1.82.86-1.82 1.74v2.09h3.1l-.5 2.87h-2.6V21.8C18.56 20.85 22 16.84 22 12z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-
-              <a 
-                className="social-link group" 
-                href="https://instagram.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <div 
-                  className="social-icon transition-all duration-300"
-                  style={{ background: "#E4405F" }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6a5 5 0 100 10 5 5 0 000-10zm6.5-.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-
-              <a 
-                className="social-link group" 
-                href="https://linkedin.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                <div 
-                  className="social-icon transition-all duration-300"
-                  style={{ background: "#0A66C2" }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.94 6.94a2.28 2.28 0 11.001-4.561 2.28 2.28 0 01-.001 4.561zM4.5 8.25h4V20h-4v-11.75zM14.25 8.25h3.75v1.5h.05c.52-.99 1.8-2.04 3.7-2.04 3.95 0 4.7 2.6 4.7 5.98V20h-4v-5.88c0-1.4 0-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.08V20h-4V8.25z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-            </div>
+            <SocialLinks />
           </div>
         </div>
 
