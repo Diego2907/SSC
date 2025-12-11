@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Logo from "../assets/img/Logo.webp"; // Ajusta la ruta si es diferente
-import { Link } from "react-router-dom";
+import Logo_amarillo from "../assets/img/Logo - Amarillo.webp"; // Ajusta la ruta si es diferente
+import { Link, useLocation } from "react-router-dom";
 
 const RegisterPage = () => {
   const [password, setPassword] = useState("");
@@ -11,7 +11,7 @@ const RegisterPage = () => {
       {/* Header superior solo blanco (opcional según tu proyecto) */}
 
       {/* Logo centrado */}
-      <img src={Logo} alt="Logo SHC" className="mt-14 w-36 sm:w-44" />
+      <img src={Logo_amarillo} alt="Logo SHC" className="mt-14 w-36 sm:w-44" />
 
       {/* Card Form */}
       <section className="mt-6 bg-white w-[90%] max-w-md rounded-xl shadow-xl p-8 font-poppins">
@@ -80,8 +80,9 @@ const RegisterPage = () => {
         </button>
 
         {/* Footer */}
+        <input type="checkbox" />
         <p className="text-[11px] mt-4 text-center text-gray-500">
-          Al crear una cuenta aceptas las{" "}
+          He aceptado las{" "}
           <a href="#" className="text-[#1D4289] underline">
             Condiciones de uso
           </a>{" "}
