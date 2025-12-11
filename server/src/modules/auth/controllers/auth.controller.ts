@@ -61,6 +61,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 			Contrasenia,
 		});
 
+		// Establecer la cookie antes de enviar la respuesta
+		res.cookie("token", result.token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "strict",
+			maxAge: 120 * 60 * 1000, // 2 horas
+		});
+
 		res.status(200).json({
 			message: "Inicio de sesión exitoso",
 			data: result,
@@ -81,6 +89,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 			error: error.message,
 		});
 	}
+};
+
+export const logout = (res: Response): void => {
+	res.clearCookie("token");
+	res.status(200).json({
+		message: "Cierre de sesión exitoso",
+	});
 };
 
 //!Controlador pendiente de revisar y probar

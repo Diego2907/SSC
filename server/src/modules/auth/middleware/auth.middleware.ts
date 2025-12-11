@@ -20,45 +20,21 @@ export const authenticate = (
 	next: NextFunction
 ): void => {
 	try {
-		// Obtener el token del header Authorization
-		const authHeader = req.headers.authorization;
-
-		if (!authHeader) {
-			res.status(401).json({
-				message: "Token no proporcionado",
-			});
-			return;
-		}
-
-		// El formato esperado es: "Bearer <token>"
-		const parts = authHeader.split(" ");
-
-		if (parts.length !== 2 || parts[0] !== "Bearer") {
-			res.status(401).json({
-				message: "Formato de token inválido. Use: Bearer <token>",
-			});
-			return;
-		}
-
-		const token = parts[1];
+		const token = req.cookies?.token;
 
 		if (!token) {
 			res.status(401).json({
-				message: "Token vacío",
+				message: "Token no proporcionado. Debe iniciar sesión",
 			});
 			return;
 		}
 
-		// Verificar el token
 		const decoded = verifyToken(token);
 
-		// Agregar el usuario decodificado al request
 		req.user = {
 			id_Usuario: decoded.id_Usuario,
 			Correo: decoded.Correo,
 		};
-
-		// Continuar al siguiente middleware/controlador
 		next();
 	} catch (error: any) {
 		console.error("Error en autenticación:", error);
@@ -76,44 +52,3 @@ export const authenticate = (
 		});
 	}
 };
-//! QUITAR ESTO
-// // Middleware opcional para autenticación (no falla si no hay token)
-// export const optionalAuthenticate = (
-// 	req: Request,
-// 	// res: Response,
-// 	next: NextFunction
-// ): void => {
-// 	try {
-// 		const authHeader = req.headers.authorization;
-
-// 		if (!authHeader) {
-// 			// No hay token, pero continuar de todos modos
-// 			next();
-// 			return;
-// 		}
-
-// 		const parts = authHeader.split(" ");
-
-// 		if (parts.length === 2 && parts[0] === "Bearer") {
-// 			const token = parts[1];
-
-// 			if (token) {
-// 				try {
-// 					const decoded = verifyToken(token);
-// 					req.user = {
-// 						id_Usuario: decoded.id_Usuario,
-// 						Correo: decoded.Correo,
-// 					};
-// 				} catch (error) {
-// 					// Token inválido, pero continuar sin usuario
-// 					console.warn("Token inválido en autenticación opcional:", error);
-// 				}
-// 			}
-// 		}
-
-// 		next();
-// 	} catch (error) {
-// 		// En caso de error, continuar sin usuario
-// 		next();
-// 	}
-// };
