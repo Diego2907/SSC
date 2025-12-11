@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Logo_amarillo from "../assets/img/Logo - Amarillo.webp"; // Ajusta la ruta si es diferente
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const RegisterPage = () => {
   const [password, setPassword] = useState("");
@@ -80,8 +80,9 @@ const RegisterPage = () => {
         </button>
 
         {/* Footer */}
+        <input type="checkbox" />
         <p className="text-[11px] mt-4 text-center text-gray-500">
-          Al crear una cuenta aceptas las{" "}
+          He aceptado las{" "}
           <a href="#" className="text-[#1D4289] underline">
             Condiciones de uso
           </a>{" "}
