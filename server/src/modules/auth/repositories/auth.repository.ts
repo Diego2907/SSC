@@ -14,6 +14,7 @@ const sequelize = new Sequelize(
 		host: process.env.DB_USER_HOST || "localhost",
 		dialect: "mysql",
 		port: Number(process.env.DB_USER_PORT) || 3306,
+		timezone: "-06:00",
 	}
 );
 
@@ -77,8 +78,12 @@ Usuario.init(
 				}
 
 				if (usuario.Consentimiento) {
-					const fecha = new Date().toLocaleDateString("en-CA");
-					usuario.FechaConsentimiento = new Date(fecha);
+					// Obtener la fecha y hora en la zona horaria de Ciudad de México (UTC-6)
+					const fechaMexico = new Date().toLocaleString("en-US", {
+						timeZone: "America/Mexico_City",
+					});
+					// Convertir al formato compatible con MySQL DATETIME
+					usuario.FechaConsentimiento = new Date(fechaMexico);
 				} else {
 					usuario.FechaConsentimiento = null;
 				}
