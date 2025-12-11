@@ -76,44 +76,44 @@ export const authenticate = (
 		});
 	}
 };
+//! QUITAR ESTO
+// // Middleware opcional para autenticación (no falla si no hay token)
+// export const optionalAuthenticate = (
+// 	req: Request,
+// 	// res: Response,
+// 	next: NextFunction
+// ): void => {
+// 	try {
+// 		const authHeader = req.headers.authorization;
 
-// Middleware opcional para autenticación (no falla si no hay token)
-export const optionalAuthenticate = (
-	req: Request,
-	// res: Response,
-	next: NextFunction
-): void => {
-	try {
-		const authHeader = req.headers.authorization;
+// 		if (!authHeader) {
+// 			// No hay token, pero continuar de todos modos
+// 			next();
+// 			return;
+// 		}
 
-		if (!authHeader) {
-			// No hay token, pero continuar de todos modos
-			next();
-			return;
-		}
+// 		const parts = authHeader.split(" ");
 
-		const parts = authHeader.split(" ");
+// 		if (parts.length === 2 && parts[0] === "Bearer") {
+// 			const token = parts[1];
 
-		if (parts.length === 2 && parts[0] === "Bearer") {
-			const token = parts[1];
+// 			if (token) {
+// 				try {
+// 					const decoded = verifyToken(token);
+// 					req.user = {
+// 						id_Usuario: decoded.id_Usuario,
+// 						Correo: decoded.Correo,
+// 					};
+// 				} catch (error) {
+// 					// Token inválido, pero continuar sin usuario
+// 					console.warn("Token inválido en autenticación opcional:", error);
+// 				}
+// 			}
+// 		}
 
-			if (token) {
-				try {
-					const decoded = verifyToken(token);
-					req.user = {
-						id_Usuario: decoded.id_Usuario,
-						Correo: decoded.Correo,
-					};
-				} catch (error) {
-					// Token inválido, pero continuar sin usuario
-					console.warn("Token inválido en autenticación opcional:", error);
-				}
-			}
-		}
-
-		next();
-	} catch (error) {
-		// En caso de error, continuar sin usuario
-		next();
-	}
-};
+// 		next();
+// 	} catch (error) {
+// 		// En caso de error, continuar sin usuario
+// 		next();
+// 	}
+// };
