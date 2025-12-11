@@ -1,16 +1,26 @@
 import React from "react";
+import SocialLinks from "./SocialLinks";
+
+// Colores Pantone oficiales
+const COLORS = {
+  blue: "#1D4289",     // Pantone 7687 C
+  red: "#DA291C",      // Pantone 485 C
+  yellow: "#FFE900",   // Pantone 803 C
+  gray: "#838383",     // Pantone Cool Gray 10 U
+  green: "#44D62C",    // Pantone 802 C
+} as const;
 
 const Footer: React.FC = () => {
   return (
     <footer className="footer-section">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-12">
-        <div className="footer-grid grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-          <div className="footer-column footer-logo">
-            <img src="/Images/Logo.png" alt="SHC Logo" className="w-32" />
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-10 md:py-12">
+        <div className="footer-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 items-start">
+          <div className="footer-column footer-logo flex justify-center sm:justify-start">
+            <img src="/Images/Logo.png" alt="SHC Logo" className="w-28 md:w-32" loading="lazy" />
           </div>
 
-          <div className="footer-column">
-            <nav aria-label="Secciones" className="footer-links">
+          <div className="footer-column text-center sm:text-left">
+            <nav aria-label="Secciones" className="footer-links font-poppins">
               <a className="footer-link" href="#">
                 Inicio
               </a>
@@ -29,22 +39,22 @@ const Footer: React.FC = () => {
             </nav>
           </div>
 
-          <div className="footer-column">
-            <div className="footer-heading">Formas de pago</div>
-            <div className="payment-methods">
+          <div className="footer-column text-center sm:text-left">
+            <div className="footer-heading font-poppins">Formas de pago</div>
+            <div className="payment-methods items-center sm:items-start">
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src="/Images/visa.png" alt="VISA" className="h-6" />
+                  <img src="/Images/visa.png" alt="VISA" className="h-6" loading="lazy" />
                 </div>
               </div>
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src="/Images/paypal.png" alt="PayPal" className="h-6" />
+                  <img src="/Images/paypal.png" alt="PayPal" className="h-6" loading="lazy" />
                 </div>
               </div>
               <div className="payment-item">
                 <div className="payment-logo">
-                  <img src="/Images/oxxo.png" alt="OXXO PAY" className="h-6" />
+                  <img src="/Images/oxxo.png" alt="OXXO PAY" className="h-6" loading="lazy" />
                 </div>
               </div>
               <div className="payment-item">
@@ -53,15 +63,16 @@ const Footer: React.FC = () => {
                     src="/Images/mastercard.png"
                     alt="Mastercard"
                     className="h-6"
+                    loading="lazy"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="footer-column">
-            <div className="footer-heading">Compañía</div>
-            <div className="footer-links">
+          <div className="footer-column text-center sm:text-left">
+            <div className="footer-heading font-poppins">Compañía</div>
+            <div className="footer-links font-poppins">
               <a className="footer-link" href="#">
                 Términos y condiciones generales del servicio
               </a>
@@ -84,98 +95,27 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-column social-column">
-            <div className="footer-heading">
-              síguenos en nuestras redes sociales
+            <div className="footer-heading font-poppins text-center">
+              Redes
             </div>
-            <div className="social-links">
-              <a className="social-link" href="#" aria-label="Facebook">
-                <div className="social-icon" style={{ background: "#1877F2" }}>
-                  {/* Facebook SVG */}
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 4.84 3.44 8.85 7.94 9.8v-6.93H7.1v-2.87h2.84V9.41c0-2.81 1.67-4.36 4.22-4.36 1.22 0 2.5.22 2.5.22v2.75h-1.41c-1.39 0-1.82.86-1.82 1.74v2.09h3.1l-.5 2.87h-2.6V21.8C18.56 20.85 22 16.84 22 12z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-
-              <a className="social-link" href="#" aria-label="Instagram">
-                <div className="social-icon" style={{ background: "#E4405F" }}>
-                  {/* Instagram SVG */}
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 6a5 5 0 100 10 5 5 0 000-10zm6.5-.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-
-              <a className="social-link" href="#" aria-label="LinkedIn">
-                <div className="social-icon" style={{ background: "#0A66C2" }}>
-                  {/* LinkedIn SVG */}
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.94 6.94a2.28 2.28 0 11.001-4.561 2.28 2.28 0 01-.001 4.561zM4.5 8.25h4V20h-4v-11.75zM14.25 8.25h3.75v1.5h.05c.52-.99 1.8-2.04 3.7-2.04 3.95 0 4.7 2.6 4.7 5.98V20h-4v-5.88c0-1.4 0-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.08V20h-4V8.25z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-
-              <a className="social-link" href="#" aria-label="X/Twitter">
-                <div className="social-icon" style={{ background: "#1DA1F2" }}>
-                  {/* X/Twitter SVG */}
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M22 5.92c-.6.26-1.25.44-1.93.52.7-.42 1.24-1.08 1.5-1.87-.66.39-1.39.67-2.17.82A3.44 3.44 0 0015.5 4c-1.9 0-3.44 1.55-3.44 3.46 0 .27.03.53.09.78C8.2 8.05 5.2 6.13 3.2 3.45c-.3.53-.47 1.14-.47 1.8 0 1.24.63 2.33 1.6 2.97-.58-.02-1.12-.18-1.6-.44v.04c0 1.72 1.2 3.15 2.8 3.48-.3.08-.62.12-.96.12-.24 0-.48-.02-.71-.06.48 1.5 1.86 2.6 3.5 2.63A6.9 6.9 0 012 19.54a9.7 9.7 0 005.26 1.54c6.31 0 9.76-5.24 9.76-9.78v-.45c.68-.48 1.27-1.08 1.74-1.77-.62.27-1.28.46-1.96.54z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </a>
-            </div>
+            <SocialLinks />
           </div>
         </div>
 
-        <div className="footer-bottom mt-8 pt-6 text-sm text-gray-300">
+        <div className="footer-bottom mt-8 pt-6 text-xs md:text-sm text-gray-300 text-center font-poppins">
           Copyright © 2025-2029 ServiHogar de Colima. Todos los derechos
           reservados.
         </div>
       </div>
 
-      {/* WhatsApp floating button (update the number) */}
+      {/* WhatsApp floating button */}
       <a
         className="whatsapp-float"
         href="https://wa.me/523121234567"
         target="_blank"
         rel="noreferrer"
         aria-label="Enviar mensaje por WhatsApp"
+        style={{ background: `linear-gradient(135deg, ${COLORS.yellow} 0%, #FFD600 100%)` }}
       >
         <svg
           width="24"

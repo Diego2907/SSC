@@ -13,19 +13,7 @@ interface Brand {
 }
 
 const Brands: React.FC = () => {
-  // const images = [
-  //   { src: lgLogo, alt: "Logo de LG", classNameImage: "h-48 object-contain" },
-  //   {
-  //     src: panasonicLogo,
-  //     alt: "Logo de Panasonic",
-  //     classNameImage: "h-48 object-contain",
-  //   },
-  //   {
-  //     src: mideaLogo,
-  //     alt: "Logo de Midea",
-  //     classNameImage: "h-48 object-contain",
-  //   },
-  // ];
+
   const brands: Brand[] = [
     { id: 1, imagePath: lgLogo },
     { id: 2, imagePath: panasonicLogo },
@@ -43,6 +31,7 @@ const Brands: React.FC = () => {
 
   return (
     <section
+      id="marcas"
       className="brands-section py-8 md:py-10 lg:py-12 "
       // className="brands-section py-6 md:py-8"
       aria-labelledby="brands-title"
@@ -54,22 +43,16 @@ const Brands: React.FC = () => {
             className="brands-title text-3xl md:text-4xl lg:text-5xl font-extrabold mb-16 md:mb-12 lg:mb-16 text-center"
             // className="brands-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-center"
           >
-            Nuestras marcas
+            Marcas que trabajamos   
           </h2>
 
-          {/* 🔹 Aquí se muestra el carrusel
-          <Carousel
-            images={images}
-            className="max-w-20xl mx-auto"
-            autoplayInterval={3000}
-          /> */}
         </header>
 
         <div className="h-64 md:h-72 lg:h-80 overflow-hidden flex items-center">
           <Carousel
             images={carouselImages}
             className="w-full"
-            autoplayInterval={1000}
+            autoplayInterval={2000}
           />
         </div>
 

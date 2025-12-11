@@ -1,22 +1,81 @@
 /* ==================== IMPORTS ==================== */
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sora:wght@100..800&display=swap");
 
 /* ==================== TAILWIND DIRECTIVES ==================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ==================== CSS CUSTOM PROPERTIES (Pantone Official Colors) ==================== */
+:root {
+  /* Pantone Official Palette */
+  --pantone-blue: #1d4289;
+  --pantone-red: #da291c;
+  --pantone-yellow: #ffe900;
+  --pantone-gray: #838383;
+  --pantone-green: #44d62c;
+  --pantone-white: #ffffff;
+
+  /* Light Mode Specific */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --bg-primary: #0b1220;
+  --bg-secondary: #1a2332;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --border-color: #374151;
+}
+
 /* ==================== BASE STYLES ==================== */
 @layer base {
   body {
-    font-family: "Sora", sans-serif;
-    background-color: #e9e9e9;
+    font-family: "Poppins", "Sora", sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     margin: 0;
     padding: 0;
-    /* Prevent horizontal page scroll caused by elements wider than the viewport */
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  /* Typography Hierarchy */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+  }
+
+  p,
+  span,
+  a,
+  li {
+    font-family: "Poppins", sans-serif;
+  }
+
+  .font-sora {
+    font-family: "Sora", sans-serif;
+  }
+
+  .font-futura {
+    font-family: "Futura", sans-serif;
   }
 }
 
@@ -159,33 +218,85 @@
   .social-links {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
+    align-items: center;
   }
 
   .social-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.3s ease;
   }
 
   .social-link:hover {
-    transform: translateX(4px);
+    transform: translateY(-3px);
   }
 
   .social-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: var(--pantone-gray);
+    background: #f3f4f6;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
   .social-icon:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: var(--pantone-blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(29, 66, 137, 0.3);
+    transform: scale(1.05);
+  }
+
+  .social-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+  }
+
+  .social-icon-container svg {
+    transition: none;
+  }
+
+  .social-icon-container svg rect {
+    transition: fill 0.15s ease;
+  }
+
+  .social-link:hover .social-icon-container svg rect {
+    fill: #1D4289 !important;
+  }
+
+  .social-link:hover .social-icon-container {
+    transform: scale(1.05);
+    transition: transform 0.15s ease;
+  }
+
+  /* Dark mode social icons */
+  .dark .social-icon {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  .dark .social-icon:hover {
+    background: var(--pantone-blue);
+    color: white;
+  }
+
+  .dark .social-link:hover .social-icon-container svg rect {
+    fill: #1D4289 !important;
   }
 
   .footer-bottom {
@@ -221,19 +332,31 @@
   }
 
   .contact-section {
-    background: white;
+    background: var(--bg-primary);
     padding-top: 3rem;
     padding-bottom: 3rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .dark .contact-section {
+    background: var(--bg-secondary);
   }
 
   .contact-heading {
-    color: #0b3b78;
+    color: var(--pantone-blue);
     font-weight: 600;
+    font-family: "Poppins", sans-serif;
   }
 
   .contact-links li,
   .company-links li {
-    color: #1f3b6f;
+    color: var(--pantone-blue);
+    transition: color 0.3s ease;
+  }
+
+  .dark .contact-links li,
+  .dark .company-links li {
+    color: #93c5fd;
   }
 
   .payment-img {
@@ -243,29 +366,20 @@
     display: block;
   }
 
-  .social-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: contain;
-    display: inline-block;
-    background: white;
-    padding: 6px;
-    box-shadow: 0 4px 10px rgba(2, 6, 23, 0.12);
-  }
-
   .social-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .social-column .contact-heading,
   .social-column .footer-heading {
     text-align: center;
-    margin-bottom: 1rem;
-    color: #0b3b78;
+    margin-bottom: 1.5rem;
+    color: var(--pantone-blue);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
   }
 
   .social-column .social-links {
@@ -366,10 +480,9 @@
     gap: 1.25rem;
   }
 
-  .social-img {
-    width: 48px;
-    height: 48px;
-    padding: 8px;
+  .social-icon-svg {
+    width: 44px;
+    height: 44px;
   }
 }
 

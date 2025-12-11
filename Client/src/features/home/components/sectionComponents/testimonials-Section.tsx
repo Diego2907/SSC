@@ -3,7 +3,7 @@ import testimonialsBg from "../../assets/img/lo_que_dicen_nuestros_clientes.webp
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="testimonials-section py-8 md:py-12">
+    <section id="preguntas-frecuentes" className="testimonials-section py-8 md:py-12">
       <div className="w-full">
         <img
           src={testimonialsBg}
