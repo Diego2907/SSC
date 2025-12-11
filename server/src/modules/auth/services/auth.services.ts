@@ -1,10 +1,13 @@
 import { Usuario } from "../repositories/auth.repository.js";
 import jwt, { type SignOptions } from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Obtener el secreto JWT del entorno
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-this";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1d";
 
 //? Interface para el payload del JWT
 interface JWTPayload {
@@ -120,12 +123,10 @@ export const getUserById = async (id_Usuario: string) => {
 	}
 
 	return {
-		id_Usuario: user.getDataValue("id_Usuario"),
 		Nombre: user.getDataValue("Nombre"),
 		Apellido_Paterno: user.getDataValue("Apellido_Paterno"),
 		Apellido_Materno: user.getDataValue("Apellido_Materno"),
 		Correo: user.getDataValue("Correo"),
 		Telefono: user.getDataValue("Telefono"),
-		Consentimiento: user.getDataValue("Consentimiento"),
 	};
 };
