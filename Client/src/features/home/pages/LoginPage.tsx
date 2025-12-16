@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Logo from "../assets/img/Logo.webp"; // ⬅️ Ajusta la ruta si es necesario
+import Logo from "../assets/img/Logo.webp";
+import Facebook from "../assets/icons/Facebook.svg";
+import Google from "../assets/icons/Google.svg";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
@@ -18,20 +20,12 @@ const LoginPage = () => {
 
         {/* Social Buttons */}
         <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-lg py-2 font-medium hover:bg-gray-50 transition">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-            alt="google"
-            className="w-5"
-          />
+          <img src={Google} alt="google" className="w-5" />
           Iniciar sesión con Google
         </button>
 
         <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-lg py-2 font-medium mt-3 hover:bg-gray-50 transition">
-          <img
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg"
-            alt="facebook"
-            className="w-5"
-          />
+          <img src={Facebook} alt="facebook" className="w-5" />
           Iniciar sesión con Facebook
         </button>
 
