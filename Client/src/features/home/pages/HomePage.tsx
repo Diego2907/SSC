@@ -1,8 +1,8 @@
-import Header from "../components/Header.tsx";
+import Header from "../components/componentsHomePage/Header.tsx";
 import Carousel from "../../shared/components/Carousel.tsx";
 import Image from "../../shared/components/Image";
 import Brands from "../components/sectionComponents/brands-Section.tsx";
-import Contact from "../components/sectionComponents/contact-Section.tsx";
+import Footer from "../components/componentsHomePage/Footer.tsx";
 import Chatbot from "../../shared/components/Chatbot.tsx";
 import persona from "../assets/img/vista-lateral-hombre-trabajando-como-fontanero.webp";
 import UbicacionImg from "../assets/img/Ubicacion.webp";
@@ -24,7 +24,7 @@ const HomePage = () => {
   return (
     <main className="main-content bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
-
+      <Header />
       <header
         id="inicio"
         className="container mx-auto px-4 md:px-8 lg:px-16 pt-8 md:pt-10 pb-0"
@@ -328,7 +328,7 @@ const HomePage = () => {
 
       <Achievements />
       <Testimonials />
-      <Contact />
+      <Footer />
     </main>
   );
 };
