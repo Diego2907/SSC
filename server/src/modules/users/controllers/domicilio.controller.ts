@@ -4,7 +4,12 @@ import * as domicilioService from "../services/domicilio.services.js";
 //? Controlador para agregar un nuevo domicilio
 const agregarDomicilio = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const domicilioData = req.body;
+		const id_Usuario = (req as any).user?.id_Usuario;
+		if (!id_Usuario) {
+			res.status(401).json({ error: "Usuario no autenticado" });
+			return;
+		}
+		const domicilioData = { ...req.body, id_Usuario };
 		const result = await domicilioService.agregarDomicilio(domicilioData);
 		res.status(201).json(result);
 	} catch (error) {
@@ -44,7 +49,11 @@ const verTodosDomicilios = async (
 	res: Response
 ): Promise<void> => {
 	try {
-		const idUsuario: any = req.params.idUsuario;
+		const idUsuario = (req as any).user?.id_Usuario;
+		if (!idUsuario) {
+			res.status(401).json({ error: "Usuario no autenticado" });
+			return;
+		}
 		const result = await domicilioService.verTodosDomicilios(idUsuario);
 		res.status(200).json(result);
 	} catch (error) {
