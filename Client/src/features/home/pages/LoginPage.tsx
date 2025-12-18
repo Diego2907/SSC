@@ -70,7 +70,7 @@ const LoginPage = () => {
 
           {/* Login Button */}
           <button className="w-full bg-[#1D4289] hover:bg-[#163670] text-white py-2 font-semibold rounded-lg transition-colors">
-            Iniciar sesión
+            <Link to="/user/settings">Iniciar sesión</Link>
           </button>
 
           {/* Footer */}
