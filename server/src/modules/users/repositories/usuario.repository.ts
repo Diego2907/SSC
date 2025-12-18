@@ -62,6 +62,10 @@ Domicilio.init(
 			type: DataTypes.STRING(10),
 			allowNull: true,
 		},
+		referencias: {
+			type: DataTypes.STRING(255),
+			allowNull: true,
+		},
 		domicilio_Principal: {
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
