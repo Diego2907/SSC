@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const Coverage: React.FC = () => {
+const Coverage = () => {
   const [postalCode, setPostalCode] = useState("");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -19,7 +19,7 @@ const Coverage: React.FC = () => {
 
   return (
     <section className="w-full py-16 md:py-20 bg-white">
-      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
+      <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
         <div className="w-full mx-auto bg-[#F8F9FA] rounded-2xl p-8 md:p-10 lg:px-24 xl:px-32 shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-gray-200/50">
           <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-10">
             <div className="md:col-span-2">
