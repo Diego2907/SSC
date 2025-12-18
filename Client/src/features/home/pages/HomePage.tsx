@@ -15,6 +15,7 @@ import misionImg from "../assets/img/mision.webp";
 import visionImg from "../assets/img/vision.webp";
 
 import Achievements from "../components/sectionComponents/achievements-Section.tsx";
+import Coverage from "../components/sectionComponents/coverage.tsx";
 import Testimonials from "../components/sectionComponents/testimonials-Section.tsx";
 import ContactSchedule from "../components/sectionComponents/contactSchedule-Section.tsx";
 import Services from "../components/Services";
@@ -327,6 +328,7 @@ const HomePage = () => {
       <Brands />
 
       <Achievements />
+      <Coverage />
       <Testimonials />
       <Footer />
     </main>
