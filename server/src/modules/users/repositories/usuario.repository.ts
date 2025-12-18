@@ -39,11 +39,11 @@ Domicilio.init(
 			allowNull: false,
 		},
 		estado: {
-			type: DataTypes.STRING(15),
+			type: DataTypes.STRING(30),
 			allowNull: false,
 		},
 		municipio: {
-			type: DataTypes.STRING(25),
+			type: DataTypes.STRING(50),
 			allowNull: false,
 		},
 		colonia: {
@@ -51,15 +51,15 @@ Domicilio.init(
 			allowNull: false,
 		},
 		calle: {
-			type: DataTypes.STRING(100),
+			type: DataTypes.STRING(50),
 			allowNull: false,
 		},
 		numero_Exterior: {
-			type: DataTypes.STRING(10),
+			type: DataTypes.STRING(6),
 			allowNull: false,
 		},
 		numero_Interior: {
-			type: DataTypes.STRING(10),
+			type: DataTypes.STRING(6),
 			allowNull: true,
 		},
 		referencias: {
