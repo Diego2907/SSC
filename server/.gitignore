@@ -6,3 +6,6 @@
 
 # Build output
 dist/
+
+# Visual Studio Code
+.vscode/
