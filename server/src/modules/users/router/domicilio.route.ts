@@ -28,11 +28,7 @@ router.delete(
 	authenticate,
 	domicilioController.eliminarDomicilio
 );
-router.get(
-	"/verTodos/:idUsuario",
-	authenticate,
-	domicilioController.verTodosDomicilios
-);
+router.get("/verTodos", authenticate, domicilioController.verTodosDomicilios);
 router.get("/:idDomicilio", authenticate, domicilioController.verDomicilio);
 
 export default router;
