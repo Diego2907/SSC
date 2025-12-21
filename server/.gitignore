@@ -9,3 +9,6 @@ dist/
 
 # Visual Studio Code
 .vscode/
+
+# Pruebas (esta carpeta aun no esta terminada)
+tests/integration/
