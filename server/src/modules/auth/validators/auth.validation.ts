@@ -100,4 +100,4 @@ const validate = (schema: z.ZodSchema) => {
 const validateRegister = validate(registerSchema);
 const validateLogin = validate(loginSchema);
 
-export { validateRegister, validateLogin };
+export { validateRegister, validateLogin, registerSchema, loginSchema };
