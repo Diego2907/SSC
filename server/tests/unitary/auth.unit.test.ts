@@ -1,4 +1,7 @@
-import { registerSchema } from "../../src/modules/auth/validators/auth.validation.js";
+import {
+	registerSchema,
+	loginSchema,
+} from "../../src/modules/auth/validators/auth.validation.js";
 
 describe("Validaciones de registro de usuario", () => {
 	it("debería validar un registro con datos correctos", () => {
@@ -102,5 +105,31 @@ describe("Validaciones de registro de usuario", () => {
 			);
 			expect(error?.message).toBe("Las contraseñas no coinciden");
 		}
+	});
+});
+
+describe("Validaciones de login de usuario", () => {
+	it("debería hacer un login con datos correctos", () => {
+		// Arrange: Preparar datos válidos
+		const datosValidos = {
+			Correo: "juan.perez@ejemplo.com",
+			Contrasenia: "MiPassword123",
+		};
+		// Act: Ejecutar la validación
+		const resultado = loginSchema.safeParse(datosValidos);
+		// Assert: Verificar que la validación fue exitosa
+		expect(resultado.success).toBe(true);
+	});
+
+	it("debería fallar cuando todos los campos estan vacios", () => {
+		// Arrange: Preparar datos con correo inválido
+		const datosInvalidos = {
+			Correo: "",
+			Contrasenia: "",
+		};
+		// Act: Ejecutar la validación
+		const resultado = loginSchema.safeParse(datosInvalidos);
+		// Assert: Verificar que la validación falló
+		expect(resultado.success).toBe(false);
 	});
 });
