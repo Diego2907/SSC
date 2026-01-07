@@ -13,6 +13,8 @@ export default {
 				tsconfig: {
 					module: "esnext",
 					moduleResolution: "bundler",
+					esModuleInterop: true,
+					allowSyntheticDefaultImports: true,
 				},
 			},
 		],
