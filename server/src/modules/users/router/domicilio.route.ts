@@ -31,4 +31,9 @@ router.delete(
 router.get("/verTodos", authenticate, domicilioController.verTodosDomicilios);
 router.get("/:idDomicilio", authenticate, domicilioController.verDomicilio);
 
+
+
+//? RUTAS EXPERIMENTALES
+//router.get("/buscar/:codigo_Postal", domicilioController.buscarPorCodigoPostal);
+
 export default router;
