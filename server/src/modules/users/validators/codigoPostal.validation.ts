@@ -1,9 +1,9 @@
 import { CodigoPostal } from "../repositories/codigoPostal.repository.js";
 
 interface CodigoPostalInterface {
-	id: number;
-	estado: string;
-	municipio: string;
+	id_CP?: number;
+	estado?: string;
+	municipio?: string;
 	rango_Inicio: number;
 	rango_Fin: number;
 }
