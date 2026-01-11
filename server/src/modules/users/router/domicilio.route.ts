@@ -1,7 +1,3 @@
-/**
- * ? agregar, actualizar, eliminar,
- * ? ver todos, ver uno domicilios de usuario
- */
 import { Router } from "express";
 import * as domicilioController from "../controllers/domicilio.controller.js";
 import {
@@ -9,6 +5,8 @@ import {
 	validarActualizarDomicilio,
 } from "../validators/domicilio.validation.js";
 import { authenticate } from "../../auth/middleware/auth.middleware.js";
+import { completarDomicilio } from "../controllers/codigosPostales.controller.js";
+
 const router = Router();
 
 router.post(
@@ -31,9 +29,8 @@ router.delete(
 router.get("/verTodos", authenticate, domicilioController.verTodosDomicilios);
 router.get("/:idDomicilio", authenticate, domicilioController.verDomicilio);
 
-
-
 //? RUTAS EXPERIMENTALES
-//router.get("/buscar/:codigo_Postal", domicilioController.buscarPorCodigoPostal);
+//! REVISAR CON EL EQUIPO SI SE PONE AQUI O SE HACE SU PROPIO ROUTER
+router.get("/buscar-datos/:codigoPostal", completarDomicilio);
 
 export default router;
