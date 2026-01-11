@@ -16,6 +16,11 @@ class CodigoPostal extends Model {}
 
 CodigoPostal.init(
 	{
+		id_CP: {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
 		estado: {
 			type: DataTypes.STRING(30),
 			allowNull: false,
