@@ -77,9 +77,9 @@ Content-Type: application/json
 
 **Validaciones:**
 
-- `Nombre`: Requerido, mínimo 1 carácter, máximo 100 caracteres
-- `Apellido_Paterno`: Requerido, mínimo 1 carácter, máximo 100 caracteres
-- `Apellido_Materno`: Requerido, mínimo 1 carácter, máximo 100 caracteres
+- `Nombre`: Requerido, mínimo 1 carácter, máximo 50 caracteres
+- `Apellido_Paterno`: Requerido, mínimo 1 carácter, máximo 30 caracteres
+- `Apellido_Materno`: Requerido, mínimo 1 carácter, máximo 30 caracteres
 - `Correo`: Requerido, formato de email válido, máximo 100 caracteres
 - `Contrasenia`: Requerido, mínimo 8 caracteres, máximo 255 caracteres
 - `ConfirmarContrasenia`: Debe coincidir con `Contrasenia`
@@ -127,40 +127,11 @@ fetch("http://localhost:3000/auth/register", {
 	.catch((error) => console.error("Error:", error));
 ```
 
-**Ejemplo con Python (requests):**
-
-```python
-import requests
-
-url = 'http://localhost:3000/auth/register'
-data = {
-    "Nombre": "Juan",
-    "Apellido_Paterno": "Pérez",
-    "Apellido_Materno": "García",
-    "Correo": "juan.perez@ejemplo.com",
-    "Contrasenia": "MiContraseña123",
-    "ConfirmarContrasenia": "MiContraseña123",
-    "Telefono": "5512345678",
-    "Consentimiento": True
-}
-
-response = requests.post(url, json=data)
-print(response.json())
-```
-
 **Respuesta Exitosa (201):**
 
 ```json
 {
-	"message": "Usuario registrado exitosamente",
-	"data": {
-		"id": 1,
-		"Nombre": "Juan",
-		"Apellido_Paterno": "Pérez",
-		"Apellido_Materno": "García",
-		"Correo": "juan.perez@ejemplo.com",
-		"Telefono": "5512345678"
-	}
+	"message": "Usuario registrado exitosamente"
 }
 ```
 
@@ -208,7 +179,7 @@ Content-Type: application/json
 **Validaciones:**
 
 - `Correo`: Requerido, formato de email válido
-- `Contrasenia`: Requerido, mínimo 1 carácter
+- `Contrasenia`: Requerido, mínimo 8 carácteres
 
 **Ejemplo con cURL:**
 
@@ -237,29 +208,8 @@ fetch("http://localhost:3000/auth/login", {
 	.then((response) => response.json())
 	.then((data) => {
 		// Guarda el token para futuras peticiones
-		localStorage.setItem("token", data.token);
-		console.log(data);
 	})
 	.catch((error) => console.error("Error:", error));
-```
-
-**Ejemplo con Python (requests):**
-
-```python
-import requests
-
-url = 'http://localhost:3000/auth/login'
-data = {
-    "Correo": "juan.perez@ejemplo.com",
-    "Contrasenia": "MiContraseña123"
-}
-
-response = requests.post(url, json=data)
-result = response.json()
-print(result)
-
-# Guardar el token para futuras peticiones
-token = result.get('token')
 ```
 
 **Respuesta Exitosa (200):**
@@ -267,13 +217,7 @@ token = result.get('token')
 ```json
 {
 	"message": "Login exitoso",
-	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-	"user": {
-		"id": 1,
-		"Nombre": "Juan",
-		"Apellido_Paterno": "Pérez",
-		"Correo": "juan.perez@ejemplo.com"
-	}
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
@@ -303,7 +247,7 @@ Authorization: Bearer <tu_token_jwt>
 
 ```bash
 curl -X GET http://localhost:3000/auth/profile \
-  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  -H "Cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
 **Ejemplo con JavaScript (Fetch API):**
@@ -314,27 +258,12 @@ const token = localStorage.getItem("token");
 fetch("http://localhost:3000/auth/profile", {
 	method: "GET",
 	headers: {
-		Authorization: `Bearer ${token}`,
+		Cookie: `${token}`,
 	},
 })
 	.then((response) => response.json())
 	.then((data) => console.log(data))
 	.catch((error) => console.error("Error:", error));
-```
-
-**Ejemplo con Python (requests):**
-
-```python
-import requests
-
-url = 'http://localhost:3000/auth/profile'
-token = 'tu_token_jwt_aqui'
-headers = {
-    'Authorization': f'Bearer {token}'
-}
-
-response = requests.get(url, headers=headers)
-print(response.json())
 ```
 
 **Respuesta Exitosa (200):**
@@ -363,45 +292,6 @@ print(response.json())
 
 ---
 
-### 4. Obtener Usuarios
-
-Lista todos los usuarios registrados.
-
-**URL:** `GET /usuarios`
-
-**Ejemplo con cURL:**
-
-```bash
-curl -X GET http://localhost:3000/usuarios
-```
-
-**Ejemplo con JavaScript (Fetch API):**
-
-```javascript
-fetch("http://localhost:3000/usuarios")
-	.then((response) => response.json())
-	.then((data) => console.log(data))
-	.catch((error) => console.error("Error:", error));
-```
-
-**Respuesta Exitosa (200):**
-
-```json
-{
-	"message": "Lista de usuarios",
-	"data": [
-		{
-			"id": 1,
-			"Nombre": "Juan",
-			"Apellido_Paterno": "Pérez",
-			"Correo": "juan.perez@ejemplo.com"
-		}
-	]
-}
-```
-
----
-
 ## Códigos de Estado HTTP
 
 | Código | Significado                                             |
@@ -412,64 +302,6 @@ fetch("http://localhost:3000/usuarios")
 | 401    | Unauthorized - No autenticado o token inválido          |
 | 404    | Not Found - Recurso no encontrado                       |
 | 500    | Internal Server Error - Error del servidor              |
-
----
-
-## Ejemplos con Postman
-
-### Configuración de Postman para POST /auth/register
-
-1. **Método:** Selecciona `POST`
-2. **URL:** `http://localhost:3000/auth/register`
-3. **Headers:**
-   - Key: `Content-Type`
-   - Value: `application/json`
-4. **Body:**
-   - Selecciona `raw`
-   - Tipo: `JSON`
-   - Contenido:
-   ```json
-   {
-   	"Nombre": "Juan",
-   	"Apellido_Paterno": "Pérez",
-   	"Apellido_Materno": "García",
-   	"Correo": "juan.perez@ejemplo.com",
-   	"Contrasenia": "MiContraseña123",
-   	"ConfirmarContrasenia": "MiContraseña123",
-   	"Telefono": "5512345678",
-   	"Consentimiento": true
-   }
-   ```
-5. Haz clic en **Send**
-
-### Configuración de Postman para POST /auth/login
-
-1. **Método:** Selecciona `POST`
-2. **URL:** `http://localhost:3000/auth/login`
-3. **Headers:**
-   - Key: `Content-Type`
-   - Value: `application/json`
-4. **Body:**
-   - Selecciona `raw`
-   - Tipo: `JSON`
-   - Contenido:
-   ```json
-   {
-   	"Correo": "juan.perez@ejemplo.com",
-   	"Contrasenia": "MiContraseña123"
-   }
-   ```
-5. Haz clic en **Send**
-6. Copia el `token` de la respuesta para usarlo en peticiones autenticadas
-
-### Configuración de Postman para GET /auth/profile (Autenticado)
-
-1. **Método:** Selecciona `GET`
-2. **URL:** `http://localhost:3000/auth/profile`
-3. **Headers:**
-   - Key: `Authorization`
-   - Value: `Bearer tu_token_jwt_aqui` (reemplaza con el token obtenido del login)
-4. Haz clic en **Send**
 
 ---
 
