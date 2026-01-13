@@ -8,7 +8,7 @@
 dist/
 
 # Visual Studio Code
-.vscode/
+/.vscode/
 
 # Pruebas (esta carpeta aun no esta terminada)
 tests/integration/
