@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import * as authService from "../services/auth.services.js";
 
 // Controlador para registrar un nuevo usuario
-export const register = async (req: Request, res: Response): Promise<void> => {
+const register = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const {
 			Nombre,
@@ -52,7 +52,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 };
 
 // Controlador para iniciar sesión
-export const login = async (req: Request, res: Response): Promise<void> => {
+const login = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const { Correo, Contrasenia } = req.body;
 
@@ -91,7 +91,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
-export const logout = (res: Response): void => {
+const logout = (res: Response): void => {
 	res.clearCookie("token");
 	res.status(200).json({
 		message: "Cierre de sesión exitoso",
@@ -100,10 +100,7 @@ export const logout = (res: Response): void => {
 
 //!Controlador pendiente de revisar y probar
 // Controlador para obtener el perfil del usuario autenticado
-export const getProfile = async (
-	req: Request,
-	res: Response
-): Promise<void> => {
+const getProfile = async (req: Request, res: Response): Promise<void> => {
 	try {
 		// El middleware de autenticación debe haber agregado el usuario al request
 		const userId = (req as any).user?.id_Usuario;
@@ -137,3 +134,6 @@ export const getProfile = async (
 		});
 	}
 };
+
+//!Eliminar getProfile si no se va a usar
+export { register, login, logout, getProfile };
