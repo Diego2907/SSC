@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import User from "../assets/icons/User.svg";
 import SignOut from "../assets/icons/SignOut.svg";
 
@@ -10,24 +10,40 @@ const SideBar = () => {
   }
 
   return (
-    <div>
-      <aside className="w-64 bg-white border-r min-h-[calc(100vh-64px)]">
+    <div className="w-64 bg-white border-r border-gray-200 flex flex-col h-full">
+      <aside className="flex flex-col h-full">
         <nav className="px-4 py-6 space-y-2">
-          <button className="w-full px-4 py-3 rounded-xl text-white flex items-center gap-3">
+          <NavLink
+            to="/user/profile"
+            className={({ isActive }) =>
+              `w-full px-4 py-3 rounded-xl flex items-center gap-3
+            ${
+              isActive
+                ? "bg-[#1D4289] text-white"
+                : "text-black hover:bg-gray-100"
+            }`
+            }
+          >
             <img src={User} alt="" className="w-5 h-5" />
-            <Link to="/user/profile">
-              <span className="text-black">Mi perfil</span>
-            </Link>
-          </button>
+            <span>Mi perfil</span>
+          </NavLink>
 
-          <button className="w-full px-4 py-3 rounded-xl bg-[#1D4289]  flex items-center gap-3">
-            <Link to="/user/settings">
-              <span className="font-semibold text-white">Configuración</span>
-            </Link>
-          </button>
+          <NavLink
+            to="/user/settings"
+            className={({ isActive }) =>
+              `w-full px-4 py-3 rounded-xl flex items-center gap-3
+            ${
+              isActive
+                ? "bg-[#1D4289] text-white"
+                : "text-black hover:bg-gray-100"
+            }`
+            }
+          >
+            <span>Configuracion</span>
+          </NavLink>
         </nav>
 
-        <div className="px-4 py-6">
+        <div className="px-4 py-6 mt-auto">
           <button
             onClick={() => setShowLogoutModal(true)}
             className="w-full flex items-center gap-3 text-red-500 font-semibold"
