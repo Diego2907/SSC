@@ -13,15 +13,15 @@ const UserSettingsPage = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f2f7a] to-[#072053]">
+    <div className="h-screen bg-gradient-to-br from-[#0f2f7a] to-[#072053] flex flex-col">
       {/* ===== HEADER ===== */}
       <Header />
 
-      <div className="flex">
+      <div className="flex flex-1 overflow-hidden">
         {/* ===== SIDEBAR ===== */}
         <SideBar />
         {/* ===== CONTENT ===== */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8 overflow-y-auto bg-gradient-to-br from-[#0f2f7a] to-[#072053]">
           <div className="container mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Usuario */}
             <section className="bg-[#F7F8FA] rounded-2xl p-6 shadow-xl">
