@@ -8,7 +8,7 @@ API REST para el sistema de autenticación con Node.js, Express, TypeScript y Se
 
 ### Requisitos Previos
 
-- Node.js (v14 o superior)
+- Node.js (v22.18 o superior)
 - MySQL
 - npm o yarn
 
@@ -20,7 +20,7 @@ npm install
 
 ### Variables de Entorno
 
-Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+Crea un archivo `.env` en la raíz del proyecto con las variables que se encuentran en el `.env.template`:
 
 ```env
 PORT=3000
@@ -52,7 +52,7 @@ El servidor estará disponible en: `http://localhost:3000`
 
 Registra un nuevo usuario en el sistema.
 
-**URL:** `POST /auth/register`
+**URL:** `POST /api/auth/register`
 
 **Headers:**
 
@@ -89,7 +89,7 @@ Content-Type: application/json
 **Ejemplo con cURL:**
 
 ```bash
-curl -X POST http://localhost:3000/auth/register \
+curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "Nombre": "Juan",
@@ -106,7 +106,7 @@ curl -X POST http://localhost:3000/auth/register \
 **Ejemplo con JavaScript (Fetch API):**
 
 ```javascript
-fetch("http://localhost:3000/auth/register", {
+fetch("http://localhost:3000/api/auth/register", {
 	method: "POST",
 	headers: {
 		"Content-Type": "application/json",
@@ -159,7 +159,7 @@ fetch("http://localhost:3000/auth/register", {
 
 Autentica un usuario y devuelve un token JWT.
 
-**URL:** `POST /auth/login`
+**URL:** `POST /api/auth/login`
 
 **Headers:**
 
@@ -184,7 +184,7 @@ Content-Type: application/json
 **Ejemplo con cURL:**
 
 ```bash
-curl -X POST http://localhost:3000/auth/login \
+curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "Correo": "juan.perez@ejemplo.com",
@@ -195,7 +195,7 @@ curl -X POST http://localhost:3000/auth/login \
 **Ejemplo con JavaScript (Fetch API):**
 
 ```javascript
-fetch("http://localhost:3000/auth/login", {
+fetch("http://localhost:3000/api/auth/login", {
 	method: "POST",
 	headers: {
 		"Content-Type": "application/json",
@@ -235,7 +235,7 @@ fetch("http://localhost:3000/auth/login", {
 
 Obtiene el perfil del usuario autenticado.
 
-**URL:** `GET /auth/profile`
+**URL:** `GET /api/auth/profile`
 
 **Headers:**
 
@@ -246,7 +246,7 @@ Authorization: Bearer <tu_token_jwt>
 **Ejemplo con cURL:**
 
 ```bash
-curl -X GET http://localhost:3000/auth/profile \
+curl -X GET http://localhost:3000/api/auth/profile \
   -H "Cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -255,7 +255,7 @@ curl -X GET http://localhost:3000/auth/profile \
 ```javascript
 const token = localStorage.getItem("token");
 
-fetch("http://localhost:3000/auth/profile", {
+fetch("http://localhost:3000/api/auth/profile", {
 	method: "GET",
 	headers: {
 		Cookie: `${token}`,
