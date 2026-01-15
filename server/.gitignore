@@ -1,0 +1,14 @@
+# Dependencias
+/node_modules/
+
+# Variables de entorno
+.env
+
+# Build output
+dist/
+
+# Visual Studio Code
+/.vscode/
+
+# Pruebas (esta carpeta aun no esta terminada)
+tests/integration/
