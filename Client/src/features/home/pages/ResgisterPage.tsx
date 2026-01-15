@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Logo_amarillo from "../assets/img/Logo - Amarillo.webp"; // Ajusta la ruta si es diferente
 import { Link, useLocation } from "react-router-dom";
+import Header from "../components/Login-Register-Page/Header";
 
 const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0f2f7a] to-[#072053] relative">
+    <main className="flex flex-col items-center justify-center bg-gradient-to-b from-[#0f2f7a] to-[#072053] relative">
       {/* Header superior solo blanco (opcional según tu proyecto) */}
-
+      <Header />
       {/* Logo centrado */}
       <img src={Logo_amarillo} alt="Logo SHC" className="mt-14 w-36 sm:w-44" />
 

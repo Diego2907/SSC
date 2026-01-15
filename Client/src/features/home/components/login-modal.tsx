@@ -1,5 +1,5 @@
-import Logo from "../../assets/img/Logo.webp";
-import Image from "../../../shared/components/Image";
+import Logo from "../assets/img/Logo.webp";
+import Image from "../../shared/components/Image";
 import { Link } from "react-router-dom";
 type ModalProps = {
   isOpen: boolean;

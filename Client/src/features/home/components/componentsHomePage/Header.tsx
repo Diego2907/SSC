@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import Navbar from "../../shared/components/Navbar";
-import Button from "../../shared/components/Button";
-import Image from "../../shared/components/Image";
-import logo from "../assets/img/Logo.webp";
-import Modal from "./sectionComponents/login-modal";
+import Navbar from "../../../shared/components/Navbar";
+import Button from "../../../shared/components/Button";
+import Image from "../../../shared/components/Image";
+import logo from "../../assets/img/Logo.webp";
+import Modal from "../login-modal";
 import { useState, useEffect } from "react";
 
 const Header = () => {
