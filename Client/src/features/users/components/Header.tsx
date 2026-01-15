@@ -5,6 +5,7 @@ import Notificaciones from "../assets/icons/Notificaciones.svg";
 import Mensajes from "../assets/icons/Mensajes.svg";
 import Chats from "../assets/icons/Chats.svg";
 import Historial from "../assets/icons/Historial.svg";
+import UserAvatar from "../assets/icons/avatar.svg";
 
 const Header = () => {
   return (
@@ -37,6 +38,13 @@ const Header = () => {
           AltImage="Icono Historial"
           classNameImage="w-8 h-8 cursor-pointer"
         />
+        <div>
+          <Image
+            SrcImage={UserAvatar}
+            AltImage="Avatar de usuario"
+            classNameImage="w-14 h-16 cursor-pointer"
+          />
+        </div>
       </div>
     </header>
   );
