@@ -1,18 +1,16 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-import dotenv from "dotenv";
 import { Usuario } from "../../auth/repositories/auth.repository.js";
-
-dotenv.config();
+import env from "../../../config/env.js";
 
 const sequelize = new Sequelize(
-	process.env.DB_USER_NAME || "database",
-	process.env.DB_USER_USER || "username",
-	process.env.DB_USER_PASSWORD || "password",
+	env.DB_USER_NAME,
+	env.DB_USER_USER,
+	env.DB_USER_PASSWORD,
 	{
-		host: process.env.DB_USER_HOST || "localhost",
+		host: env.DB_USER_HOST,
 		dialect: "mysql",
-		port: Number(process.env.DB_USER_PORT) || 3306,
-	}
+		port: env.DB_USER_PORT,
+	},
 );
 
 class Domicilio extends Model {}
@@ -76,7 +74,7 @@ Domicilio.init(
 		modelName: "Domicilio",
 		tableName: "domicilios",
 		timestamps: false,
-	}
+	},
 );
 
 export { Domicilio };

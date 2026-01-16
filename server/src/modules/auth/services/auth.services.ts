@@ -1,13 +1,10 @@
 import { Usuario } from "../repositories/auth.repository.js";
 import jwt, { type SignOptions } from "jsonwebtoken";
+import env from "../../../config/env.js";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-// Obtener el secreto JWT del entorno
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-this";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1d";
+const JWT_SECRET = env.JWT_SECRET;
+const JWT_EXPIRES_IN = env.JWT_EXPIRES_IN;
 
 //? Interface para el payload del JWT
 interface JWTPayload {
@@ -33,7 +30,7 @@ interface LoginData {
 }
 
 //? Servicio para registrar un nuevo usuario
-export const registerUser = async (userData: RegisterData) => {
+const registerUser = async (userData: RegisterData) => {
 	// Sincronizar la tabla de usuarios
 	await Usuario.sync();
 
@@ -70,7 +67,7 @@ export const registerUser = async (userData: RegisterData) => {
 };
 
 //? Servicio para autenticar un usuario
-export const loginUser = async (loginData: LoginData) => {
+const loginUser = async (loginData: LoginData) => {
 	// Buscar el usuario por correo
 	const usuario = await Usuario.findOne({
 		where: { Correo: loginData.Correo },
@@ -83,7 +80,7 @@ export const loginUser = async (loginData: LoginData) => {
 	// Verificar la contraseña
 	const isPasswordValid = await bcrypt.compare(
 		loginData.Contrasenia,
-		usuario.getDataValue("Contrasenia")
+		usuario.getDataValue("Contrasenia"),
 	);
 
 	if (!isPasswordValid) {
@@ -97,14 +94,14 @@ export const loginUser = async (loginData: LoginData) => {
 			Correo: usuario.getDataValue("Correo"),
 		} as JWTPayload,
 		JWT_SECRET,
-		{ expiresIn: JWT_EXPIRES_IN } as SignOptions
+		{ expiresIn: JWT_EXPIRES_IN } as SignOptions,
 	);
 
 	return { token };
 };
 
-// Servicio para verificar un token JWT
-export const verifyToken = (token: string): JWTPayload => {
+//? Servicio para verificar un token JWT
+const verifyToken = (token: string): JWTPayload => {
 	try {
 		const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
 		return decoded;
@@ -113,9 +110,9 @@ export const verifyToken = (token: string): JWTPayload => {
 	}
 };
 
-//! ESTE SERVICIO NO SE ESTA USANDO POR EL MOMENTO
-// Servicio para obtener usuario por ID
-export const getUserById = async (id_Usuario: string) => {
+//! eliminar este servicio cuando se mueva el controlador
+//? Servicio para obtener usuario por ID
+const getUserById = async (id_Usuario: string) => {
 	const user = await Usuario.findByPk(id_Usuario);
 
 	if (!user) {
@@ -130,3 +127,5 @@ export const getUserById = async (id_Usuario: string) => {
 		Telefono: user.getDataValue("Telefono"),
 	};
 };
+
+export { registerUser, loginUser, verifyToken, getUserById };
