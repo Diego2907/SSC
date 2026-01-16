@@ -1,16 +1,15 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
-import dotenv from "dotenv";
-dotenv.config();
+import env from "../../../config/env.js";
 
 const sequelize = new Sequelize(
-	process.env.DB_USER_NAME || "database",
-	process.env.DB_USER_USER || "username",
-	process.env.DB_USER_PASSWORD || "password",
+	env.DB_USER_NAME,
+	env.DB_USER_USER,
+	env.DB_USER_PASSWORD,
 	{
-		host: process.env.DB_USER_HOST || "localhost",
+		host: env.DB_USER_HOST,
 		dialect: "mysql",
-		port: Number(process.env.DB_USER_PORT) || 3306,
-	}
+		port: env.DB_USER_PORT,
+	},
 );
 class CodigoPostal extends Model {}
 
@@ -45,7 +44,7 @@ CodigoPostal.init(
 		modelName: "CodigoPostal",
 		tableName: "codigos_postales",
 		timestamps: false,
-	}
+	},
 );
 
 export { CodigoPostal };
