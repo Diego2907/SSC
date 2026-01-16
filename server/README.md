@@ -2,7 +2,7 @@
 
 ## Descripción
 
-API REST para el sistema de autenticación con Node.js, Express, TypeScript y Sequelize.
+API REST para el sistema gestor de usuarios para MiPyMes.
 
 ## Configuración Inicial
 
@@ -20,15 +20,34 @@ npm install
 
 ### Variables de Entorno
 
-Crea un archivo `.env` en la raíz del proyecto con las variables que se encuentran en el `.env.template`:
+Crea un archivo `.env` en la raíz del proyecto con las variables que se encuentran en el [.env.template](.env.template):
 
 ```env
+# ==============================================
+# CONFIGURACIÓN DEL SERVIDOR
+# ==============================================
 PORT=3000
-DB_HOST=localhost
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-DB_NAME=nombre_base_datos
-JWT_SECRET=tu_secret_key
+NODE_ENV=development #? development, production, test
+
+# ==============================================
+# API KEYS
+# ==============================================
+DIPOMEX_KEY=tu_api_key_aqui
+
+# ==============================================
+# SEGURIDAD Y SECRETOS
+# ==============================================
+JWT_SECRET=tu_secreto_super_seguro_aqui
+JWT_EXPIRES_IN=1d
+
+# ==============================================
+# BASE DE DATOS USUARIOS
+# ==============================================
+DB_USER_HOST=localhost
+DB_USER_PORT=3306
+DB_USER_USER=user_db
+DB_USER_PASSWORD=user_password
+DB_USER_NAME=nombre_base_datos
 ```
 
 ### Iniciar el Servidor
@@ -355,7 +374,3 @@ server/
 4. **CORS:** Si necesitas hacer peticiones desde un frontend en otro puerto, configura CORS en `app.ts`
 
 ---
-
-## Soporte
-
-Para reportar problemas o sugerencias, contacta al equipo de desarrollo.
