@@ -33,7 +33,20 @@ const registerSchema = z
 		Contrasenia: z
 			.string({ message: "La contraseña debe ser un texto" })
 			.min(8, "La contraseña debe tener al menos 8 caracteres")
-			.max(255, "La contraseña no puede exceder 255 caracteres"),
+			.max(255, "La contraseña no puede exceder 255 caracteres")
+			.regex(
+				/[A-Z]/,
+				"La contraseña debe contener al menos una letra mayúscula",
+			)
+			.regex(
+				/[a-z]/,
+				"La contraseña debe contener al menos una letra minúscula",
+			)
+			.regex(/[0-9]/, "La contraseña debe contener al menos un número")
+			.regex(
+				/[\W_]/,
+				"La contraseña debe contener al menos un carácter especial",
+			),
 
 		ConfirmarContrasenia: z
 			.string({ message: "La confirmación de contraseña debe ser un texto" })
