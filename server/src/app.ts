@@ -1,11 +1,19 @@
 //? librerias externas
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import env from "./config/env.config.js";
+import { corsDevOptions, corsProdOptions } from "./config/cors.config.js";
 
 //? rutas
 import router from "./router/main.route.js";
 
 const app = express();
+
+const isProduction = env.NODE_ENV === "production";
+const selectedCorsOptions = isProduction ? corsProdOptions : corsDevOptions;
+
+app.use(cors(selectedCorsOptions));
 
 //? Middlewares
 app.use(express.json()); // Para parsear JSON en req.body
