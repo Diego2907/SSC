@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 import bcrypt from "bcrypt";
-import env from "../../../config/env.js";
+import env from "../../../config/env.config.js";
 
 //? Configurar la conexion a la base de datos MySQL
 const sequelize = new Sequelize(

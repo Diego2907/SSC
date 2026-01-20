@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import * as authService from "../services/auth.services.js";
-import env from "../../../config/env.js";
+import env from "../../../config/env.config.js";
 
 //? Controlador para registrar un nuevo usuario
 const register = async (req: Request, res: Response): Promise<void> => {

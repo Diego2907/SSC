@@ -1,6 +1,6 @@
 import { Sequelize, Model, DataTypes } from "sequelize";
 import { Usuario } from "../../auth/repositories/auth.repository.js";
-import env from "../../../config/env.js";
+import env from "../../../config/env.config.js";
 
 const sequelize = new Sequelize(
 	env.DB_USER_NAME,
