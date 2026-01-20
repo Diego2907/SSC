@@ -1,6 +1,6 @@
 import { Usuario } from "../repositories/auth.repository.js";
 import jwt, { type SignOptions } from "jsonwebtoken";
-import env from "../../../config/env.js";
+import env from "../../../config/env.config.js";
 import bcrypt from "bcrypt";
 
 const JWT_SECRET = env.JWT_SECRET;

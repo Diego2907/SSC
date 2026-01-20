@@ -1,4 +1,4 @@
-import env from "../../../../config/env.js";
+import env from "../../../../config/env.config.js";
 import { codigoPostalValidado } from "../../validators/codigoPostal.validation.js";
 
 const DIPOMEX_KEY = env.DIPOMEX_KEY;
