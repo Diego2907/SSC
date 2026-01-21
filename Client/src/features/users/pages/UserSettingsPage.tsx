@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import avatar from "../assets/icons/avatar.svg";
 import chats from "../assets/icons/chats.svg";
@@ -36,7 +36,7 @@ const UserSettingsPage = () => {
 
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <p className="text-xl font-semibold">Milene Bejarano</p>
+                    <p className="text-xl font-semibold">NOMBRE</p>
                     <button className="p-2 bg-white rounded-full shadow">
                       <img src={edit} alt="" className="w-4 h-4" />
                     </button>
@@ -46,18 +46,16 @@ const UserSettingsPage = () => {
 
                   <div className="space-y-2 text-sm">
                     <div className="bg-white p-3 rounded border">
-                      Milene Itzel
-                    </div>
-                    <div className="bg-white p-3 rounded border">Bejarano</div>
-                    <div className="bg-white p-3 rounded border">Gutiérrez</div>
-                    <div className="bg-white p-3 rounded border">
-                      Av Carlos Páez Stille 408, Cd. Guzmán
+                      NOMBRE DEL USUARIO
                     </div>
                     <div className="bg-white p-3 rounded border">
-                      312 589 4786
+                      APELLIDO DEL USUARIO
                     </div>
                     <div className="bg-white p-3 rounded border">
-                      corrfal456@gmail.com
+                      APELLIDO DEL USUARIO
+                    </div>
+                    <div className="bg-white p-3 rounded border">
+                      SU CORREOO
                     </div>
                   </div>
                 </div>

@@ -35,7 +35,7 @@ const Header = () => {
           "Preguntas frecuentes",
         ]}
         NavClassName="hidden md:flex gap-4 lg:gap-6"
-        LinkClassName="font-poppins font-bold text-base lg:text-xl text-[#1D4289] dark:text-blue-400 hover:text-[#44D62c] transition-colors duration-200"
+        LinkClassName="font-poppins font-bold text-base lg:text-xl text-[#1D4289] dark:text-blue-400 hover:underline  transition-colors duration-200"
       />
       <Button
         ClassNameButton="hidden sm:block font-poppins text-[#1D4289] text-xs sm:text-sm lg:text-[15px] font-semibold bg-[#FFE900] w-auto px-4 lg:w-[260px] h-10 lg:h-[51px] border-black rounded-[10px] shadow-lg cursor-pointer transition-all duration-200 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#E6D200] hover:text-[#14356E] hover:font-bold"

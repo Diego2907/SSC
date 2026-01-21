@@ -1,7 +1,7 @@
 import React from "react";
-import handsIcon from "../../assets/stats-icons/hands.svg";
-import clientsIcon from "../../assets/stats-icons/Mask group.svg";
-import qualityIcon from "../../assets/stats-icons/reconocimientos de calidad.svg";
+import handsIcon from "../../assets/icons/achievements-Icons/hands.svg";
+import clientsIcon from "../../assets/icons/achievements-Icons/clients.svg";
+import branchesIcon from "../../assets/icons/achievements-Icons/branches.svg";
 
 const Achievements: React.FC = () => {
   const stats = [
@@ -17,11 +17,22 @@ const Achievements: React.FC = () => {
       icon: clientsIcon,
       alt: "Ícono de clientes satisfechos",
     },
-    {
+    /*{
       number: "+15",
       description: "Reconocimientos de\ncalidad",
       icon: qualityIcon,
       alt: "Ícono de reconocimientos de calidad",
+    },*/
+    {
+      number: "+9",
+      description: "Sucursales\nen el estado",
+      icon: branchesIcon,
+      alt: "Ícono de sucursales en el estado",
+    },
+    {
+      number: "+20",
+      description: "Territorios\nde cobertura",
+      alt: "Icono de territorios de cobertura",
     },
   ];
 
