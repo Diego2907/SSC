@@ -1,8 +1,7 @@
-import dotenv from "dotenv";
+import env from "../../../../config/env.config.js";
 import { codigoPostalValidado } from "../../validators/codigoPostal.validation.js";
-dotenv.config();
 
-const DIPOMEX_KEY = process.env.DIPOMEX_KEY || "";
+const DIPOMEX_KEY = env.DIPOMEX_KEY;
 const DIPOMEX_URL: string = `https://api.tau.com.mx/dipomex/v1/codigo_postal`;
 
 interface DomicilioInfoInterface {
@@ -13,7 +12,7 @@ interface DomicilioInfoInterface {
 }
 
 const buscarDatosPorCodigoPostal = async (
-	codigoPostal: string
+	codigoPostal: string,
 ): Promise<DomicilioInfoInterface> => {
 	const response = await fetch(`${DIPOMEX_URL}?cp=${codigoPostal}`, {
 		method: "GET",
@@ -29,7 +28,7 @@ const buscarDatosPorCodigoPostal = async (
 
 	const esValido = await codigoPostalValidado(
 		data.codigo_postal.municipio,
-		data.codigo_postal.codigo_postal
+		data.codigo_postal.codigo_postal,
 	);
 
 	if (!esValido) {

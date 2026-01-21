@@ -1,11 +1,8 @@
-//? dependencias
 import app from "./app.js";
-import dotenv from "dotenv";
-
-dotenv.config();
+import env from "./config/env.config.js";
 
 //? configuracion del puerto
-const PORT = process.env.PORT || 3000;
+const PORT = env.PORT;
 
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);

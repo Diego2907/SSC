@@ -1,21 +1,18 @@
-//? Importar Sequelize y dotenv para la configuracion de la base de datos
 import { Sequelize, Model, DataTypes } from "sequelize";
-import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-
-dotenv.config();
+import env from "../../../config/env.config.js";
 
 //? Configurar la conexion a la base de datos MySQL
 const sequelize = new Sequelize(
-	process.env.DB_USER_NAME || "database",
-	process.env.DB_USER_USER || "username",
-	process.env.DB_USER_PASSWORD || "password",
+	env.DB_USER_NAME,
+	env.DB_USER_USER,
+	env.DB_USER_PASSWORD,
 	{
-		host: process.env.DB_USER_HOST || "localhost",
+		host: env.DB_USER_HOST,
 		dialect: "mysql",
-		port: Number(process.env.DB_USER_PORT) || 3306,
+		port: env.DB_USER_PORT,
 		timezone: "-06:00",
-	}
+	},
 );
 
 class Usuario extends Model {}
@@ -96,7 +93,7 @@ Usuario.init(
 				}
 			},
 		},
-	}
+	},
 );
 
 //? Verificar la conexion a la base de datos

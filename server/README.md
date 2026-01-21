@@ -2,13 +2,13 @@
 
 ## Descripción
 
-API REST para el sistema de autenticación con Node.js, Express, TypeScript y Sequelize.
+API REST para el sistema gestor de usuarios para MiPyMes.
 
 ## Configuración Inicial
 
 ### Requisitos Previos
 
-- Node.js (v14 o superior)
+- Node.js (v22.18 o superior)
 - MySQL
 - npm o yarn
 
@@ -20,15 +20,34 @@ npm install
 
 ### Variables de Entorno
 
-Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
+Crea un archivo `.env` en la raíz del proyecto con las variables que se encuentran en el [.env.template](.env.template):
 
 ```env
+# ==============================================
+# CONFIGURACIÓN DEL SERVIDOR
+# ==============================================
 PORT=3000
-DB_HOST=localhost
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-DB_NAME=nombre_base_datos
-JWT_SECRET=tu_secret_key
+NODE_ENV=development #? development, production, test
+
+# ==============================================
+# API KEYS
+# ==============================================
+DIPOMEX_KEY=tu_api_key_aqui
+
+# ==============================================
+# SEGURIDAD Y SECRETOS
+# ==============================================
+JWT_SECRET=tu_secreto_super_seguro_aqui
+JWT_EXPIRES_IN=1d
+
+# ==============================================
+# BASE DE DATOS USUARIOS
+# ==============================================
+DB_USER_HOST=localhost
+DB_USER_PORT=3306
+DB_USER_USER=user_db
+DB_USER_PASSWORD=user_password
+DB_USER_NAME=nombre_base_datos
 ```
 
 ### Iniciar el Servidor
@@ -52,7 +71,7 @@ El servidor estará disponible en: `http://localhost:3000`
 
 Registra un nuevo usuario en el sistema.
 
-**URL:** `POST /auth/register`
+**URL:** `POST /api/auth/register`
 
 **Headers:**
 
@@ -89,7 +108,7 @@ Content-Type: application/json
 **Ejemplo con cURL:**
 
 ```bash
-curl -X POST http://localhost:3000/auth/register \
+curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "Nombre": "Juan",
@@ -106,7 +125,7 @@ curl -X POST http://localhost:3000/auth/register \
 **Ejemplo con JavaScript (Fetch API):**
 
 ```javascript
-fetch("http://localhost:3000/auth/register", {
+fetch("http://localhost:3000/api/auth/register", {
 	method: "POST",
 	headers: {
 		"Content-Type": "application/json",
@@ -159,7 +178,7 @@ fetch("http://localhost:3000/auth/register", {
 
 Autentica un usuario y devuelve un token JWT.
 
-**URL:** `POST /auth/login`
+**URL:** `POST /api/auth/login`
 
 **Headers:**
 
@@ -184,7 +203,7 @@ Content-Type: application/json
 **Ejemplo con cURL:**
 
 ```bash
-curl -X POST http://localhost:3000/auth/login \
+curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "Correo": "juan.perez@ejemplo.com",
@@ -195,7 +214,7 @@ curl -X POST http://localhost:3000/auth/login \
 **Ejemplo con JavaScript (Fetch API):**
 
 ```javascript
-fetch("http://localhost:3000/auth/login", {
+fetch("http://localhost:3000/api/auth/login", {
 	method: "POST",
 	headers: {
 		"Content-Type": "application/json",
@@ -235,7 +254,7 @@ fetch("http://localhost:3000/auth/login", {
 
 Obtiene el perfil del usuario autenticado.
 
-**URL:** `GET /auth/profile`
+**URL:** `GET /api/auth/profile`
 
 **Headers:**
 
@@ -246,7 +265,7 @@ Authorization: Bearer <tu_token_jwt>
 **Ejemplo con cURL:**
 
 ```bash
-curl -X GET http://localhost:3000/auth/profile \
+curl -X GET http://localhost:3000/api/auth/profile \
   -H "Cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -255,7 +274,7 @@ curl -X GET http://localhost:3000/auth/profile \
 ```javascript
 const token = localStorage.getItem("token");
 
-fetch("http://localhost:3000/auth/profile", {
+fetch("http://localhost:3000/api/auth/profile", {
 	method: "GET",
 	headers: {
 		Cookie: `${token}`,
@@ -355,7 +374,3 @@ server/
 4. **CORS:** Si necesitas hacer peticiones desde un frontend en otro puerto, configura CORS en `app.ts`
 
 ---
-
-## Soporte
-
-Para reportar problemas o sugerencias, contacta al equipo de desarrollo.
