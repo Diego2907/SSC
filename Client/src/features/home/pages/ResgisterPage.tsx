@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Logo_amarillo from "../assets/img/Logo - Amarillo.webp"; // Ajusta la ruta si es diferente
+import LogoAmarillo from "../assets/img/Logo_Amarillo.webp"; // Ajusta la ruta si es diferente
 import { Link, useLocation } from "react-router-dom";
 import Header from "../components/Login-Register-Page/Header";
 
@@ -12,7 +12,7 @@ const RegisterPage = () => {
       {/* Header superior solo blanco (opcional según tu proyecto) */}
       <Header />
       {/* Logo centrado */}
-      <img src={Logo_amarillo} alt="Logo SHC" className="mt-14 w-36 sm:w-44" />
+      <img src={LogoAmarillo} alt="Logo SHC" className="mt-14 w-36 sm:w-44" />
 
       {/* Card Form */}
       <section className="mt-6 bg-white w-[90%] max-w-md rounded-xl shadow-xl p-8 font-poppins">

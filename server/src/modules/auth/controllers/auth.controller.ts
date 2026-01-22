@@ -1,7 +1,8 @@
 import type { Request, Response } from "express";
 import * as authService from "../services/auth.services.js";
+import env from "../../../config/env.config.js";
 
-// Controlador para registrar un nuevo usuario
+//? Controlador para registrar un nuevo usuario
 const register = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const {
@@ -51,7 +52,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
-// Controlador para iniciar sesión
+//? Controlador para iniciar sesión
 const login = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const { Correo, Contrasenia } = req.body;
@@ -64,7 +65,7 @@ const login = async (req: Request, res: Response): Promise<void> => {
 		// Establecer la cookie antes de enviar la respuesta
 		res.cookie("token", result.token, {
 			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
+			secure: env.NODE_ENV === "production",
 			sameSite: "strict",
 			maxAge: 120 * 60 * 1000, // 2 horas
 		});
@@ -99,7 +100,7 @@ const logout = (res: Response): void => {
 };
 
 //!Controlador pendiente de revisar y probar
-// Controlador para obtener el perfil del usuario autenticado
+//? Controlador para obtener el perfil del usuario autenticado
 const getProfile = async (req: Request, res: Response): Promise<void> => {
 	try {
 		// El middleware de autenticación debe haber agregado el usuario al request

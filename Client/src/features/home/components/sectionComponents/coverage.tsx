@@ -33,7 +33,6 @@ const Coverage = () => {
                 disponible cuando integremos la base de datos.
               </p>
             </div>
-
             <div className="md:col-span-1">
               <form onSubmit={handleSubmit} className="flex gap-3 items-center">
                 <input
