@@ -48,7 +48,7 @@ const Carousel: React.FC<CarouselProps> = ({
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
       {/* Contenedor principal del slide */}
-      <div className="relative h-[100px] md:h-[300px] lg:h-[450px] flex items-center justify-center ">
+      <div className="relative h-[180px] sm:h-[250px] md:h-[300px] lg:h-[450px] flex items-center justify-center">
         {images.map((image, index) => (
           <div
             key={index}
@@ -81,7 +81,7 @@ const Carousel: React.FC<CarouselProps> = ({
       {/* Botones de navegación */}
       <button
         onClick={prevSlide}
-        className="absolute left-10 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full hover:bg-white shadow"
+        className="absolute left-2 sm:left-4 md:left-10 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-1.5 sm:p-2 rounded-full hover:bg-white shadow"
         aria-label="Anterior"
       >
         <svg
@@ -102,7 +102,7 @@ const Carousel: React.FC<CarouselProps> = ({
 
       <button
         onClick={nextSlide}
-        className="absolute right-10 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-2 rounded-full hover:bg-white shadow"
+        className="absolute right-2 sm:right-4 md:right-10 top-1/2 -translate-y-1/2 bg-white/80 text-gray-800 p-1.5 sm:p-2 rounded-full hover:bg-white shadow"
         aria-label="Siguiente"
       >
         <svg
@@ -111,7 +111,7 @@ const Carousel: React.FC<CarouselProps> = ({
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-5 h-5 sm:w-6 sm:h-6"
         >
           <path
             strokeLinecap="round"
@@ -122,12 +122,12 @@ const Carousel: React.FC<CarouselProps> = ({
       </button>
 
       {/* Indicadores */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-1.5 sm:space-x-2">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
               index === currentIndex
                 ? "bg-yellow-400/80 shadow-[0_0_10px_rgba(250,204,21,0.5)]"
                 : "bg-gray-400"
