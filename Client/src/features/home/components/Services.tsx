@@ -39,7 +39,7 @@ const Services: React.FC = () => {
   const isExpanded = (cardKey: CardKey) => expandedCards[cardKey];
 
   return (
-    <section id="servicios" className="relative bg-[#1D4289] text-white overflow-hidden min-h-[600px]">
+    <section id="servicios" className="relative bg-[#1D4289] text-white overflow-hidden min-h-[500px] sm:min-h-[550px] md:min-h-[600px]">
       <img
         src={obrero}
         alt="Técnico profesional de Servi Hogar"
@@ -50,12 +50,12 @@ const Services: React.FC = () => {
         }}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 relative z-10">
-        <div className="text-center mb-8 lg:mb-12">
-          <span className="inline-block bg-[#DA291C] text-white px-4 py-1.5 text-xs font-semibold mb-4 font-poppins rounded">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-10 md:py-16 lg:py-20 relative z-10">
+        <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+          <span className="inline-block bg-[#DA291C] text-white px-3 sm:px-4 py-1 sm:py-1.5 text-xs font-semibold mb-3 sm:mb-4 font-poppins rounded">
             ¿En qué podemos ayudarte?
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight font-poppins">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight font-poppins">
             Nuestros servicios
           </h2>
         </div>
