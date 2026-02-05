@@ -1,0 +1,728 @@
+================================================================================
+GUIA COMPLETA DE DEPLOYMENT EN HOSTINGER VPS
+PROYECTO SSC - SERVI HOGAR DE COLIMA
+================================================================================
+
+INDICE
+------
+
+1. RESUMEN DE LO QUE SE HIZO
+2. QUE DEBES HACER PASO A PASO
+3. CONFIGURACION DEL SERVIDOR
+4. CONFIGURACION DEL BACKEND
+5. CONFIGURACION DEL FRONTEND
+6. CONFIGURACION DE NGINX
+7. VERIFICACION Y PRUEBAS
+8. COMANDOS UTILES
+9. SOLUCION DE PROBLEMAS COMUNES
+
+================================================================================
+1. RESUMEN DE LO QUE SE HIZO
+================================================================================
+
+Se preparo completamente el proyecto para deployment en Hostinger VPS. A continuacion
+se detalla todo lo que se configuro:
+
+ARCHIVOS CREADOS PARA EL BACKEND:
+----------------------------------
+
+1. server/ecosystem.config.cjs
+   - Archivo de configuracion de PM2 (gestor de procesos)
+   - Configura el proceso del backend para que corra en produccion
+   - Define logs, reinicios automaticos y limites de memoria
+
+2. server/package.json (MODIFICADO)
+   - Se agregaron los siguientes scripts:
+     * build: Compila el codigo TypeScript a JavaScript
+     * start:pm2: Inicia la aplicacion con PM2
+     * stop:pm2: Detiene la aplicacion
+     * restart:pm2: Reinicia la aplicacion
+   - Estos scripts facilitan el manejo del servidor en produccion
+
+3. server/.gitignore (MODIFICADO)
+   - Se agregaron exclusiones para logs de PM2
+   - Evita subir archivos de log al repositorio
+
+ARCHIVOS CREADOS PARA EL FRONTEND:
+-----------------------------------
+
+1. Client/src/config/api.config.ts
+   - Archivo de configuracion centralizada para la URL del API
+   - Permite cambiar facilmente la URL del backend segun el ambiente
+   - En desarrollo usa localhost:3000
+   - En produccion usa la URL configurada en variables de entorno
+
+2. Client/src/features/home/pages/LoginPage.tsx (MODIFICADO)
+   - Se actualizo para usar la configuracion centralizada del API
+   - Ya no tiene la URL hardcodeada
+   - Ahora usa la variable API_URL del archivo de configuracion
+
+ARCHIVOS DE CONFIGURACION DEL SERVIDOR:
+----------------------------------------
+
+1. nginx.conf
+   - Configuracion completa de Nginx como reverse proxy
+   - Sirve el frontend en la ruta raiz (/)
+   - Redirige las peticiones /api al backend en el puerto 3000
+   - Configurado para cache de archivos estaticos
+   - Preparado para SSL (comentado, listo para activar)
+
+2. scripts/setup-hostinger.sh
+   - Script automatico para configurar el servidor
+   - Instala Node.js, PM2, MySQL y Nginx
+   - Crea los directorios necesarios
+   - Configura el firewall basico
+
+3. scripts/deploy-hostinger.sh
+   - Script para deployment automatico desde Linux/Mac
+   - Construye el backend y frontend
+   - Sube los archivos al servidor
+   - Reinicia los servicios
+
+4. scripts/deploy-hostinger.ps1
+   - Script para deployment automatico desde Windows
+   - Mismas funcionalidades que el script .sh pero para PowerShell
+
+QUE SIGNIFICA TODO ESTO:
+------------------------
+
+El proyecto ahora esta completamente preparado para correr en un servidor VPS de
+Hostinger. Los cambios principales son:
+
+1. El backend puede compilarse y ejecutarse en produccion usando PM2
+2. El frontend puede configurarse para apuntar a cualquier URL del backend
+3. Nginx esta configurado para servir ambos (frontend y backend) desde un solo
+   punto de entrada
+4. Hay scripts automatizados para facilitar el deployment
+
+================================================================================
+2. QUE DEBES HACER PASO A PASO
+================================================================================
+
+PASO 1: PREPARAR TU MAQUINA LOCAL
+----------------------------------
+
+Antes de subir nada al servidor, debes preparar el frontend en tu maquina local:
+
+1. Abre una terminal en tu maquina local
+2. Navega a la carpeta del proyecto:
+   cd C:\Users\Colibecas\Documents\SHC\SSC\Client
+
+3. Crea un archivo llamado .env (sin extension) en la carpeta Client
+   Puedes usar el Bloc de notas o cualquier editor de texto
+
+4. Dentro del archivo .env, escribe lo siguiente:
+   VITE_API_URL=http://TU_IP_O_DOMINIO
+
+   Reemplaza TU_IP_O_DOMINIO con:
+   - La IP de tu servidor Hostinger (ejemplo: http://123.45.67.89)
+   - O tu dominio si ya lo tienes (ejemplo: http://tudominio.com)
+   
+   IMPORTANTE: No uses https:// a menos que ya tengas SSL configurado
+
+5. Guarda el archivo .env
+
+6. Instala las dependencias si aun no lo has hecho:
+   npm install
+
+7. Construye el frontend para produccion:
+   npm run build
+
+   Esto creara una carpeta llamada "dist" con los archivos listos para subir
+
+PASO 2: CONECTARTE AL SERVIDOR HOSTINGER
+-----------------------------------------
+
+1. Abre una terminal o PowerShell
+2. Conectate al servidor usando SSH:
+   ssh tu_usuario@tu_ip_o_dominio
+
+   Reemplaza:
+   - tu_usuario: con tu usuario de Hostinger
+   - tu_ip_o_dominio: con la IP o dominio de tu servidor
+
+3. Si es la primera vez, te pedira confirmar la conexion, escribe: yes
+4. Ingresa tu contraseña cuando te la pida
+
+PASO 3: CONFIGURAR EL SERVIDOR (SOLO LA PRIMERA VEZ)
+-----------------------------------------------------
+
+Una vez conectado al servidor, ejecuta estos comandos:
+
+1. Actualizar el sistema:
+   sudo apt update
+   sudo apt upgrade -y
+
+2. Instalar Node.js 20.x:
+   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+   sudo apt install -y nodejs
+
+3. Verificar que Node.js se instalo correctamente:
+   node --version
+   npm --version
+
+4. Instalar PM2 globalmente:
+   sudo npm install -g pm2
+
+5. Configurar PM2 para iniciar automaticamente al reiniciar el servidor:
+   pm2 startup systemd -u $USER --hp $HOME
+
+6. Instalar MySQL:
+   sudo apt install -y mysql-server
+
+7. Configurar MySQL (esto te pedira crear una contraseña para root):
+   sudo mysql_secure_installation
+
+   Sigue las instrucciones en pantalla. Recomendaciones:
+   - Presiona Enter para usar la validacion de contraseña por defecto
+   - Establece una contraseña segura para el usuario root
+   - Responde "Y" a todas las preguntas de seguridad
+
+8. Instalar Nginx:
+   sudo apt install -y nginx
+
+9. Iniciar y habilitar Nginx:
+   sudo systemctl start nginx
+   sudo systemctl enable nginx
+
+10. Crear los directorios del proyecto:
+    sudo mkdir -p /var/www/ssc/backend
+    sudo mkdir -p /var/www/ssc/frontend
+    sudo chown -R $USER:$USER /var/www/ssc
+
+11. Configurar el firewall (opcional pero recomendado):
+    sudo ufw allow 22/tcp    # SSH
+    sudo ufw allow 80/tcp     # HTTP
+    sudo ufw allow 443/tcp    # HTTPS
+    sudo ufw --force enable
+
+PASO 4: CONFIGURAR LA BASE DE DATOS
+------------------------------------
+
+1. Conectate a MySQL:
+   sudo mysql -u root -p
+
+2. Ingresa la contraseña que configuraste en el paso anterior
+
+3. Una vez dentro de MySQL, ejecuta estos comandos (cambia los valores segun
+   necesites):
+
+   CREATE DATABASE ssc_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE USER 'ssc_user'@'localhost' IDENTIFIED BY 'tu_password_seguro';
+   GRANT ALL PRIVILEGES ON ssc_db.* TO 'ssc_user'@'localhost';
+   FLUSH PRIVILEGES;
+   EXIT;
+
+   IMPORTANTE: Guarda estos valores, los necesitaras para el archivo .env del
+   backend:
+   - Nombre de la base de datos: ssc_db
+   - Usuario: ssc_user
+   - Contraseña: la que pusiste en 'tu_password_seguro'
+
+PASO 5: SUBIR EL CODIGO DEL BACKEND
+------------------------------------
+
+Tienes varias opciones para subir el codigo:
+
+OPCION A: Usando Git (si el repositorio es publico o tienes acceso SSH)
+------------------------------------------------------------------------
+
+1. En el servidor, navega al directorio del backend:
+   cd /var/www/ssc/backend
+
+2. Clona el repositorio:
+   git clone https://github.com/Diego2907/SSC.git .
+
+   El punto al final es importante, clona directamente en el directorio actual
+
+3. Si necesitas una rama especifica:
+   git checkout nombre_de_la_rama
+
+OPCION B: Usando SCP desde tu maquina local
+-------------------------------------------
+
+1. En tu maquina local, abre una terminal
+2. Navega a la carpeta del proyecto:
+   cd C:\Users\Colibecas\Documents\SHC\SSC
+
+3. Sube la carpeta server al servidor:
+   scp -r server/* tu_usuario@tu_ip:/var/www/ssc/backend/
+
+OPCION C: Usando FTP/SFTP
+--------------------------
+
+1. Usa un cliente FTP como FileZilla
+2. Conectate a tu servidor
+3. Navega a /var/www/ssc/backend
+4. Sube todos los archivos de la carpeta server
+
+PASO 6: CONFIGURAR EL BACKEND EN EL SERVIDOR
+---------------------------------------------
+
+1. Conectate al servidor via SSH si no estas conectado
+
+2. Navega al directorio del backend:
+   cd /var/www/ssc/backend
+
+3. Instala las dependencias de produccion:
+   npm install --production
+
+4. Crea el archivo .env:
+   nano .env
+
+5. Dentro del archivo .env, pega lo siguiente y ajusta los valores:
+
+   PORT=3000
+   NODE_ENV=production
+   DIPOMEX_KEY=tu_clave_dipomex_aqui
+   JWT_SECRET=genera_un_secret_muy_largo_y_seguro_aqui
+   JWT_EXPIRES_IN=1d
+   DB_USER_HOST=localhost
+   DB_USER_PORT=3306
+   DB_USER_USER=ssc_user
+   DB_USER_PASSWORD=tu_password_seguro
+   DB_USER_NAME=ssc_db
+
+   IMPORTANTE:
+   - DIPOMEX_KEY: Si tienes una clave de la API de Dipomex, ponla aqui
+   - JWT_SECRET: Debe ser una cadena larga y aleatoria. Puedes generar una
+     ejecutando en el servidor: node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+   - DB_USER_USER, DB_USER_PASSWORD, DB_USER_NAME: Los valores que creaste
+     en el paso 4
+
+6. Guarda el archivo:
+   - Presiona Ctrl + O
+   - Presiona Enter
+   - Presiona Ctrl + X
+
+7. Crea el directorio de logs:
+   mkdir -p logs
+
+8. Compila el codigo TypeScript:
+   npm run build
+
+   Esto creara una carpeta "dist" con el codigo compilado
+
+9. Inicia la aplicacion con PM2:
+   pm2 start ecosystem.config.cjs
+
+10. Guarda la configuracion de PM2 para que persista:
+    pm2 save
+
+11. Verifica que este corriendo:
+    pm2 status
+
+    Deberias ver "ssc-backend" en la lista con status "online"
+
+12. Ver los logs para asegurarte de que no hay errores:
+    pm2 logs ssc-backend
+
+    Presiona Ctrl + C para salir de los logs
+
+PASO 7: SUBIR EL FRONTEND
+--------------------------
+
+1. En tu maquina local, asegurate de que ya construiste el frontend (Paso 1)
+
+2. Sube la carpeta dist al servidor usando SCP:
+   scp -r Client/dist/* tu_usuario@tu_ip:/var/www/ssc/frontend/dist/
+
+   Si la carpeta dist no existe en el servidor, creala primero:
+   ssh tu_usuario@tu_ip "mkdir -p /var/www/ssc/frontend/dist"
+
+   Luego sube los archivos:
+   scp -r Client/dist/* tu_usuario@tu_ip:/var/www/ssc/frontend/dist/
+
+3. Verifica los permisos en el servidor:
+   ssh tu_usuario@tu_ip
+   ls -la /var/www/ssc/frontend/dist
+
+   Si hay problemas de permisos:
+   sudo chown -R $USER:$USER /var/www/ssc/frontend
+
+PASO 8: CONFIGURAR NGINX
+------------------------
+
+1. Conectate al servidor via SSH
+
+2. Copia el archivo nginx.conf del proyecto a la configuracion de Nginx:
+   sudo cp /var/www/ssc/backend/nginx.conf /etc/nginx/sites-available/ssc
+
+   Si subiste el proyecto de otra forma, copia el archivo nginx.conf que esta
+   en la raiz del proyecto
+
+3. Edita el archivo de configuracion:
+   sudo nano /etc/nginx/sites-available/ssc
+
+4. Busca la linea que dice:
+   server_name tu-dominio.com www.tu-dominio.com;
+
+5. Cambiala por una de estas opciones:
+   
+   Si tienes dominio:
+   server_name tudominio.com www.tudominio.com;
+
+   Si NO tienes dominio (usar IP):
+   server_name _;
+
+6. Guarda el archivo (Ctrl + O, Enter, Ctrl + X)
+
+7. Crea un enlace simbolico para habilitar el sitio:
+   sudo ln -s /etc/nginx/sites-available/ssc /etc/nginx/sites-enabled/
+
+8. Elimina el sitio por defecto (opcional):
+   sudo rm /etc/nginx/sites-enabled/default
+
+9. Prueba la configuracion de Nginx:
+   sudo nginx -t
+
+   Debe decir "syntax is ok" y "test is successful"
+
+10. Si la prueba es exitosa, reinicia Nginx:
+    sudo systemctl restart nginx
+
+11. Verifica que Nginx este corriendo:
+    sudo systemctl status nginx
+
+================================================================================
+3. VERIFICACION Y PRUEBAS
+================================================================================
+
+Ahora debes verificar que todo funcione correctamente:
+
+PRUEBA 1: Verificar que el backend esta corriendo
+---------------------------------------------------
+
+En el servidor, ejecuta:
+pm2 status
+
+Debe mostrar "ssc-backend" con status "online"
+
+PRUEBA 2: Verificar que el backend responde
+--------------------------------------------
+
+En el servidor, ejecuta:
+curl http://localhost:3000/api/auth/profile
+
+Si el backend esta funcionando, deberias recibir una respuesta (probablemente un
+error de autenticacion, pero eso significa que el servidor esta respondiendo)
+
+PRUEBA 3: Verificar que Nginx esta sirviendo el frontend
+---------------------------------------------------------
+
+Abre tu navegador y visita:
+http://TU_IP_O_DOMINIO
+
+Deberias ver la pagina principal del proyecto. Si ves una pagina de error o
+"Welcome to nginx", hay un problema con la configuracion.
+
+PRUEBA 4: Verificar que la API funciona
+----------------------------------------
+
+Abre las herramientas de desarrollador del navegador (F12) y ve a la pestaña
+"Network" o "Red". Intenta hacer login o cualquier accion que llame al API.
+
+Las peticiones a /api/* no deberian dar error 502. Si dan 502, el backend no
+esta corriendo o Nginx no puede conectarse a el.
+
+================================================================================
+4. COMANDOS UTILES
+================================================================================
+
+GESTION DEL BACKEND CON PM2:
+-----------------------------
+
+Ver estado de las aplicaciones:
+pm2 status
+
+Ver logs en tiempo real:
+pm2 logs ssc-backend
+
+Ver solo los ultimos 100 lineas de logs:
+pm2 logs ssc-backend --lines 100
+
+Reiniciar la aplicacion:
+pm2 restart ssc-backend
+
+Detener la aplicacion:
+pm2 stop ssc-backend
+
+Iniciar la aplicacion:
+pm2 start ssc-backend
+
+Eliminar la aplicacion de PM2:
+pm2 delete ssc-backend
+
+GESTION DE NGINX:
+-----------------
+
+Ver estado:
+sudo systemctl status nginx
+
+Reiniciar:
+sudo systemctl restart nginx
+
+Recargar configuracion (sin downtime):
+sudo systemctl reload nginx
+
+Ver logs de acceso:
+sudo tail -f /var/log/nginx/ssc-access.log
+
+Ver logs de errores:
+sudo tail -f /var/log/nginx/ssc-error.log
+
+Probar configuracion:
+sudo nginx -t
+
+GESTION DE MYSQL:
+-----------------
+
+Ver estado:
+sudo systemctl status mysql
+
+Reiniciar:
+sudo systemctl restart mysql
+
+Conectarse a MySQL:
+sudo mysql -u root -p
+
+Conectarse con el usuario de la aplicacion:
+mysql -u ssc_user -p ssc_db
+
+GESTION DE ARCHIVOS:
+--------------------
+
+Ver contenido de un directorio:
+ls -la
+
+Ver permisos de archivos:
+ls -la /var/www/ssc
+
+Cambiar permisos:
+sudo chown -R $USER:$USER /var/www/ssc
+sudo chmod -R 755 /var/www/ssc
+
+ACTUALIZAR EL CODIGO:
+---------------------
+
+Para actualizar el backend:
+
+1. En el servidor:
+   cd /var/www/ssc/backend
+   git pull  # Si usas Git
+   # O sube los archivos nuevos manualmente
+   npm install --production
+   npm run build
+   pm2 restart ssc-backend
+
+Para actualizar el frontend:
+
+1. En tu maquina local:
+   cd Client
+   npm run build
+
+2. Sube los archivos:
+   scp -r dist/* usuario@servidor:/var/www/ssc/frontend/dist/
+
+================================================================================
+5. SOLUCION DE PROBLEMAS COMUNES
+================================================================================
+
+PROBLEMA: Error 502 Bad Gateway
+---------------------------------
+
+Causa: Nginx no puede conectarse al backend
+
+Solucion:
+1. Verifica que el backend este corriendo:
+   pm2 status
+
+2. Si no esta corriendo:
+   cd /var/www/ssc/backend
+   pm2 start ecosystem.config.cjs
+
+3. Verifica los logs del backend:
+   pm2 logs ssc-backend
+
+4. Verifica que el backend este escuchando en el puerto 3000:
+   netstat -tulpn | grep 3000
+
+5. Verifica la configuracion de Nginx:
+   sudo nginx -t
+
+PROBLEMA: La pagina no carga (404 o pagina en blanco)
+------------------------------------------------------
+
+Causa: El frontend no esta en la ubicacion correcta o Nginx no esta configurado
+
+Solucion:
+1. Verifica que los archivos del frontend esten en:
+   /var/www/ssc/frontend/dist
+
+2. Verifica que exista el archivo index.html:
+   ls -la /var/www/ssc/frontend/dist/index.html
+
+3. Verifica los permisos:
+   ls -la /var/www/ssc/frontend/dist
+
+4. Si hay problemas de permisos:
+   sudo chown -R $USER:$USER /var/www/ssc/frontend
+   sudo chmod -R 755 /var/www/ssc/frontend
+
+5. Verifica la configuracion de Nginx:
+   sudo cat /etc/nginx/sites-available/ssc
+
+   Asegurate de que la ruta en "root" sea correcta
+
+PROBLEMA: Error de conexion a la base de datos
+-----------------------------------------------
+
+Causa: Credenciales incorrectas o MySQL no esta corriendo
+
+Solucion:
+1. Verifica que MySQL este corriendo:
+   sudo systemctl status mysql
+
+2. Si no esta corriendo:
+   sudo systemctl start mysql
+
+3. Verifica las credenciales en el archivo .env:
+   cd /var/www/ssc/backend
+   cat .env
+
+4. Prueba la conexion manualmente:
+   mysql -u ssc_user -p ssc_db
+
+   Ingresa la contraseña y verifica que puedas conectarte
+
+5. Si no puedes conectarte, verifica que el usuario exista:
+   sudo mysql -u root -p
+   SELECT User, Host FROM mysql.user WHERE User='ssc_user';
+
+PROBLEMA: El backend se detiene constantemente
+------------------------------------------------
+
+Causa: Error en el codigo o falta de memoria
+
+Solucion:
+1. Ver los logs detallados:
+   pm2 logs ssc-backend --lines 200
+
+2. Busca errores en los logs
+
+3. Verifica que todas las variables de entorno esten configuradas:
+   cd /var/www/ssc/backend
+   cat .env
+
+4. Verifica el uso de memoria:
+   pm2 monit
+
+5. Si el problema persiste, aumenta el limite de memoria en
+   ecosystem.config.cjs:
+   max_memory_restart: "1G"
+
+PROBLEMA: No puedo acceder al servidor via SSH
+-----------------------------------------------
+
+Causa: Firewall bloqueando o credenciales incorrectas
+
+Solucion:
+1. Verifica que el firewall permita SSH:
+   sudo ufw status
+
+2. Si SSH no esta permitido:
+   sudo ufw allow 22/tcp
+
+3. Verifica las credenciales con Hostinger
+
+4. Si usas clave SSH, verifica que la clave este en el servidor
+
+PROBLEMA: Las peticiones al API dan CORS error
+-----------------------------------------------
+
+Causa: Configuracion de CORS en el backend
+
+Solucion:
+1. Verifica el archivo de configuracion de CORS:
+   cat /var/www/ssc/backend/src/config/cors.config.ts
+
+2. Asegurate de que el origen del frontend este permitido
+
+3. Reinicia el backend:
+   pm2 restart ssc-backend
+
+================================================================================
+6. CONFIGURACION DE SSL (OPCIONAL PERO RECOMENDADO)
+================================================================================
+
+Si ya tienes un dominio configurado, puedes agregar SSL gratuito con Let's Encrypt:
+
+1. Instalar Certbot:
+   sudo apt install -y certbot python3-certbot-nginx
+
+2. Obtener certificado SSL:
+   sudo certbot --nginx -d tudominio.com -d www.tudominio.com
+
+3. Seguir las instrucciones en pantalla
+
+4. Certbot modificara automaticamente la configuracion de Nginx
+
+5. El certificado se renovara automaticamente
+
+6. Despues de obtener el certificado, edita nginx.conf y descomenta las lineas
+   de SSL
+
+================================================================================
+7. RESUMEN FINAL
+================================================================================
+
+LO QUE SE HIZO:
+---------------
+
+1. Se configuro el backend para compilar y ejecutarse en produccion
+2. Se creo configuracion de PM2 para gestionar el proceso del backend
+3. Se configuro el frontend para usar URLs dinamicas del API
+4. Se creo configuracion completa de Nginx
+5. Se crearon scripts de deployment automatizado
+6. Se documento todo el proceso
+
+LO QUE DEBES HACER:
+-------------------
+
+1. Preparar el frontend en tu maquina local (crear .env y construir)
+2. Configurar el servidor Hostinger (instalar Node.js, PM2, MySQL, Nginx)
+3. Crear la base de datos MySQL
+4. Subir el codigo del backend al servidor
+5. Configurar el archivo .env del backend
+6. Compilar e iniciar el backend con PM2
+7. Subir el frontend construido al servidor
+8. Configurar Nginx
+9. Verificar que todo funcione
+
+TIEMPO ESTIMADO:
+----------------
+
+- Configuracion inicial del servidor: 30-45 minutos
+- Deployment del backend: 15-20 minutos
+- Deployment del frontend: 10 minutos
+- Configuracion de Nginx: 10 minutos
+- Verificacion y pruebas: 15 minutos
+
+Total: Aproximadamente 1.5 a 2 horas para la primera vez
+
+SIGUIENTES DEPLOYMENTS:
+-----------------------
+
+Una vez configurado todo, los siguientes deployments son mucho mas rapidos:
+
+- Actualizar backend: 5-10 minutos
+- Actualizar frontend: 5 minutos
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
+
+Si tienes dudas o problemas, revisa la seccion de "Solucion de Problemas Comunes"
+o consulta los logs del servidor usando los comandos indicados.
+
+
