@@ -8,7 +8,7 @@ declare global {
 			user?: {
 				id_Usuario: string;
 				Correo: string;
-				// id?: number;
+                // id?: number;
 				// email?: string;
 				// role?: "client" | "technical";
 			};
@@ -20,7 +20,7 @@ declare global {
 export const authenticate = (
 	req: Request,
 	res: Response,
-	next: NextFunction,
+	next: NextFunction
 ): void => {
 	try {
 		const token = req.cookies?.token;
@@ -37,7 +37,7 @@ export const authenticate = (
 		req.user = {
 			id_Usuario: decoded.id_Usuario!, // Aseguramos que existe para TS
 			Correo: decoded.Correo!,
-			// id: decoded.id,
+            // id: decoded.id,
 			// email: decoded.email,
 			// role: decoded.role,
 		};

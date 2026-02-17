@@ -1,26 +1,85 @@
+import type { Request, Response, NextFunction } from "express";
 import { z } from "zod";
 
-//? Esquemas de validación existentes...
-export const registerSchema = z.object({
-	Nombre: z.string().min(1, "El nombre es obligatorio"),
-	Apellido_Paterno: z.string().min(1, "El apellido paterno es obligatorio"),
-	Apellido_Materno: z.string().min(1, "El apellido materno es obligatorio"),
-	Correo: z.string().email("Debe ser un correo válido"),
+// Schema para registro de usuario
+const registerSchema = z
+	.object({
+		Nombre: z
+			.string({ message: "El nombre debe ser un texto" })
+			.min(1, "El nombre no puede estar vacío")
+			.max(50, "El nombre no puede exceder 50 caracteres")
+			.trim(),
+
+		Apellido_Paterno: z
+			.string({ message: "El apellido paterno debe ser un texto" })
+			.min(1, "El apellido paterno no puede estar vacío")
+			.max(30, "El apellido paterno no puede exceder 30 caracteres")
+			.trim(),
+
+		Apellido_Materno: z
+			.string({ message: "El apellido materno debe ser un texto" })
+			.min(1, "El apellido materno no puede estar vacío")
+			.max(30, "El apellido materno no puede exceder 30 caracteres")
+			.trim(),
+
+		Correo: z
+			.string({ message: "El correo debe ser un texto" })
+			.min(1, "El correo es requerido")
+			.email("El correo no tiene un formato válido")
+			.max(100, "El correo no puede exceder 100 caracteres")
+			.toLowerCase()
+			.trim(),
+
+		Contrasenia: z
+			.string({ message: "La contraseña debe ser un texto" })
+			.min(8, "La contraseña debe tener al menos 8 caracteres")
+			.max(255, "La contraseña no puede exceder 255 caracteres")
+			.regex(
+				/[A-Z]/,
+				"La contraseña debe contener al menos una letra mayúscula",
+			)
+			.regex(
+				/[a-z]/,
+				"La contraseña debe contener al menos una letra minúscula",
+			)
+			.regex(/[0-9]/, "La contraseña debe contener al menos un número")
+			.regex(
+				/[\W_]/,
+				"La contraseña debe contener al menos un carácter especial",
+			),
+
+		ConfirmarContrasenia: z
+			.string({ message: "La confirmación de contraseña debe ser un texto" })
+			.min(8, "La confirmación debe tener al menos 8 caracteres")
+			.max(255, "La confirmación no puede exceder 255 caracteres"),
+
+		Telefono: z
+			.string({ message: "El teléfono debe ser un texto" })
+			.length(10, "El teléfono debe tener exactamente 10 dígitos"),
+
+		Consentimiento: z.boolean().default(true),
+	})
+	.refine((data) => data.Contrasenia === data.ConfirmarContrasenia, {
+		message: "Las contraseñas no coinciden",
+		path: ["ConfirmarContrasenia"],
+	});
+
+// Schema para login de usuario
+const loginSchema = z.object({
+	Correo: z
+		.string({ message: "El correo debe ser un texto" })
+		.min(1, "El correo es requerido")
+		.email("El correo no tiene un formato válido")
+		.toLowerCase()
+		.trim(),
+
 	Contrasenia: z
-		.string()
-		.min(6, "La contraseña debe tener al menos 6 caracteres"),
-	Telefono: z.string().min(10, "El teléfono debe tener 10 dígitos"),
-	Consentimiento: z.boolean().optional(),
+		.string({ message: "La contraseña debe ser un texto" })
+		.min(8, "La contraseña debe contener al menos 8 caracteres"),
 });
-
-export const loginSchema = z.object({
-	Correo: z.string().email("Debe ser un correo válido"),
-	Contrasenia: z.string().min(1, "La contraseña es obligatoria"),
-});
-
 
 //? Esquema de Validación para Registro de Técnicos
-export const registerTechnicalSchema = z
+const registerTechnicalSchema = z
 	.object({
 		nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
 		apellido_paterno: z
@@ -51,32 +110,43 @@ export const registerTechnicalSchema = z
 	//? Asegura que password y password_confirmation sean idénticos.
 	.refine((data) => data.password === data.password_confirmation, {
 		message: "Las contraseñas no coinciden",
-		path: ["password_confirmation"], 	
+		path: ["password_confirmation"],
 	});
 
-//? Middleware Genérico de Validación
-//? Recibe un esquema Zod, valida el body de la petición y pasa al siguiente middleware
-//? o devuelve un error 400 formateado si la validación falla.
-export const validateSchema =
-	(schema: z.ZodSchema) => (req: any, res: any, next: any) => {
+// Middleware de validación genérico
+const validateSchema = (schema: z.ZodSchema) => {
+	return (req: Request, res: Response, next: NextFunction): void => {
 		try {
-			schema.parse(req.body);
+			// Validar y parsear el body
+			const parsed = schema.parse(req.body);
+			req.body = parsed;
 			next();
-		} catch (error: any) {
+		} catch (error) {
 			if (error instanceof z.ZodError) {
-				return res.status(400).json({
+				// Formatear errores de Zod
+				const errors = error.issues.map((err) => ({
+					campo: err.path.join("."),
+					mensaje: err.message,
+				}));
+
+				res.status(400).json({
 					message: "Error de validación",
-					errors: error.issues.map((e: any) => ({
-						field: e.path[0],
-						message: e.message,
-					})),
+					errors,
 				});
+				return;
 			}
-			next(error);
+
+			// Error inesperado
+			res.status(500).json({
+				message: "Error al validar los datos",
+			});
 		}
 	};
+};
 
-export const validateRegister = validateSchema(registerSchema);
-export const validateLogin = validateSchema(loginSchema);
+// Middlewares específicos
+const validateRegister = validateSchema(registerSchema);
+const validateLogin = validateSchema(loginSchema);
+const validateRegisterTechnical = validateSchema(registerTechnicalSchema);
 
-export const validateRegisterTechnical = validateSchema(registerTechnicalSchema);
+export { validateRegister, validateLogin, registerSchema, loginSchema, validateSchema, validateRegisterTechnical };

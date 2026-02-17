@@ -1,6 +1,13 @@
 import type { CorsOptions } from "cors";
 
-const allowedProdOrigins: string[] = ["https://www.shc.com", "https://shc.com"];
+const allowedProdOrigins: string[] = [
+	"https://www.shc.com", 
+	"https://shc.com",
+	"https://www.shc.com.mx",
+	"https://shc.com.mx",
+	"https://staging.shc.com.mx",
+	"http://staging.shc.com.mx",
+];
 
 const allowedDevOrigins: string[] = [
 	"http://localhost:3000",

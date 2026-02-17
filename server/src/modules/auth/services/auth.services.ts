@@ -1,31 +1,44 @@
 import { Usuario } from "../repositories/auth.repository.js";
-import { TechnicalUser } from "../../users/repositories/technical-user.repository.js"; // Importamos el nuevo repo
-import bcrypt from "bcrypt";
+// import { TechnicalUser } from "../../users/repositories/technical-user.repository.js"; // Importamos el nuevo repo
 import jwt, { type SignOptions } from "jsonwebtoken";
 import env from "../../../config/env.config.js";
-import { OAuth2Client } from "google-auth-library"; // Librería de Google
-import axios from "axios"; // Para Facebook
+import bcrypt from "bcrypt";
+// import { OAuth2Client } from "google-auth-library"; // Librería de Google
+// import axios from "axios"; // Para Facebook
 
 const { JWT_SECRET, JWT_EXPIRES_IN, GOOGLE_CLIENT_ID } = env;
 
 // Cliente de Google
-const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+// const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
-//? Interfaz para el payload del token
+//? Interface para el payload del JWT
 interface JWTPayload {
-	id_Usuario?: string; // Para usuarios normales
-	id?: number; // Para usuarios técnicos
+	id_Usuario?: string;
 	Correo?: string;
-	email?: string;
-	role: "client" | "technical"; // Rol estricto
+    // id?: number; // Para usuarios técnicos
+	// email?: string;
+	// role?: "client" | "technical"; // Rol estricto
 }
 
+//? Interface para los datos de registro
+interface RegisterData {
+	Nombre: string;
+	Apellido_Paterno: string;
+	Apellido_Materno: string;
+	Correo: string;
+	Contrasenia: string;
+	Telefono: string;
+	Consentimiento: boolean;
+}
+
+//? Interface para los datos de login
 interface LoginData {
 	Correo: string;
 	Contrasenia: string;
 }
 
 //? Interfaz de datos para registro técnico
+/*
 interface RegisterTechnicalData {
 	nombre: string;
 	apellido_paterno: string;
@@ -36,29 +49,41 @@ interface RegisterTechnicalData {
 	terms_accepted: boolean;
 	provider?: "local" | "google" | "facebook"; // Opcional, por defecto es local
 }
+*/
 
-//? Servicio para registrar un nuevo usuario (Cliente normal)
-const registerUser = async (userData: any) => {
-	// Buscar el usuario por correo
-	const existingUserByEmail = await Usuario.findOne({
+//? Servicio para registrar un nuevo usuario
+const registerUser = async (userData: RegisterData) => {
+	// Sincronizar la tabla de usuarios
+	// await Usuario.sync(); // Ya se hace en el repository
+
+	// Verificar si el correo ya existe
+	const correoExistente = await Usuario.findOne({
 		where: { Correo: userData.Correo },
 	});
 
-	if (existingUserByEmail) {
+	if (correoExistente) {
 		throw new Error("El correo ya está registrado");
 	}
 
-	// Buscar el usuario por teléfono
-	const existingUserByPhone = await Usuario.findOne({
+	// Verificar si el teléfono ya existe
+	const telefonoExistente = await Usuario.findOne({
 		where: { Telefono: userData.Telefono },
 	});
 
-	if (existingUserByPhone) {
+	if (telefonoExistente) {
 		throw new Error("El teléfono ya está registrado");
 	}
 
-	// Crear el usuario
-	const newUser = await Usuario.create(userData);
+	//? (UUID y hash de contraseña se manejan automáticamente en el repository via hooks)
+	const newUser = await Usuario.create({
+		Nombre: userData.Nombre,
+		Apellido_Paterno: userData.Apellido_Paterno,
+		Apellido_Materno: userData.Apellido_Materno,
+		Correo: userData.Correo,
+		Contrasenia: userData.Contrasenia,
+		Telefono: userData.Telefono,
+		Consentimiento: userData.Consentimiento,
+	});
 
 	return newUser;
 };
@@ -116,7 +141,7 @@ const loginUser = async (loginData: LoginData) => {
 		{
 			id_Usuario: usuario.getDataValue("id_Usuario"),
 			Correo: usuario.getDataValue("Correo"),
-			// role: "client", // Agregamos rol implícito
+			// role: "client", // Agregamos rol implícito si fuera necesario
 		} as JWTPayload,
 		JWT_SECRET,
 		{ expiresIn: JWT_EXPIRES_IN } as SignOptions,
@@ -309,16 +334,17 @@ const loginWithFacebook = async (accessToken: string) => {
 */
 
 //? Servicio para verificar un token JWT
-const verifyToken = (token: string) => {
+const verifyToken = (token: string): JWTPayload => {
 	try {
-		return jwt.verify(token, JWT_SECRET) as JWTPayload;
+		const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
+		return decoded;
 	} catch (error) {
-		console.error("Error verificando token:", error);
-		throw new Error("Token inválido o expirado");
+		throw new Error("Token inválido o expirado", error as any);
 	}
 };
 
-//! Servicio para obtener usuario por ID
+//! eliminar este servicio cuando se mueva el controlador
+//? Servicio para obtener usuario por ID
 const getUserById = async (id_Usuario: string) => {
 	const user = await Usuario.findByPk(id_Usuario);
 

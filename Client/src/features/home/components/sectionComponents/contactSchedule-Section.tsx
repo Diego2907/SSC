@@ -122,7 +122,7 @@ const ContactSchedule: React.FC = () => {
 
   // Estilos para las tarjetas de horario
   const getCardStyles = (isActive: boolean): string => {
-    const baseCard = "px-6 py-4 rounded-xl flex-1 min-w-[200px] border-2 transition-all duration-300 ease-out";
+    const baseCard = "px-4 sm:px-6 py-3 sm:py-4 rounded-xl flex-1 min-w-0 sm:min-w-[200px] border-2 transition-all duration-300 ease-out";
     
     if (isActive) {
       return `${baseCard} border-[${COLORS.green}] bg-green-50 dark:bg-green-900/10 shadow-md`;
@@ -148,7 +148,7 @@ const ContactSchedule: React.FC = () => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2">
       {/* Columna izquierda con imagen */}
-      <div className="relative h-full min-h-[500px] sm:min-h-[550px] md:min-h-[700px]">
+      <div className="relative h-[280px] sm:h-[350px] md:h-full md:min-h-[700px]">
         <img
           src={mujerImage}
           alt="Mujer en oficina"
@@ -158,7 +158,7 @@ const ContactSchedule: React.FC = () => {
       </div>
 
       {/* Columna derecha con información */}
-      <div className="bg-white dark:bg-gray-900 p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 relative transition-colors duration-300">
+      <div className="bg-white dark:bg-gray-900 p-5 sm:p-6 md:p-12 lg:p-16 xl:p-20 relative transition-colors duration-300">
         <div className="max-w-xl">
           {/* Título */}
           <h2 className="font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-gray-900 dark:text-white">

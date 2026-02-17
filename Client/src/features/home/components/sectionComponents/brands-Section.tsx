@@ -32,15 +32,15 @@ const Brands: React.FC = () => {
   return (
     <section
       id="marcas"
-      className="brands-section py-8 md:py-10 lg:py-12 "
+      className="brands-section py-6 sm:py-8 md:py-10 lg:py-12"
       // className="brands-section py-6 md:py-8"
       aria-labelledby="brands-title"
     >
-      <div className="container mx-auto px-10 md:px-2 lg:px-2 relative mt-10">
-        <header className="container mx-auto px-4 md:px-8 lg:px-16 mb-6 md:mb-8">
+      <div className="container mx-auto px-4 sm:px-6 md:px-2 lg:px-2 relative mt-6 sm:mt-8 md:mt-10">
+        <header className="container mx-auto px-4 md:px-8 lg:px-16 mb-4 sm:mb-6 md:mb-8">
           <h2
             id="brands-title"
-            className="brands-title text-3xl md:text-4xl lg:text-5xl font-extrabold mb-16 md:mb-12 lg:mb-16 text-center"
+            className="brands-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-8 sm:mb-12 md:mb-12 lg:mb-16 text-center"
             // className="brands-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-center"
           >
             Marcas que trabajamos   
@@ -48,7 +48,7 @@ const Brands: React.FC = () => {
 
         </header>
 
-        <div className="h-64 md:h-72 lg:h-80 overflow-hidden flex items-center">
+        <div className="h-40 sm:h-52 md:h-72 lg:h-80 overflow-hidden flex items-center">
           <Carousel
             images={carouselImages}
             className="w-full"

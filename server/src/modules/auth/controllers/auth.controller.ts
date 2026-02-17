@@ -2,7 +2,11 @@ import type { Request, Response } from "express";
 import * as authService from "../services/auth.services.js";
 import env from "../../../config/env.config.js";
 
+<<<<<<< HEAD
 //? Controlador para registrar un nuevo usuario (Cliente)
+=======
+//? Controlador para registrar un nuevo usuario
+>>>>>>> origin/develop
 const register = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const {
@@ -34,6 +38,10 @@ const register = async (req: Request, res: Response): Promise<void> => {
 	} catch (error: any) {
 		console.error("Error en registro:", error);
 
+<<<<<<< HEAD
+=======
+		// Manejar errores específicos
+>>>>>>> origin/develop
 		if (
 			error.message === "El correo ya está registrado" ||
 			error.message === "El teléfono ya está registrado"
@@ -51,6 +59,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
+<<<<<<< HEAD
 //? ============================================================================
 //? NUEVO: Controlador para registrar un Técnico
 //? ============================================================================
@@ -99,6 +108,10 @@ const registerTechnical = async (
 
 //? Controlador para iniciar sesión (Cliente)
 const login = async (req: Request, res: Response) => {
+=======
+//? Controlador para iniciar sesión
+const login = async (req: Request, res: Response): Promise<void> => {
+>>>>>>> origin/develop
 	try {
 		const { Correo, Contrasenia } = req.body;
 
@@ -107,11 +120,19 @@ const login = async (req: Request, res: Response) => {
 			Contrasenia,
 		});
 
+<<<<<<< HEAD
+=======
+		// Establecer la cookie antes de enviar la respuesta
+>>>>>>> origin/develop
 		res.cookie("token", result.token, {
 			httpOnly: true,
 			secure: env.NODE_ENV === "production",
 			sameSite: "strict",
+<<<<<<< HEAD
 			maxAge: 120 * 60 * 1000,
+=======
+			maxAge: 120 * 60 * 1000, // 2 horas
+>>>>>>> origin/develop
 		});
 
 		res.status(200).json({
@@ -121,6 +142,10 @@ const login = async (req: Request, res: Response) => {
 	} catch (error: any) {
 		console.error("Error en login:", error);
 
+<<<<<<< HEAD
+=======
+		// Manejar errores de credenciales inválidas
+>>>>>>> origin/develop
 		if (error.message === "Credenciales inválidas") {
 			res.status(401).json({
 				message: error.message,
@@ -135,6 +160,7 @@ const login = async (req: Request, res: Response) => {
 	}
 };
 
+<<<<<<< HEAD
 //? ============================================================================
 //? NUEVO: Controlador para Login de Técnico (Tradicional)
 //? ============================================================================
@@ -269,19 +295,45 @@ const getProfile = async (req: Request, res: Response): Promise<void> => {
 			res.status(200).json({
 				message: "Perfil técnico (Datos limitados por ahora)",
 				data: user,
+=======
+const logout = (res: Response): void => {
+	res.clearCookie("token");
+	res.status(200).json({
+		message: "Cierre de sesión exitoso",
+	});
+};
+
+//!Controlador pendiente de revisar y probar
+//? Controlador para obtener el perfil del usuario autenticado
+const getProfile = async (req: Request, res: Response): Promise<void> => {
+	try {
+		// El middleware de autenticación debe haber agregado el usuario al request
+		const userId = (req as any).user?.id_Usuario;
+
+		if (!userId) {
+			res.status(401).json({
+				message: "Usuario no autenticado",
+>>>>>>> origin/develop
 			});
 			return;
 		}
 
-		const userId = user?.id_Usuario;
-		const userData = await authService.getUserById(userId);
+		const user = await authService.getUserById(userId);
 
 		res.status(200).json({
 			message: "Perfil obtenido exitosamente",
-			data: userData,
+			data: user,
 		});
 	} catch (error: any) {
 		console.error("Error al obtener perfil:", error);
+
+		if (error.message === "Usuario no encontrado") {
+			res.status(404).json({
+				message: error.message,
+			});
+			return;
+		}
+
 		res.status(500).json({
 			message: "Error al obtener perfil",
 			error: error.message,
@@ -289,13 +341,14 @@ const getProfile = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
+//!Eliminar getProfile si no se va a usar
 export {
 	register,
-	registerTechnical,
+	// registerTechnical,
 	login,
-	loginTechnical,
-	loginGoogle, // Exportar
-	loginFacebook, // Exportar
+	// loginTechnical,
+	// loginGoogle, // Exportar
+	// loginFacebook, // Exportar
 	logout,
 	getProfile,
 };
