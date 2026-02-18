@@ -81,8 +81,29 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
           <Link
             to="/register"
             className="text-blue-400 hover:underline font-medium"
+            onClick={onClose}
           >
             Regístrate
+          </Link>
+        </p>
+
+        {/* Acceso para técnicos */}
+        <p className="text-center text-sm text-gray-300 mt-6 pt-4 border-t border-gray-600">
+          ¿Eres técnico?{" "}
+          <Link
+            to="/technician/login"
+            className="text-[#FFE900] hover:underline font-medium"
+            onClick={onClose}
+          >
+            Iniciar sesión
+          </Link>
+          {" · "}
+          <Link
+            to="/technician/register"
+            className="text-[#FFE900] hover:underline font-medium"
+            onClick={onClose}
+          >
+            Registrarse
           </Link>
         </p>
       </div>

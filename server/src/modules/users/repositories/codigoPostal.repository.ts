@@ -1,16 +1,5 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
-import env from "../../../config/env.config.js";
-
-const sequelize = new Sequelize(
-	env.DB_USER_NAME,
-	env.DB_USER_USER,
-	env.DB_USER_PASSWORD,
-	{
-		host: env.DB_USER_HOST,
-		dialect: "mysql",
-		port: env.DB_USER_PORT,
-	},
-);
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../../../config/database.config.js";
 class CodigoPostal extends Model {}
 
 CodigoPostal.init(

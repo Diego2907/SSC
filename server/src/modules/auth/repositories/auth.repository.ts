@@ -1,19 +1,6 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import bcrypt from "bcrypt";
-import env from "../../../config/env.config.js";
-
-//? Configurar la conexion a la base de datos MySQL
-const sequelize = new Sequelize(
-	env.DB_USER_NAME,
-	env.DB_USER_USER,
-	env.DB_USER_PASSWORD,
-	{
-		host: env.DB_USER_HOST,
-		dialect: "mysql",
-		port: env.DB_USER_PORT,
-		timezone: "-06:00",
-	},
-);
+import sequelize from "../../../config/database.config.js";
 
 class Usuario extends Model {}
 
@@ -95,16 +82,5 @@ Usuario.init(
 		},
 	},
 );
-
-//? Verificar la conexion a la base de datos
-async function testConnection() {
-	try {
-		await sequelize.authenticate();
-		console.log("Conexion a la base de datos establecida correctamente.");
-	} catch (error) {
-		console.error("No se pudo conectar a la base de datos:", error);
-	}
-}
-testConnection();
 
 export { Usuario };

@@ -10,7 +10,12 @@
 		"test:watch": "npm run test -- --watch",
 		"start": "cross-env NODE_ENV=production node ./dist/index.js",
 		"tsc": "tsc",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"verify-db": "node scripts/verify-database.js",
+		"create-db": "node scripts/create-database.js",
+		"sync-db": "tsx scripts/sync-database.js",
+		"test-api": "node scripts/test-endpoints.js",
+		"diagnose-mysql": "node scripts/diagnose-mysql.js"
 	},
 	"keywords": [],
 	"author": "",
