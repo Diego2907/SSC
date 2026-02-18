@@ -2,11 +2,7 @@ import type { Request, Response } from "express";
 import * as authService from "../services/auth.services.js";
 import env from "../../../config/env.config.js";
 
-<<<<<<< HEAD
 //? Controlador para registrar un nuevo usuario (Cliente)
-=======
-//? Controlador para registrar un nuevo usuario
->>>>>>> origin/develop
 const register = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const {
@@ -38,10 +34,6 @@ const register = async (req: Request, res: Response): Promise<void> => {
 	} catch (error: any) {
 		console.error("Error en registro:", error);
 
-<<<<<<< HEAD
-=======
-		// Manejar errores específicos
->>>>>>> origin/develop
 		if (
 			error.message === "El correo ya está registrado" ||
 			error.message === "El teléfono ya está registrado"
@@ -59,7 +51,6 @@ const register = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
-<<<<<<< HEAD
 //? ============================================================================
 //? NUEVO: Controlador para registrar un Técnico
 //? ============================================================================
@@ -107,11 +98,7 @@ const registerTechnical = async (
 };
 
 //? Controlador para iniciar sesión (Cliente)
-const login = async (req: Request, res: Response) => {
-=======
-//? Controlador para iniciar sesión
 const login = async (req: Request, res: Response): Promise<void> => {
->>>>>>> origin/develop
 	try {
 		const { Correo, Contrasenia } = req.body;
 
@@ -120,19 +107,12 @@ const login = async (req: Request, res: Response): Promise<void> => {
 			Contrasenia,
 		});
 
-<<<<<<< HEAD
-=======
 		// Establecer la cookie antes de enviar la respuesta
->>>>>>> origin/develop
 		res.cookie("token", result.token, {
 			httpOnly: true,
 			secure: env.NODE_ENV === "production",
 			sameSite: "strict",
-<<<<<<< HEAD
-			maxAge: 120 * 60 * 1000,
-=======
 			maxAge: 120 * 60 * 1000, // 2 horas
->>>>>>> origin/develop
 		});
 
 		res.status(200).json({
@@ -142,10 +122,6 @@ const login = async (req: Request, res: Response): Promise<void> => {
 	} catch (error: any) {
 		console.error("Error en login:", error);
 
-<<<<<<< HEAD
-=======
-		// Manejar errores de credenciales inválidas
->>>>>>> origin/develop
 		if (error.message === "Credenciales inválidas") {
 			res.status(401).json({
 				message: error.message,
@@ -160,11 +136,10 @@ const login = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
-<<<<<<< HEAD
 //? ============================================================================
 //? NUEVO: Controlador para Login de Técnico (Tradicional)
 //? ============================================================================
-const loginTechnical = async (req: Request, res: Response) => {
+const loginTechnical = async (req: Request, res: Response): Promise<void> => {
 	try {
 		// Soporte para ambos nombres de campo según doc y legacy
 		const email = req.body.email || req.body.Correo;
@@ -211,11 +186,10 @@ const loginTechnical = async (req: Request, res: Response) => {
 	}
 };
 
-
 //? ============================================================================
 //? NUEVO: Login Social (Google)
 //? ============================================================================
-const loginGoogle = async (req: Request, res: Response) => {
+const loginGoogle = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const { token } = req.body;
 		if (!token) {
@@ -225,12 +199,14 @@ const loginGoogle = async (req: Request, res: Response) => {
 
 		const result = await authService.loginWithGoogle(token);
 
-		res.cookie("token", result.token, {
-			httpOnly: true,
-			secure: env.NODE_ENV === "production",
-			sameSite: "strict",
-			maxAge: 120 * 60 * 1000,
-		});
+		if (result && typeof result === 'object' && 'token' in result) {
+			res.cookie("token", result.token, {
+				httpOnly: true,
+				secure: env.NODE_ENV === "production",
+				sameSite: "strict",
+				maxAge: 120 * 60 * 1000,
+			});
+		}
 
 		res.status(200).json({
 			message: "Inicio de sesión con Google exitoso",
@@ -248,7 +224,7 @@ const loginGoogle = async (req: Request, res: Response) => {
 //? ============================================================================
 //? NUEVO: Login Social (Facebook)
 //? ============================================================================
-const loginFacebook = async (req: Request, res: Response) => {
+const loginFacebook = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const { token } = req.body;
 		if (!token) {
@@ -258,12 +234,14 @@ const loginFacebook = async (req: Request, res: Response) => {
 
 		const result = await authService.loginWithFacebook(token);
 
-		res.cookie("token", result.token, {
-			httpOnly: true,
-			secure: env.NODE_ENV === "production",
-			sameSite: "strict",
-			maxAge: 120 * 60 * 1000,
-		});
+		if (result && typeof result === 'object' && 'token' in result) {
+			res.cookie("token", (result as { token: string }).token, {
+				httpOnly: true,
+				secure: env.NODE_ENV === "production",
+				sameSite: "strict",
+				maxAge: 120 * 60 * 1000,
+			});
+		}
 
 		res.status(200).json({
 			message: "Inicio de sesión con Facebook exitoso",
@@ -283,46 +261,38 @@ const logout = (res: Response): void => {
 	res.status(200).json({ message: "Sesión cerrada exitosamente" });
 };
 
-//! Eliminar este controlador cuando se mueva
-const getProfile = async (req: Request, res: Response): Promise<void> => {
-	try {
-		// El usuario autenticado está disponible en req.body.user (inyectado por el middleware)
-		const user = (req as any).user;
-		// Aquí deberíamos detectar el rol para saber qué servicio llamar (getUserById vs getTechnicalUserById)
-		// Por ahora mantenemos la lógica legacy para clientes.
-		if (user?.role === "technical") {
-			// TODO: Implementar getTechnicalUserById si es necesario
-			res.status(200).json({
-				message: "Perfil técnico (Datos limitados por ahora)",
-				data: user,
-=======
-const logout = (res: Response): void => {
-	res.clearCookie("token");
-	res.status(200).json({
-		message: "Cierre de sesión exitoso",
-	});
-};
-
-//!Controlador pendiente de revisar y probar
 //? Controlador para obtener el perfil del usuario autenticado
 const getProfile = async (req: Request, res: Response): Promise<void> => {
 	try {
-		// El middleware de autenticación debe haber agregado el usuario al request
-		const userId = (req as any).user?.id_Usuario;
+		// El usuario autenticado está disponible en req.body.user (inyectado por el middleware)
+		// O en (req as any).user según middleware
+        const user = (req as any).user;
+        
+        // Si no hay usuario en request, intentar buscar por ID si viene en payload
+		const userId = user?.id_Usuario || user?.id;
 
 		if (!userId) {
 			res.status(401).json({
 				message: "Usuario no autenticado",
->>>>>>> origin/develop
 			});
 			return;
 		}
 
-		const user = await authService.getUserById(userId);
+        // Si es técnico (tiene rol o id numérico), devolver datos de usuario inyectado
+        if (user?.role === "technical") {
+             res.status(200).json({
+				message: "Perfil técnico obtenido",
+				data: user,
+			});
+            return;
+        }
+
+        // Si es cliente (legacy), buscar en BD
+		const userData = await authService.getUserById(userId);
 
 		res.status(200).json({
 			message: "Perfil obtenido exitosamente",
-			data: user,
+			data: userData,
 		});
 	} catch (error: any) {
 		console.error("Error al obtener perfil:", error);
@@ -341,14 +311,13 @@ const getProfile = async (req: Request, res: Response): Promise<void> => {
 	}
 };
 
-//!Eliminar getProfile si no se va a usar
 export {
 	register,
-	// registerTechnical,
+	registerTechnical,
 	login,
-	// loginTechnical,
-	// loginGoogle, // Exportar
-	// loginFacebook, // Exportar
+	loginTechnical,
+	loginGoogle,
+	loginFacebook,
 	logout,
 	getProfile,
 };

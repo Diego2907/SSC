@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import * as techUserService from "../services/technical-user.services.js";
 
 //? Helper para transformar perfil a formato Frontend (PascalCase)
@@ -25,7 +25,8 @@ const mapProfileToResponse = (user: any) => {
 
 export const getProfile = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users, string for others. Casting safely.
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;
@@ -50,25 +51,16 @@ export const getProfile = async (req: Request, res: Response): Promise<void> => 
 
 export const updateProfile = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users, string for others. Casting safely.
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;
 		}
 
 		// Mapear campos entrantes (Frontend camelCase -> Backend snake_case)
-		// El frontend envía: nombre, apellido_paterno, apellido_materno, correo, telefono, monitoring_*, etc.
-		// El backend espera keys que coincidan con el servicio, que a su vez espera snake_case o camelCase según definí?
-		// Revisando technical-user.services.ts, updateTechnicalUserProfile usa keys directas.
-		// El frontend envía 'correo', servicio espera 'email' (o el modelo lo tiene como 'email').
-		// Ajustamos el body:
 		const updateData = { ...req.body };
 		if (updateData.correo) updateData.email = updateData.correo; // Alias
-		// Eliminar correo si venía para no causar conflictos si el servicio es estricto, pero el servicio filtra allowedFields.
-		// El servicio permite: nombre, apellido_paterno, apellido_materno, telefono, profile_image_url, language, currency.
-		// Falta 'email' en allowedFields del servicio updateTechnicalUserProfile? Voy a checar el servicio.
-		// Si el usuario quiere cambiar email, debe ser permitido? Doc dice "editar perfil (nombre, apellido, email, teléfono)".
-		// Voy a asumir que el servicio debe permitir 'email'.
 
 		// Si es una actualización de settings (monitoreo/vacaciones)
 		if (
@@ -97,7 +89,8 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
 
 export const changePassword = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;
@@ -140,7 +133,8 @@ export const changePassword = async (req: Request, res: Response): Promise<void>
 
 export const uploadAvatar = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;
@@ -171,14 +165,10 @@ export const uploadAvatar = async (req: Request, res: Response): Promise<void> =
 	}
 };
 
-// ... keep updateMonitoring, updateSecurity, validatePassword if needed internally or for legacy, 
-// but updateProfile handles monitoring now as per doc suggestion.
-// I'll keep them but updateProfile is the main entry point for the doc's requests.
-
-
 export const updateMonitoring = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;
@@ -198,7 +188,8 @@ export const updateMonitoring = async (req: Request, res: Response): Promise<voi
 
 export const updateSecurity = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;
@@ -221,7 +212,8 @@ export const updateSecurity = async (req: Request, res: Response): Promise<void>
 
 export const validatePassword = async (req: Request, res: Response): Promise<void> => {
 	try {
-		const userId = req.user?.id;
+        // @ts-expect-error: ID is a number for technical users
+		const userId = req.user?.id as number;
 		if (!userId) {
 			res.status(401).json({ message: "Usuario no autenticado" });
 			return;

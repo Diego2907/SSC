@@ -1,26 +1,26 @@
 import { Usuario } from "../repositories/auth.repository.js";
-// import { TechnicalUser } from "../../users/repositories/technical-user.repository.js"; // Importamos el nuevo repo
+import { TechnicalUser } from "../../users/repositories/technical-user.repository.js";
 import jwt, { type SignOptions } from "jsonwebtoken";
 import env from "../../../config/env.config.js";
 import bcrypt from "bcrypt";
-// import { OAuth2Client } from "google-auth-library"; // Librería de Google
-// import axios from "axios"; // Para Facebook
+import { OAuth2Client } from "google-auth-library";
+// import axios from "axios"; // Para Facebook (pendiente de implementación real si no se usa)
 
 const { JWT_SECRET, JWT_EXPIRES_IN, GOOGLE_CLIENT_ID } = env;
 
 // Cliente de Google
-// const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 //? Interface para el payload del JWT
 interface JWTPayload {
-	id_Usuario?: string;
-	Correo?: string;
-    // id?: number; // Para usuarios técnicos
-	// email?: string;
-	// role?: "client" | "technical"; // Rol estricto
+	id_Usuario?: string; // Para usuarios (legacy)
+	Correo?: string;    // Para usuarios (legacy)
+    id?: number;        // Para técnicos
+	email?: string;     // Para técnicos
+	role?: "client" | "technical";
 }
 
-//? Interface para los datos de registro
+//? Interface para los datos de registro de usuario
 interface RegisterData {
 	Nombre: string;
 	Apellido_Paterno: string;
@@ -31,14 +31,13 @@ interface RegisterData {
 	Consentimiento: boolean;
 }
 
-//? Interface para los datos de login
+//? Interface para los datos de login de usuario
 interface LoginData {
 	Correo: string;
 	Contrasenia: string;
 }
 
 //? Interfaz de datos para registro técnico
-/*
 interface RegisterTechnicalData {
 	nombre: string;
 	apellido_paterno: string;
@@ -47,16 +46,11 @@ interface RegisterTechnicalData {
 	telefono: string;
 	password: string;
 	terms_accepted: boolean;
-	provider?: "local" | "google" | "facebook"; // Opcional, por defecto es local
+	provider?: "local" | "google" | "facebook";
 }
-*/
 
-//? Servicio para registrar un nuevo usuario
+//? Servicio para registrar un nuevo usuario (Cliente)
 const registerUser = async (userData: RegisterData) => {
-	// Sincronizar la tabla de usuarios
-	// await Usuario.sync(); // Ya se hace en el repository
-
-	// Verificar si el correo ya existe
 	const correoExistente = await Usuario.findOne({
 		where: { Correo: userData.Correo },
 	});
@@ -65,7 +59,6 @@ const registerUser = async (userData: RegisterData) => {
 		throw new Error("El correo ya está registrado");
 	}
 
-	// Verificar si el teléfono ya existe
 	const telefonoExistente = await Usuario.findOne({
 		where: { Telefono: userData.Telefono },
 	});
@@ -74,7 +67,6 @@ const registerUser = async (userData: RegisterData) => {
 		throw new Error("El teléfono ya está registrado");
 	}
 
-	//? (UUID y hash de contraseña se manejan automáticamente en el repository via hooks)
 	const newUser = await Usuario.create({
 		Nombre: userData.Nombre,
 		Apellido_Paterno: userData.Apellido_Paterno,
@@ -91,7 +83,6 @@ const registerUser = async (userData: RegisterData) => {
 //? ============================================================================
 //? NUEVO: Servicio para registrar un Usuario Técnico
 //? ============================================================================
-/*
 const registerTechnical = async (data: RegisterTechnicalData) => {
 	//? 1. Verificación de Duplicados (Email)
 	const existingEmail = await TechnicalUser.findOne({
@@ -103,7 +94,14 @@ const registerTechnical = async (data: RegisterTechnicalData) => {
 	}
 
 	//? 2. Persistencia (Guardar en BD)
-	const newTechnicalUser = await TechnicalUser.create(data as any);
+    // Asignamos provider local por defecto si no viene
+    const technicalData = {
+        ...data,
+        provider: data.provider || "local",
+        is_active: true // Por defecto activo al registrarse (o false si requiere aprobación)
+    };
+    
+	const newTechnicalUser = await TechnicalUser.create(technicalData as any);
 
 	//? 3. Retorno Seguro
 	return {
@@ -113,11 +111,9 @@ const registerTechnical = async (data: RegisterTechnicalData) => {
 		is_active: newTechnicalUser.getDataValue("is_active"),
 	};
 };
-*/
 
-//? Servicio para autenticar un usuario
+//? Servicio para autenticar un usuario (Cliente)
 const loginUser = async (loginData: LoginData) => {
-	// Buscar el usuario por correo
 	const usuario = await Usuario.findOne({
 		where: { Correo: loginData.Correo },
 	});
@@ -126,7 +122,6 @@ const loginUser = async (loginData: LoginData) => {
 		throw new Error("Credenciales inválidas");
 	}
 
-	// Verificar la contraseña
 	const isPasswordValid = await bcrypt.compare(
 		loginData.Contrasenia,
 		usuario.getDataValue("Contrasenia"),
@@ -136,12 +131,11 @@ const loginUser = async (loginData: LoginData) => {
 		throw new Error("Credenciales inválidas");
 	}
 
-	// Generar token JWT
 	const token = jwt.sign(
 		{
 			id_Usuario: usuario.getDataValue("id_Usuario"),
 			Correo: usuario.getDataValue("Correo"),
-			// role: "client", // Agregamos rol implícito si fuera necesario
+            role: "client"
 		} as JWTPayload,
 		JWT_SECRET,
 		{ expiresIn: JWT_EXPIRES_IN } as SignOptions,
@@ -153,7 +147,6 @@ const loginUser = async (loginData: LoginData) => {
 //? ============================================================================
 //? NUEVO: Servicio para autenticar un Técnico (Login Tradicional)
 //? ============================================================================
-/*
 const loginTechnicalUser = async (loginData: {
 	email: string;
 	password: string;
@@ -164,10 +157,10 @@ const loginTechnicalUser = async (loginData: {
 	});
 
 	if (!tecnico) {
-		throw new Error("Credenciales inválidas"); // No decimos "usuario no existe" por seguridad
+		throw new Error("Credenciales inválidas");
 	}
 
-	// 2. Verificar Proveedor (Evitar login local si es cuenta de Google)
+	// 2. Verificar Proveedor
 	const provider = tecnico.getDataValue("provider");
 	if (provider !== "local") {
 		throw new Error(`Debes iniciar sesión con ${provider}`);
@@ -176,7 +169,7 @@ const loginTechnicalUser = async (loginData: {
 	// 3. Verificar Contraseña
 	const storedPassword = tecnico.getDataValue("password");
 	if (!storedPassword) {
-		throw new Error("Error en la cuenta. Contacte soporte."); // Caso raro: local sin pass
+		throw new Error("Error en la cuenta. Contacte soporte.");
 	}
 
 	const isPasswordValid = await bcrypt.compare(
@@ -188,17 +181,17 @@ const loginTechnicalUser = async (loginData: {
 		throw new Error("Credenciales inválidas");
 	}
 
-	// 4. Verificar si está activo (Regla de negocio adicional)
+	// 4. Verificar si está activo
 	if (!tecnico.getDataValue("is_active")) {
 		throw new Error("La cuenta ha sido desactivada");
 	}
 
-	// 5. Generar Token JWT con rol 'technical'
+	// 5. Generar Token JWT
 	const token = jwt.sign(
 		{
 			id: tecnico.getDataValue("id"),
 			email: tecnico.getDataValue("email"),
-			role: "technical", // Rol CRÍTICO para middleware de autorización
+			role: "technical",
 		} as JWTPayload,
 		JWT_SECRET,
 		{ expiresIn: JWT_EXPIRES_IN } as SignOptions,
@@ -214,12 +207,10 @@ const loginTechnicalUser = async (loginData: {
 		},
 	};
 };
-*/
 
 //? ============================================================================
 //? NUEVO: Helper para Buscar o Crear Usuario Social
 //? ============================================================================
-/*
 const findOrCreateSocialUser = async (
 	email: string,
 	nombre: string,
@@ -230,27 +221,26 @@ const findOrCreateSocialUser = async (
 	let tecnico = await TechnicalUser.findOne({ where: { email } });
 
 	if (tecnico) {
-		// Validar que el proveedor coincida (Seguridad: Evitar secuestro de cuentas)
+		// Validar que el proveedor coincida
 		if (tecnico.getDataValue("provider") !== provider) {
 			throw new Error(
 				`El correo ya está registrado usando ${tecnico.getDataValue("provider")}`,
 			);
 		}
 	} else {
-		// 2. Si no existe, CREAR (Auto-registro)
-		// Nota: Como Google/Facebook a veces no dan teléfono, ponemos uno dummy o null si la BD lo permite.
-		// En nuestro modelo 'telefono' es obligatorio (Requisito previo).
-		// SOLUCIÓN: Usaremos "0000000000" temporalmente y el frontend deberá pedir actualizar perfil.
+		// 2. Si no existe, CREAR
 		tecnico = await TechnicalUser.create({
 			email,
 			nombre,
 			apellido_paterno: apellido,
-			apellido_materno: "", // A veces no viene, lo dejamos vacío
-			telefono: "0000000000", // Placeholder obligatorio
+			apellido_materno: "",
+			telefono: "0000000000",
 			provider,
-			terms_accepted: true, // Implícito al usar social login
+			terms_accepted: true,
 			is_active: true,
-		});
+            // Password aleatorio o null para usuarios sociales
+            password: await bcrypt.hash(Math.random().toString(36), 10) 
+		} as any);
 	}
 
 	// 3. Generar JWT
@@ -274,12 +264,10 @@ const findOrCreateSocialUser = async (
 		},
 	};
 };
-*/
 
 //? ============================================================================
 //? NUEVO: Login con Google
 //? ============================================================================
-/*
 const loginWithGoogle = async (idToken: string) => {
 	try {
 		const ticket = await googleClient.verifyIdToken({
@@ -303,15 +291,15 @@ const loginWithGoogle = async (idToken: string) => {
 		throw new Error("Error al validar con Google");
 	}
 };
-*/
 
 //? ============================================================================
-//? NUEVO: Login con Facebook
+//? NUEVO: Login con Facebook (Placeholder - requiere axios e implementación real)
 //? ============================================================================
-/*
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const loginWithFacebook = async (accessToken: string) => {
+ 
 	try {
-		// Validar token contra Graph API
+        /*
 		const { data } = await axios.get(
 			`https://graph.facebook.com/me?fields=id,name,email,first_name,last_name&access_token=${accessToken}`,
 		);
@@ -326,12 +314,13 @@ const loginWithFacebook = async (accessToken: string) => {
 			data.last_name || "",
 			"facebook",
 		);
-	} catch (error) {
+        */
+        throw new Error("Login con Facebook no implementado aún");
+	} catch (error: any) {
 		console.error("Error en loginWithFacebook:", error);
 		throw new Error("Error al validar con Facebook");
 	}
 };
-*/
 
 //? Servicio para verificar un token JWT
 const verifyToken = (token: string): JWTPayload => {
@@ -343,8 +332,7 @@ const verifyToken = (token: string): JWTPayload => {
 	}
 };
 
-//! eliminar este servicio cuando se mueva el controlador
-//? Servicio para obtener usuario por ID
+//? Servicio para obtener usuario por ID (Cliente)
 const getUserById = async (id_Usuario: string) => {
 	const user = await Usuario.findByPk(id_Usuario);
 
@@ -363,11 +351,11 @@ const getUserById = async (id_Usuario: string) => {
 
 export {
 	registerUser,
-	// registerTechnical,
+	registerTechnical,
 	loginUser,
-	// loginTechnicalUser,
-	// loginWithGoogle, // Exportar
-	// loginWithFacebook, // Exportar
+	loginTechnicalUser,
+	loginWithGoogle,
+	loginWithFacebook,
 	verifyToken,
 	getUserById,
 };

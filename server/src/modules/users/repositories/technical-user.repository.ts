@@ -118,7 +118,6 @@ TechnicalUser.init(
 			validate: {
 				isEmail: true,
 				notSameAsPrimary(value: string) {
-					// @ts-ignore
 					if (value && this.email && value === this.email) {
 						throw new Error("El email secundario no puede ser igual al primario.");
 					}

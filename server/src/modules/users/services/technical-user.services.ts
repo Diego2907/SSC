@@ -20,7 +20,7 @@ export const updateTechnicalUserProfile = async (id: number, data: any) => {
 		"nombre",
 		"apellido_paterno",
 		"apellido_materno",
-		"email", // Agregado email
+		"email",
 		"telefono",
 		"profile_image_url",
 		"language",
@@ -75,27 +75,27 @@ export const updateSecuritySettings = async (id: number, data: any) => {
 		if (!data.current_password) {
 			throw new Error("La contraseña actual es requerida para establecer una nueva.");
 		}
-        // @ts-ignore
+        // @ts-expect-error: Password comes from Sequelize model and can be null
 		const isMatch = await bcrypt.compare(data.current_password, user.password);
 		if (!isMatch) {
 			throw new Error("La contraseña actual es incorrecta.");
 		}
-		// @ts-ignore
+		// @ts-expect-error: Assignment required for hook execution
         user.password = data.new_password; // El hook se encargará de hashearlo
 	}
 
 	if (data.two_factor_enabled !== undefined) {
-		// @ts-ignore
+		// @ts-expect-error: Property exists on model
         user.two_factor_enabled = data.two_factor_enabled;
 	}
 
 	if (data.secondary_email !== undefined) {
-		// @ts-ignore
+		// @ts-expect-error: Property exists on model
         user.secondary_email = data.secondary_email;
 	}
 
 	if (data.recovery_phone !== undefined) {
-		// @ts-ignore
+		// @ts-expect-error: Property exists on model
         user.recovery_phone = data.recovery_phone;
 	}
 
@@ -108,7 +108,7 @@ export const validateCurrentPassword = async (id: number, password: string) => {
 	const user = await TechnicalUser.findByPk(id);
 	if (!user) throw new Error("Usuario no encontrado");
 
-    // @ts-ignore
+    // @ts-expect-error: Password comes from Sequelize model and can be null
 	const isMatch = await bcrypt.compare(password, user.password);
 	return { isValid: isMatch };
 };
