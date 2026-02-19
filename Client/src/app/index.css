@@ -34,6 +34,10 @@
 }
 
 /* ==================== BASE STYLES ==================== */
+#root {
+  min-height: 100vh;
+}
+
 @layer base {
   /* Global mobile-first image handling */
   img {

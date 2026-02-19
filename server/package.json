@@ -20,7 +20,12 @@
 		"restart:pm2:staging": "pm2 restart ssc-backend-staging",
 		"restart:pm2:production": "pm2 restart ssc-backend-production",
 		"tsc": "tsc",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"verify-db": "node scripts/verify-database.js",
+		"create-db": "node scripts/create-database.js",
+		"sync-db": "tsx scripts/sync-database.js",
+		"test-api": "node scripts/test-endpoints.js",
+		"diagnose-mysql": "node scripts/diagnose-mysql.js"
 	},
 	"keywords": [],
 	"author": "",
