@@ -1,26 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LogoAmarillo from "../assets/img/Logo_Amarillo.webp";
 import Facebook from "../assets/icons/Facebook.svg";
 import Google from "../assets/icons/Google.svg";
 import Header from "../components/Login-Register-Page/Header";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import { API_URL } from "../../../config/api.config";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [correo, setCorreo] = useState("");
   const [contrasenia, setContrasenia] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Mostrar mensaje de éxito si viene del registro
+  useEffect(() => {
+    if (location.state?.message) {
+      setSuccess(location.state.message);
+    }
+  }, [location.state]);
 
   const handleLogin = async () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({
           Correo: correo,
           Contrasenia: contrasenia,
@@ -33,7 +44,10 @@ const LoginPage = () => {
 
       const data = await response.json();
 
-      localStorage.setItem("token", data.token);
+      // Guardar token si viene en la respuesta
+      if (data.data?.token) {
+        localStorage.setItem("token", data.data.token);
+      }
 
       navigate("/user/settings");
     } catch (err) {
@@ -112,6 +126,9 @@ const LoginPage = () => {
           >
             Iniciar sesión
           </button>
+          {success && (
+            <p className="text-green-600 text-sm text-center mt-3">{success}</p>
+          )}
           {error && (
             <p className="text-red-600 text-sm text-center mt-3">{error}</p>
           )}

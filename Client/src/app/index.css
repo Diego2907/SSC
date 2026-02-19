@@ -39,6 +39,12 @@
 }
 
 @layer base {
+  /* Global mobile-first image handling */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   body {
     font-family: "Poppins", "Sora", sans-serif;
     background-color: var(--bg-secondary);

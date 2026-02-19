@@ -18,23 +18,23 @@ const Coverage = () => {
   };
 
   return (
-    <section className="w-full py-16 md:py-20 bg-white">
-      <div className="mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24">
-        <div className="w-full mx-auto bg-[#F8F9FA] rounded-2xl p-8 md:p-10 lg:px-24 xl:px-32 shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-gray-200/50">
-          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6 md:gap-10">
+    <section className="w-full py-10 md:py-16 lg:py-20 bg-white">
+      <div className="mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24">
+        <div className="w-full mx-auto bg-[#F8F9FA] rounded-xl md:rounded-2xl p-5 sm:p-6 md:p-10 lg:px-24 xl:px-32 shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-gray-200/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-5 md:gap-10">
             <div className="md:col-span-2">
-              <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-[#1A1A1A] mb-2 font-poppins">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extrabold text-[#1A1A1A] mb-2 font-poppins leading-tight">
                 +20 <span className="text-[#44D62C]">Territorios</span> de
                 cobertura
               </h2>
-              <p className="text-base text-[#6B7280] mt-2 font-poppins">
+              <p className="text-sm md:text-base text-[#6B7280] mt-2 font-poppins">
                 Consulta si tu zona está cubierta ingresando tu código postal.
                 Esta es una vista previa visual; la consulta real estará
                 disponible cuando integremos la base de datos.
               </p>
             </div>
             <div className="md:col-span-1">
-              <form onSubmit={handleSubmit} className="flex gap-3 items-center">
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
                 <input
                   aria-label="Código postal"
                   value={postalCode}
