@@ -52,7 +52,6 @@ const Achievements: React.FC = () => {
               {index > 0 && (
                 <span className="hidden md:block absolute left-0 top-1/2 h-20 -translate-y-1/2 border-l border-[#FFE900]/40" />
               )}
-
               <figure className="flex-shrink-0">
                 <img
                   src={stat.icon}

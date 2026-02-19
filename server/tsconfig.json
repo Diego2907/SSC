@@ -2,7 +2,7 @@
 	// Visit https://aka.ms/tsconfig to read more about this file
 	"compilerOptions": {
 		// File Layout
-		"rootDir": "./src",
+		"rootDir": "./", // Cambiado a ./ para incluir src y tests
 		"outDir": "./dist",
 
 		// Environment Settings
@@ -11,7 +11,7 @@
 		"target": "esnext",
 		// For nodejs:
 		// "lib": ["esnext"],
-		"types": ["node"],
+		"types": ["node", "jest"], // Agregado "jest" para reconocer describe, it, expect
 		// and npm install -D @types/node
 
 		// Other Outputs
@@ -42,6 +42,6 @@
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "tests/**/*"], // Agregado tests
 	"exclude": ["node_modules", "dist"]
 }

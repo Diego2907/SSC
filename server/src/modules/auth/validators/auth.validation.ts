@@ -1,5 +1,36 @@
-import { z } from "zod";
 import type { Request, Response, NextFunction } from "express";
+import { z } from "zod";
+
+// Middleware de validación genérico
+export const validateSchema = (schema: z.ZodSchema) => {
+	return (req: Request, res: Response, next: NextFunction): void => {
+		try {
+			// Validar y parsear el body
+			const parsed = schema.parse(req.body);
+			req.body = parsed;
+			next();
+		} catch (error) {
+			if (error instanceof z.ZodError) {
+				// Formatear errores de Zod
+				const errors = error.issues.map((err) => ({
+					campo: err.path.join("."),
+					mensaje: err.message,
+				}));
+
+				res.status(400).json({
+					message: "Error de validación",
+					errors,
+				});
+				return;
+			}
+
+			// Error inesperado
+			res.status(500).json({
+				message: "Error al validar los datos",
+			});
+		}
+	};
+};
 
 // Schema para registro de usuario
 const registerSchema = z
@@ -78,39 +109,64 @@ const loginSchema = z.object({
 		.min(8, "La contraseña debe contener al menos 8 caracteres"),
 });
 
-// Middleware de validación genérico
-const validate = (schema: z.ZodSchema) => {
-	return (req: Request, res: Response, next: NextFunction): void => {
-		try {
-			// Validar y parsear el body
-			const parsed = schema.parse(req.body);
-			req.body = parsed;
-			next();
-		} catch (error) {
-			if (error instanceof z.ZodError) {
-				// Formatear errores de Zod
-				const errors = error.issues.map((err) => ({
-					campo: err.path.join("."),
-					mensaje: err.message,
-				}));
+//? Esquema de Validación para Registro de Técnicos
+const registerTechnicalSchema = z
+	.object({
+		nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
+		apellido_paterno: z
+			.string()
+			.min(2, "El apellido paterno debe tener al menos 2 caracteres"),
+		apellido_materno: z
+			.string()
+			.min(2, "El apellido materno debe tener al menos 2 caracteres"),
+		email: z.string().email("Formato de correo inválido"),
+		telefono: z
+			.string()
+			.regex(/^[0-9]{10}$/, "El teléfono debe tener exactamente 10 dígitos"),
+		// Validación compleja de contraseña (Mayúscula, minúscula, número, especial)
+		password: z
+			.string()
+			.min(8, "La contraseña debe tener al menos 8 caracteres")
+			.regex(/[A-Z]/, "Debe contener al menos una letra mayúscula")
+			.regex(/[a-z]/, "Debe contener al menos una letra minúscula")
+			.regex(/[0-9]/, "Debe contener al menos un número")
+			.regex(
+				/[!@#$%+\-=]/,
+				"Debe contener al menos un carácter especial (!@#$%+-=)",
+			),
+		password_confirmation: z.string(),
+		terms_accepted: z.boolean().optional(),
+	})
+	//? Refinamiento: Comparación de contraseñas
+	//? Asegura que password y password_confirmation sean idénticos.
+	.refine((data) => data.password === data.password_confirmation, {
+		message: "Las contraseñas no coinciden",
+		path: ["password_confirmation"],
+	});
 
-				res.status(400).json({
-					message: "Error de validación",
-					errors,
-				});
-				return;
-			}
-
-			// Error inesperado
-			res.status(500).json({
-				message: "Error al validar los datos",
-			});
-		}
-	};
-};
+//? Esquema para cambio de contraseña (Técnicos)
+const changePasswordSchema = z
+	.object({
+		current_password: z.string().min(1, "La contraseña actual es requerida"),
+		new_password: z
+			.string()
+			.min(8, "La nueva contraseña debe tener al menos 8 caracteres")
+			.regex(/[A-Z]/, "Debe contener al menos una letra mayúscula")
+			.regex(/[a-z]/, "Debe contener al menos una letra minúscula")
+			.regex(/[0-9]/, "Debe contener al menos un número")
+			.regex(
+				/[!@#$%+\-=]/,
+				"Debe contener al menos un carácter especial (!@#$%+-=)",
+			),
+		new_password_confirmation: z.string(),
+	})
+	.refine((data) => data.new_password === data.new_password_confirmation, {
+		message: "Las contraseñas no coinciden",
+		path: ["new_password_confirmation"],
+	});
 
 // Middlewares específicos
-const validateRegister = validate(registerSchema);
-const validateLogin = validate(loginSchema);
-
-export { validateRegister, validateLogin, registerSchema, loginSchema };
+export const validateRegister = validateSchema(registerSchema);
+export const validateLogin = validateSchema(loginSchema);
+export const validateRegisterTechnical = validateSchema(registerTechnicalSchema);
+export const validateChangePassword = validateSchema(changePasswordSchema);

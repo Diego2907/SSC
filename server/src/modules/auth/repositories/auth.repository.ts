@@ -1,8 +1,9 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Sequelize } from "sequelize";
 import bcrypt from "bcrypt";
 import env from "../../../config/env.config.js";
 
-//? Configurar la conexion a la base de datos MySQL
+//? Configuración de Base de Datos para el Módulo de Clientes (Auth)
+//? Se crea una instancia local para evitar conflictos de merge con el pool centralizado.
 const sequelize = new Sequelize(
 	env.DB_USER_NAME,
 	env.DB_USER_USER,
@@ -12,6 +13,7 @@ const sequelize = new Sequelize(
 		dialect: "mysql",
 		port: env.DB_USER_PORT,
 		timezone: "-06:00",
+		logging: false,
 	},
 );
 
@@ -62,7 +64,7 @@ Usuario.init(
 		},
 	},
 	{
-		sequelize,
+		sequelize, // Usamos la instancia compartida
 		modelName: "Usuario",
 		tableName: "usuarios",
 		timestamps: false,
@@ -96,15 +98,8 @@ Usuario.init(
 	},
 );
 
-//? Verificar la conexion a la base de datos
-async function testConnection() {
-	try {
-		await sequelize.authenticate();
-		console.log("Conexion a la base de datos establecida correctamente.");
-	} catch (error) {
-		console.error("No se pudo conectar a la base de datos:", error);
-	}
-}
-testConnection();
+//? Sincronización explícita para asegurar que la tabla existe
+//? Nota: Eliminé 'testConnection()' porque la conexión ya se verifica en database.ts
+Usuario.sync();
 
 export { Usuario };

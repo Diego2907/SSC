@@ -10,6 +10,12 @@ const env = cleanEnv(process.env, {
 	//?API KEYS
 	DIPOMEX_KEY: str(),
 
+	//? LOGIN SOCIAL (Google & Facebook)
+	//? Se marcan como opcionales (default: "") para no bloquear el desarrollo local
+	//? si no se tienen las credenciales a mano.
+	GOOGLE_CLIENT_ID: str({ default: "" }),
+	FACEBOOK_APP_ID: str({ default: "" }),
+
 	//?SEGURIDAD Y SECRETOS
 	JWT_SECRET: str(),
 	JWT_EXPIRES_IN: str(),

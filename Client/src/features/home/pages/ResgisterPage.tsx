@@ -163,38 +163,38 @@ const RegisterPage = () => {
             />
           </div>
 
-        {/* Contraseña */}
-        <div className="mb-4">
-          <label className="text-sm font-medium text-gray-700">
-            Contraseña
-          </label>
-          <input
-            type="password"
-            placeholder="*******"
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:border-[#1D4289]"
-          />
-        </div>
+          {/* Contraseña */}
+          <div className="mb-4">
+            <label className="text-sm font-medium text-gray-700">
+              Contraseña
+            </label>
+            <input
+              type="password"
+              placeholder="*******"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:border-[#1D4289]"
+            />
+          </div>
 
-        {/* Repetir contraseña */}
-        <div className="mb-2">
-          <label className="text-sm font-medium text-gray-700">
-            Vuelve a escribir la contraseña
-          </label>
-          <input
-            type="password"
-            placeholder="*******"
-            onChange={(e) => setRepeatPass(e.target.value)}
-            className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:border-[#1D4289]"
-          />
-          {/* Mensaje de error */}
-          {repeatPass && repeatPass !== password && (
-            <p className="flex items-center gap-2 mt-1 text-red-600 text-xs font-medium">
-              <span className="text-lg">●</span> La contraseña debe de tener al
-              menos seis caracteres.
-            </p>
-          )}
-        </div>
+          {/* Repetir contraseña */}
+          <div className="mb-2">
+            <label className="text-sm font-medium text-gray-700">
+              Vuelve a escribir la contraseña
+            </label>
+            <input
+              type="password"
+              placeholder="*******"
+              onChange={(e) => setRepeatPass(e.target.value)}
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:border-[#1D4289]"
+            />
+            {/* Mensaje de error */}
+            {repeatPass && repeatPass !== password && (
+              <p className="flex items-center gap-2 mt-1 text-red-600 text-xs font-medium">
+                <span className="text-lg">●</span> La contraseña debe de tener al
+                menos seis caracteres.
+              </p>
+            )}
+          </div>
 
           {/* Botón */}
           <button

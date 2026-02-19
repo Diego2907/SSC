@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Sequelize } from "sequelize";
 import { Usuario } from "../../auth/repositories/auth.repository.js";
 import env from "../../../config/env.config.js";
 
@@ -10,6 +10,8 @@ const sequelize = new Sequelize(
 		host: env.DB_USER_HOST,
 		dialect: "mysql",
 		port: env.DB_USER_PORT,
+		timezone: "-06:00",
+		logging: false,
 	},
 );
 
@@ -70,7 +72,7 @@ Domicilio.init(
 		},
 	},
 	{
-		sequelize,
+		sequelize, // Usamos la instancia compartida
 		modelName: "Domicilio",
 		tableName: "domicilios",
 		timestamps: false,

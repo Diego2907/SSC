@@ -13,6 +13,7 @@ const Header = () => {
 
   const abrirModal = () => setIsModalOpen(true);
   const cerrarModal = () => setIsModalOpen(false);
+  
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
@@ -63,16 +64,23 @@ const Header = () => {
         />
 
         {/* Botón Hamburguesa Mobile */}
-        <button
-          onClick={toggleMobileMenu}
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg bg-[#1D4289] p-2 transition-all duration-300"
-          aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={isMobileMenuOpen}
-        >
-          <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-          <span className={`block w-5 h-0.5 bg-white rounded my-1 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+            <Button
+              ClassNameButton="sm:hidden font-poppins text-[#1D4289] text-xs font-semibold bg-[#FFE900] px-2 py-1 rounded shadow cursor-pointer"
+              onClick={abrirModal}
+              textButton="Ingresar"
+            />
+            <button
+              onClick={toggleMobileMenu}
+              className="flex flex-col justify-center items-center w-10 h-10 rounded-lg bg-[#1D4289] p-2 transition-all duration-300"
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-white rounded my-1 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-white rounded transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+            </button>
+        </div>
 
         <Modal isOpen={isModalOpen} onClose={cerrarModal} />
       </header>

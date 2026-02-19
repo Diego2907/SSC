@@ -2,21 +2,25 @@
 
 ## Descripción
 
-API REST para el sistema gestor de usuarios para MiPyMes.
+API REST para el sistema gestor de usuarios para MiPyMes y módulo de técnicos SSC.
 
 ## Configuración Inicial
 
 ### Requisitos Previos
 
-- Node.js (v22.18 o superior)
+- Node.js (v18+ / v22.18 recomendado)
 - MySQL
 - npm o yarn
 
 ### Instalación
 
-```bash
-npm install
-```
+1. Clonar el repositorio.
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+3. Configurar variables de entorno:
+   - Crea un archivo `.env` en la raíz del proyecto con las variables necesarias.
 
 ### Variables de Entorno
 
@@ -59,13 +63,16 @@ npm run dev
 # Modo producción
 npm run build
 npm start
+
+# Tests
+npm run test
 ```
 
 El servidor estará disponible en: `http://localhost:3000`
 
 ---
 
-## Endpoints Disponibles
+## Endpoints Disponibles - Clientes (Auth General)
 
 ### 1. Registro de Usuario
 
@@ -73,11 +80,7 @@ Registra un nuevo usuario en el sistema.
 
 **URL:** `POST /api/auth/register`
 
-**Headers:**
-
-```
-Content-Type: application/json
-```
+**Headers:** `Content-Type: application/json`
 
 **Body (JSON):**
 
@@ -94,58 +97,6 @@ Content-Type: application/json
 }
 ```
 
-**Validaciones:**
-
-- `Nombre`: Requerido, mínimo 1 carácter, máximo 50 caracteres
-- `Apellido_Paterno`: Requerido, mínimo 1 carácter, máximo 30 caracteres
-- `Apellido_Materno`: Requerido, mínimo 1 carácter, máximo 30 caracteres
-- `Correo`: Requerido, formato de email válido, máximo 100 caracteres
-- `Contrasenia`: Requerido, mínimo 8 caracteres, máximo 255 caracteres
-- `ConfirmarContrasenia`: Debe coincidir con `Contrasenia`
-- `Telefono`: Requerido, exactamente 10 dígitos
-- `Consentimiento`: Booleano, por defecto `true`
-
-**Ejemplo con cURL:**
-
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "Nombre": "Juan",
-    "Apellido_Paterno": "Pérez",
-    "Apellido_Materno": "García",
-    "Correo": "juan.perez@ejemplo.com",
-    "Contrasenia": "MiContraseña123",
-    "ConfirmarContrasenia": "MiContraseña123",
-    "Telefono": "5512345678",
-    "Consentimiento": true
-  }'
-```
-
-**Ejemplo con JavaScript (Fetch API):**
-
-```javascript
-fetch("http://localhost:3000/api/auth/register", {
-	method: "POST",
-	headers: {
-		"Content-Type": "application/json",
-	},
-	body: JSON.stringify({
-		Nombre: "Juan",
-		Apellido_Paterno: "Pérez",
-		Apellido_Materno: "García",
-		Correo: "juan.perez@ejemplo.com",
-		Contrasenia: "MiContraseña123",
-		ConfirmarContrasenia: "MiContraseña123",
-		Telefono: "5512345678",
-		Consentimiento: true,
-	}),
-})
-	.then((response) => response.json())
-	.then((data) => console.log(data))
-	.catch((error) => console.error("Error:", error));
-```
-
 **Respuesta Exitosa (201):**
 
 ```json
@@ -154,37 +105,11 @@ fetch("http://localhost:3000/api/auth/register", {
 }
 ```
 
-**Respuesta de Error (400):**
-
-```json
-{
-	"message": "Error de validación",
-	"errors": [
-		{
-			"campo": "Correo",
-			"mensaje": "El correo no tiene un formato válido"
-		},
-		{
-			"campo": "ConfirmarContrasenia",
-			"mensaje": "Las contraseñas no coinciden"
-		}
-	]
-}
-```
-
----
-
 ### 2. Inicio de Sesión
 
 Autentica un usuario y devuelve un token JWT.
 
 **URL:** `POST /api/auth/login`
-
-**Headers:**
-
-```
-Content-Type: application/json
-```
 
 **Body (JSON):**
 
@@ -193,42 +118,6 @@ Content-Type: application/json
 	"Correo": "juan.perez@ejemplo.com",
 	"Contrasenia": "MiContraseña123"
 }
-```
-
-**Validaciones:**
-
-- `Correo`: Requerido, formato de email válido
-- `Contrasenia`: Requerido, mínimo 8 carácteres
-
-**Ejemplo con cURL:**
-
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "Correo": "juan.perez@ejemplo.com",
-    "Contrasenia": "MiContraseña123"
-  }'
-```
-
-**Ejemplo con JavaScript (Fetch API):**
-
-```javascript
-fetch("http://localhost:3000/api/auth/login", {
-	method: "POST",
-	headers: {
-		"Content-Type": "application/json",
-	},
-	body: JSON.stringify({
-		Correo: "juan.perez@ejemplo.com",
-		Contrasenia: "MiContraseña123",
-	}),
-})
-	.then((response) => response.json())
-	.then((data) => {
-		// Guarda el token para futuras peticiones
-	})
-	.catch((error) => console.error("Error:", error));
 ```
 
 **Respuesta Exitosa (200):**
@@ -240,116 +129,125 @@ fetch("http://localhost:3000/api/auth/login", {
 }
 ```
 
-**Respuesta de Error (401):**
-
-```json
-{
-	"message": "Credenciales inválidas"
-}
-```
-
----
-
 ### 3. Obtener Perfil (Requiere Autenticación)
-
-Obtiene el perfil del usuario autenticado.
 
 **URL:** `GET /api/auth/profile`
 
-**Headers:**
-
-```
-Authorization: Bearer <tu_token_jwt>
-```
-
-**Ejemplo con cURL:**
-
-```bash
-curl -X GET http://localhost:3000/api/auth/profile \
-  -H "Cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-```
-
-**Ejemplo con JavaScript (Fetch API):**
-
-```javascript
-const token = localStorage.getItem("token");
-
-fetch("http://localhost:3000/api/auth/profile", {
-	method: "GET",
-	headers: {
-		Cookie: `${token}`,
-	},
-})
-	.then((response) => response.json())
-	.then((data) => console.log(data))
-	.catch((error) => console.error("Error:", error));
-```
-
-**Respuesta Exitosa (200):**
-
-```json
-{
-	"message": "Perfil obtenido exitosamente",
-	"user": {
-		"id": 1,
-		"Nombre": "Juan",
-		"Apellido_Paterno": "Pérez",
-		"Apellido_Materno": "García",
-		"Correo": "juan.perez@ejemplo.com",
-		"Telefono": "5512345678"
-	}
-}
-```
-
-**Respuesta de Error (401):**
-
-```json
-{
-	"message": "Token no proporcionado"
-}
-```
+**Headers:** `Authorization: Bearer <tu_token_jwt>` o Cookie `token`.
 
 ---
 
-## Códigos de Estado HTTP
+## Documentación de API - Módulo Técnicos
 
-| Código | Significado                                             |
-| ------ | ------------------------------------------------------- |
-| 200    | OK - La petición fue exitosa                            |
-| 201    | Created - Recurso creado exitosamente                   |
-| 400    | Bad Request - Error de validación en los datos enviados |
-| 401    | Unauthorized - No autenticado o token inválido          |
-| 404    | Not Found - Recurso no encontrado                       |
-| 500    | Internal Server Error - Error del servidor              |
+Prefijo base: `/api/technician`
+
+### Autenticación Técnicos
+
+#### Registro de Técnico
+- **URL:** `/register`
+- **Método:** `POST`
+- **Body:**
+  ```json
+  {
+    "nombre": "Juan",
+    "apellido_paterno": "Perez",
+    "apellido_materno": "Lopez",
+    "email": "juan@example.com",
+    "telefono": "5512345678",
+    "password": "Password123!",
+    "password_confirmation": "Password123!",
+    "terms_accepted": true
+  }
+  ```
+- **Respuesta Exitosa (201):**
+  ```json
+  {
+    "message": "Técnico registrado exitosamente",
+    "data": { ... }
+  }
+  ```
+
+#### Iniciar Sesión Técnico
+- **URL:** `/login`
+- **Método:** `POST`
+- **Body:**
+  ```json
+  {
+    "email": "juan@example.com",
+    "password": "Password123!"
+  }
+  ```
+- **Respuesta Exitosa (200):**
+  - Devuelve cookie `token` (HttpOnly).
+  ```json
+  {
+    "message": "Inicio de sesión exitoso",
+    "data": { "token": "..." }
+  }
+  ```
+
+#### Cerrar Sesión
+- **URL:** `/logout`
+- **Método:** `POST`
+- **Respuesta Exitosa (200):** Limpia la cookie de sesión.
+
+### Perfil y Configuración (Técnicos)
+
+#### Obtener Perfil
+- **URL:** `/profile`
+- **Método:** `GET`
+- **Headers:** Requiere autenticación (Cookie o Token).
+- **Respuesta Exitosa (200):**
+  ```json
+  {
+    "data": {
+      "Nombre": "Juan",
+      "ApellidoPaterno": "Perez",
+      "Correo": "juan@example.com",
+      "monitoring_enabled": false,
+      "vacation_mode": false
+    }
+  }
+  ```
+
+#### Actualizar Perfil
+- **URL:** `/profile`
+- **Método:** `PATCH`
+- **Descripción:** Actualiza datos personales y configuración operativa.
+- **Body (Ejemplo):**
+  ```json
+  {
+    "nombre": "Juan Carlos",
+    "telefono": "5587654321",
+    "monitoring_enabled": true,
+    "vacation_mode": false
+  }
+  ```
+- **Nota de Negocio:** Si se activa `vacation_mode` (`true`), el sistema automáticamente desactiva `monitoring_enabled` (`false`).
+
+### Seguridad
+
+#### Cambiar Contraseña
+- **URL:** `/change-password`
+- **Método:** `POST`
+- **Body:**
+  ```json
+  {
+    "current_password": "OldPassword123!",
+    "new_password": "NewPassword123!",
+    "new_password_confirmation": "NewPassword123!"
+  }
+  ```
 
 ---
 
-## Estructura del Proyecto
+## Disponibilidad y Asignación de Tareas
+Para determinar si un técnico está disponible para recibir nuevas tareas, el sistema debe validar:
+1. `is_active === true` (Cuenta activa)
+2. `monitoring_enabled === true` (Monitoreo encendido)
+3. `vacation_mode === false` (No está de vacaciones)
 
-```
-server/
-├── src/
-│   ├── app.ts                 # Configuración de Express
-│   ├── index.ts              # Punto de entrada
-│   ├── modules/
-│   │   └── auth/
-│   │       ├── auth.route.ts          # Rutas de autenticación
-│   │       ├── controllers/
-│   │       │   └── auth.controller.ts # Controladores
-│   │       ├── middleware/
-│   │       │   └── auth.middleware.ts # Middleware de autenticación
-│   │       ├── repositories/
-│   │       │   └── auth.repository.ts # Modelos de datos
-│   │       ├── services/
-│   │       │   └── auth.services.ts   # Lógica de negocio
-│   │       └── validators/
-│   │           └── auth.validation.ts # Validaciones con Zod
-│   └── router/
-│       └── main.route.ts     # Router principal
-├── package.json
-├── tsconfig.json
-└── README.md
-```
+El endpoint de perfil retorna estos estados para que el frontend pueda mostrar la disponibilidad actual.
 
 ---
 
@@ -372,5 +270,3 @@ server/
 2. **Contraseñas:** Se encriptan automáticamente con bcrypt antes de guardarse
 3. **Tokens JWT:** Tienen una expiración configurable, guárdalos de forma segura
 4. **CORS:** Si necesitas hacer peticiones desde un frontend en otro puerto, configura CORS en `app.ts`
-
----

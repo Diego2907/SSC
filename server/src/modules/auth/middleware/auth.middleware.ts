@@ -6,8 +6,11 @@ declare global {
 	namespace Express {
 		interface Request {
 			user?: {
-				id_Usuario: string;
-				Correo: string;
+				id_Usuario?: string | undefined;
+				Correo?: string | undefined;
+                id?: number | undefined;
+				email?: string | undefined;
+				role?: "client" | "technical" | undefined;
 			};
 		}
 	}
@@ -20,7 +23,12 @@ export const authenticate = (
 	next: NextFunction
 ): void => {
 	try {
-		const token = req.cookies?.token;
+        // Intentar leer de cookie o header Authorization
+		let token = req.cookies?.token;
+
+        if (!token && req.headers.authorization?.startsWith("Bearer ")) {
+            token = req.headers.authorization.split(" ")[1];
+        }
 
 		if (!token) {
 			res.status(401).json({
@@ -31,9 +39,13 @@ export const authenticate = (
 
 		const decoded = verifyToken(token);
 
+        // Mapear campos según rol o estructura del token
 		req.user = {
 			id_Usuario: decoded.id_Usuario,
 			Correo: decoded.Correo,
+            id: decoded.id,
+			email: decoded.email,
+			role: decoded.role,
 		};
 		next();
 	} catch (error: any) {

@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import env from "./config/env.config.js";
+import path from "path";
 import { corsDevOptions, corsProdOptions } from "./config/cors.config.js";
 
 //? rutas
@@ -19,8 +20,11 @@ app.use(cors(selectedCorsOptions));
 app.use(express.json()); // Para parsear JSON en req.body
 app.use(express.urlencoded({ extended: true })); // Para parsear form-data
 app.use(cookieParser()); // Para parsear cookies en req.cookies
-app.use(cors());
-app.use(express.json());
+// app.use(cors()); // Eliminado duplicado
+// app.use(express.json()); // Eliminado duplicado
+
+//? Archivos Estáticos (Imágenes, etc.)
+// app.use("/uploads", express.static(path.join(process.cwd(), "public/uploads")));
 
 app.get("/", (_req, res) => {
   res.send("There's nothing here, go to /api");
