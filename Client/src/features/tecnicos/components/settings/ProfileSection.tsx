@@ -23,7 +23,7 @@ const ProfileSection = ({
 
 	return (
 		<section className="space-y-4" aria-labelledby="profile-heading">
-			{/* Tarjeta de bienvenida: esquinas superiores redondeadas (la curvatura es del fondo blanco, no de la barra azul) */}
+			{/* Tarjeta de bienvenida */}
 			<div className="bg-white rounded-t-2xl rounded-b-xl shadow-sm border border-gray-200 overflow-hidden -mt-0.5">
 				<div className="p-4 flex items-center gap-4">
 					<div className="relative flex-shrink-0">
@@ -51,7 +51,7 @@ const ProfileSection = ({
 				</div>
 			</div>
 
-			{/* Bloque Imagen de perfil (perfil.png): título azul, instrucción en azul, tamaño imagen igual, EN USO */}
+			{/* Bloque Imagen de perfil */}
 			<div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
 				<h3 className="text-base font-bold text-[#1D4289] mb-1">Imagen de perfil</h3>
 				<p className="text-sm text-[#1D4289] mb-3">
